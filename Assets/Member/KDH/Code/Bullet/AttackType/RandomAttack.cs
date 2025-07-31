@@ -14,7 +14,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private bool _useRandomSeed = false; // 시드를 사용한 재현 가능한 랜덤 여부
         [SerializeField] private int _randomSeed = 12345; // 랜덤 시드 (재현 가능한 패턴용)
         [SerializeField] private bool _enableDebugLogs = true; // 디버그 로그 활성화 여부
-        
+        [SerializeField] private ParticleSystem teleportParticle;
+
         private float _lastAttackTime;
         private System.Random _randomGenerator;
         private bool _isInitialized = false;

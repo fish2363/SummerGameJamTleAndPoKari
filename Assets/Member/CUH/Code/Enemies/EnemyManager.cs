@@ -14,7 +14,14 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private Enemy[] spawnEnemies;
         [SerializeField] private Transform leftBottomTrm;
         [SerializeField] private Transform rightTopTrm;
-        
+
+        [Header("생성 워닝 띄우는 시간")]
+        public float totalDuration = 5f;
+        [Header("처음 깜빡임 간격")]
+        public float startInterval = 1.0f;
+        [Header("마지막 깜빡임 간격")]
+        public float endInterval = 0.1f;
+
         [Inject] private Player _player;
 
         [SerializeField] private int _spawnEnemyCount = 2;
@@ -39,8 +46,21 @@ namespace Member.CUH.Code.Enemies
             float x = Random.Range(leftBottomTrm.position.x, rightTopTrm.position.x);
             float y = Random.Range(leftBottomTrm.position.y, rightTopTrm.position.y);
             Vector2 spawnPos = new Vector2(x, y);
+
             GameObject obj = Instantiate(warningObject, spawnPos, Quaternion.identity);
-            yield return new WaitForSeconds(1f);
+            float elapsed = 0f;
+            bool visible = true;
+            while (elapsed < totalDuration)
+            {
+                float t = elapsed / totalDuration;
+                float currentInterval = Mathf.Lerp(startInterval, endInterval, t);
+
+                obj.SetActive(visible);
+                visible = !visible;
+
+                yield return new WaitForSeconds(currentInterval);
+                elapsed += currentInterval;
+            }
             Destroy(obj);
             Enemy spawnEnemy = Instantiate(spawnEnemies[Random.Range(0, spawnEnemies.Length)], spawnPos, Quaternion.identity);
             spawnEnemy.SetTarget(_player.GetComponent<IDamageable>());

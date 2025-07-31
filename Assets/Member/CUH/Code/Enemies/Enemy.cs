@@ -16,8 +16,12 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private StateDataSO[] states;
 
         [SerializeField] private bool isMoveableEnemy;
-        
+
+        [SerializeField] private ParticleSystem deadEffect;
+
         private EntityStateMachine _stateMachine;
+
+
         
         protected override void Awake()
         {
@@ -56,6 +60,7 @@ namespace Member.CUH.Code.Enemies
         {
             if(IsDead) return;
             IsDead = true;
+            Instantiate(deadEffect,transform.position,Quaternion.identity);
             OnDeadEvent?.Invoke();
             Destroy(gameObject);
         }

@@ -19,7 +19,11 @@ public class ScoreManager : MonoBehaviour
     {
         Instance = this;
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+            Score(1);
+    }
     public void Score(int score)
     {
         CurrentScore += score;
@@ -33,7 +37,7 @@ public class ScoreManager : MonoBehaviour
         if (!isShaking)
         {
             isShaking = true;
-            scoreText.GetComponent<RectTransform>().DOShakeRotation(0.2f, 20f, 10, 10f).OnComplete(() => isShaking = false);
+            scoreText.GetComponent<RectTransform>().DOShakeRotation(0.2f, 50f, 5, 50f).OnComplete(() => isShaking = false);
         }
     }
 

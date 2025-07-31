@@ -146,6 +146,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22088be5adb9cf54d88867e8863e6d3e, type: 2}
   - {fileID: 11400000, guid: 2f92a7bc54a7ea04993ae434df63e8ee, type: 2}
   isMoveableEnemy: 1
+  deadEffect: {fileID: 0}
 --- !u!58 &418090111691897288
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -272,8 +273,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3323204649265542087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -321,7 +322,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4349915267927364619, guid: 581184990098ec54db900d58cdc44c1d, type: 3}
+  m_Sprite: {fileID: -3534112820305561034, guid: 2bb628fb7288fcf4a98d2b56189b99b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -579,6 +580,10 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
+  laserMultiplier: 1
+  halfAngle: 90
+  chargingTime: 0.5
+  shootTime: 0.25
 --- !u!120 &8399372609199161587
 LineRenderer:
   serializedVersion: 2
@@ -624,9 +629,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 0, z: 1}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

@@ -59,5 +59,12 @@ namespace Member.CUH.Code.Enemies
             OnDeadEvent?.Invoke();
             Destroy(gameObject);
         }
+
+        public void KillSelf()
+        {
+            IsDead = true;
+            OnDeadEvent?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

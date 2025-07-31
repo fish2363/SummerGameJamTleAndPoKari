@@ -26,7 +26,8 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 if (_target != null)
                 {
-                    Debug.Log("Hit!");
+                    _target.ApplyDamage(1);
+                    _enemy.KillSelf();
                 }
                 else
                 {

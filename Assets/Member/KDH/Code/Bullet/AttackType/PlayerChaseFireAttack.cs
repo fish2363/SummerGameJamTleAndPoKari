@@ -18,7 +18,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         public override void Attack()
         {
             base.Attack();
-            Debug.Log("데미지");
+            _target.ApplyDamage(1);
+            _enemy.KillSelf();
         }
 
         private void FireBullet()

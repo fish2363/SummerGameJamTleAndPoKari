@@ -308,11 +308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0426bd6b2d3232409915e578a6d1727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokeCooltime: 5
+  invokeCooltime: 15
   alim: {fileID: 6684585917966484796}
   startInterval: 0.4
   endInterval: 0.01
-  stopDuration: 2
+  stopDuration: 1.2
   totalDuration: 4
   movePath:
   - {x: 0, y: 0}
@@ -329,7 +329,7 @@ MonoBehaviour:
   speedUp: 2
   rotationEase: 9
   rotateDuration: 7
-  rotateSpeed: 1
+  rotateSpeed: 0.5
   shakeDuration: 0.5
 --- !u!1 &6684585917966484796
 GameObject:

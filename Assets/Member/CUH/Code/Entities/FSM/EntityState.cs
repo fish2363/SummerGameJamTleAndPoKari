@@ -23,7 +23,10 @@ namespace Member.CUH.Code.Entities.FSM
             _animatorTrigger.OnAnimationEndTrigger += AnimationEndTrigger;
         }
 
-        public virtual void Update(){ }
+        public virtual void Update()
+        {
+            // _entityAnimator
+        }
 
         public virtual void Exit()
         {

@@ -65,6 +65,7 @@ namespace Member.CUH.Code.Enemies
             ScoreManager.Instance.Score(1);
             if (ScoreManager.Instance.CurrentScore >= nextEnemyCountUpScore)
             {
+                nextEnemyCountUpScore += nextEnemyCountUpScore / 2;
                 _spawnEnemyCount++;
             }
 

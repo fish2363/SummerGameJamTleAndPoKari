@@ -3,35 +3,34 @@ namespace Member.CUH.Code.Entities.FSM
     public abstract class EntityState
     {
         protected Entity _entity;
-
-        protected AnimParamSO _animParam;
+        protected int _animationHash;
+        protected EntityAnimator _entityAnimator;
+        protected EntityAnimatorTrigger _animatorTrigger;
         protected bool _isTriggerCall;
 
-        protected EntityRenderer _renderer;
-
-        public EntityState(Entity entity, AnimParamSO animParam)
+        protected EntityState(Entity entity, int animationHash)
         {
             _entity = entity;
-            _animParam = animParam;
-            _renderer = _entity.GetCompo<EntityRenderer>();
+            _animationHash = animationHash;
+            _entityAnimator = entity.GetCompo<EntityAnimator>();
+            _animatorTrigger = entity.GetCompo<EntityAnimatorTrigger>();
         }
 
         public virtual void Enter()
         {
-            _renderer.SetParam(_animParam, true);
+            _entityAnimator.SetParam(_animationHash, true);
             _isTriggerCall = false;
+            _animatorTrigger.OnAnimationEndTrigger += AnimationEndTrigger;
         }
 
-        public virtual void Update() { }
+        public virtual void Update(){ }
 
         public virtual void Exit()
         {
-            _renderer.SetParam(_animParam, false);
+            _animatorTrigger.OnAnimationEndTrigger -= AnimationEndTrigger;
+            _entityAnimator.SetParam(_animationHash, false);
         }
 
-        public virtual void AnimationEndTrigger()
-        {
-            _isTriggerCall = true;
-        }
+        public virtual void AnimationEndTrigger() => _isTriggerCall = true;
     }
 }

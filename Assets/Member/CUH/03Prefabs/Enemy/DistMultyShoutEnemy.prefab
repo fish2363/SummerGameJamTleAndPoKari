@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 7692168765680934897}
   - component: {fileID: 4681792834681035126}
   - component: {fileID: 5593042873110597449}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistMultyShoutEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,6 +366,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 1
-  _attackInterval: 1
   _bulletSpeed: 1
   _spreadAngle: 15

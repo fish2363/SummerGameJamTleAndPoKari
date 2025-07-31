@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 7591534245615828669}
   - component: {fileID: 9050093157539095953}
   - component: {fileID: 4812498317613572682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

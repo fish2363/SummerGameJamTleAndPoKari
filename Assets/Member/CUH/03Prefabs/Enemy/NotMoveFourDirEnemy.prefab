@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 0.7
-  _attackInterval: 0.5
   _bulletSpeed: 1
   _rotationStep: 45
   _initialAngle: 0
@@ -259,7 +258,7 @@ GameObject:
   - component: {fileID: 7010623812881273125}
   - component: {fileID: 8725139277751964640}
   - component: {fileID: 3900536865621849477}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NotMoveFourDirEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

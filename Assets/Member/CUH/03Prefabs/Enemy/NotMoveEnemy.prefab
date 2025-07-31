@@ -47,7 +47,6 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 1.8
   _bulletCount: 20
-  _attackInterval: 2
   _bulletSpeed: 1
 --- !u!1 &2328743019878872649
 GameObject:
@@ -258,7 +257,7 @@ GameObject:
   - component: {fileID: 344684338467609584}
   - component: {fileID: 2285733317469994623}
   - component: {fileID: 5124694202217090609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NotMoveEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

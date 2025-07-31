@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 2590573428295614171}
   - component: {fileID: 2047440184827376726}
   - component: {fileID: 3185279789365548716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RandomEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4248048772299463635}
   - component: {fileID: 5769745157965113130}
   - component: {fileID: 4875875586299671462}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JaPokFireEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

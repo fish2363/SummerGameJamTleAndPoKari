@@ -59,7 +59,7 @@ namespace Member.KDH.Code.Bullet.AttackType
             
             bullet.Fire(direction, _bulletSpeed);
             
-            _enemy.transform.rotation = Quaternion.Euler(0f, 0f, _currentAngle);
+            _enemy.transform.rotation = Quaternion.Euler(0f, 0f, _currentAngle - 90f);
             
             _currentAngle += _rotationStep;
             

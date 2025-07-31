@@ -301,6 +301,7 @@ MonoBehaviour:
   states:
   - {fileID: 11400000, guid: 0a64af2c547ed0045ae3b7e2c808822e, type: 2}
   isMoveableEnemy: 1
+  deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
 --- !u!58 &6956627020571029164
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -336,7 +337,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.3
 --- !u!50 &8695715571047960945
 Rigidbody2D:
   serializedVersion: 5

@@ -12,9 +12,14 @@ namespace Member.ISC.Code.Players.States
         public override void Enter()
         {
             base.Enter();
-            _player.SetActiveFrame(false);
             _moveCompo.CanManualMovement = false;
-            _moveCompo.StopImmediately();
+            _player.SetActiveFrame(false);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            Debug.Log("죽음!");
         }
     }
 }

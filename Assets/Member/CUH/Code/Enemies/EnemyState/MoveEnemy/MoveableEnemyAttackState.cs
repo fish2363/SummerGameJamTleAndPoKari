@@ -5,12 +5,10 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
 {
     public class MoveableEnemyAttackState : MoveableEnemyState
     {
-        private EnemyAttackCompo _attackCompo;
         private EntityMover _mover;
         
         public MoveableEnemyAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
-            _attackCompo = entity.GetCompo<EnemyAttackCompo>(true);
             _mover = entity.GetCompo<EntityMover>();
         }
 

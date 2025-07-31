@@ -1,6 +1,7 @@
 ﻿using System;
 using Blade.FSM;
 using Chuh007Lib.Dependencies;
+using DG.Tweening;
 using Member.CUH.Code.Combat;
 using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
@@ -11,6 +12,8 @@ namespace Member.CUH.Code.Enemies
 {
     public class Enemy : Entity, IDamageable
     {
+        public event Action<bool> OnOverClock;
+        
         [HideInInspector] public IDamageable Target;
         
         [SerializeField] private StateDataSO[] states;
@@ -21,7 +24,7 @@ namespace Member.CUH.Code.Enemies
 
         private EntityStateMachine _stateMachine;
 
-
+        private float _lifeTime;
         
         protected override void Awake()
         {
@@ -46,11 +49,16 @@ namespace Member.CUH.Code.Enemies
         protected override void Start()
         {
             _stateMachine.ChangeState(isMoveableEnemy ? "MOVE" : "IDLE");
+            GetComponentInChildren<SpriteRenderer>().DOColor(Color.red, 30f).SetEase(Ease.InQuart);
         }
 
         private void Update()
         {
             _stateMachine.UpdateStateMachine();
+            if (_lifeTime >= 30f)
+            {
+                OnOverClock?.Invoke(true);
+            }
         }
         
         public void ChangeState(string newStateName, bool forced = false)
@@ -62,6 +70,8 @@ namespace Member.CUH.Code.Enemies
             IsDead = true;
             Instantiate(deadEffect,transform.position,Quaternion.identity);
             OnDeadEvent?.Invoke();
+            if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
+
             Destroy(gameObject);
         }
 
@@ -69,6 +79,7 @@ namespace Member.CUH.Code.Enemies
         {
             IsDead = true;
             OnDeadEvent?.Invoke();
+            if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
             Destroy(gameObject);
         }
     }

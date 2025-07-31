@@ -21,6 +21,7 @@ namespace Member.ISC.Code.Players.States
         public override void Update()
         {
             base.Update();
+
             if (_isTriggerCall)
                 _player.ChangeState("IDLE");
         }

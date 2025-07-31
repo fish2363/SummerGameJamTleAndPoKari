@@ -1,6 +1,6 @@
 namespace Member.CUH.Code.Entities
 {
-    public interface IAfterInitable
+    public interface IAfterInitialize
     {
         public void AfterInitialize();
     }

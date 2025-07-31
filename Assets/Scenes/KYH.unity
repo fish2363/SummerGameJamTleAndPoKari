@@ -2198,6 +2198,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1947835175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7840627853215806210, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+  m_PrefabInstance: {fileID: 5969853577800342103}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064214146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2534,18 @@ PrefabInstance:
     - target: {fileID: 4648252665001288590, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: alimText
+      value: 
+      objectReference: {fileID: 1947835175}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: stopDuration
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: alimEventText_mouse
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

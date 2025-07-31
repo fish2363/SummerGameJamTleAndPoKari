@@ -1,19 +1,25 @@
-﻿using Member.CUH.Code.Combat;
+﻿using System;
+using Member.CUH.Code.Combat;
 using Member.CUH.Code.Entities;
 using UnityEngine;
 
 namespace Member.ISC.Code.Players
 {
-    public class PlayerHealth : MonoBehaviour, IEntityComponent, IDamageable
+    public class PlayerHealth : MonoBehaviour, IEntityComponent, IDamageable, IAfterInitialize
     {
-        [SerializeField] private float currentHealth;
-        [SerializeField] private float maxHealth;
+        [field: SerializeField] public float currentHealth { get; private set; }
+        [field: SerializeField] public float maxHealth { get; private set; }
 
         private Player _player;
-        
+
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
+        }
+
+        public void AfterInitialize()
+        {
+            currentHealth = maxHealth;
         }
         
         public void ApplyDamage(float damage)
@@ -27,5 +33,6 @@ namespace Member.ISC.Code.Players
             
             _player.OnHitEvent?.Invoke();
         }
+
     }
 }

@@ -1,14 +1,16 @@
 ﻿using System;
 using Blade.FSM;
+using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
+using Member.ISC.Code.Players;
 using UnityEngine;
 
 namespace Member.CUH.Code.Enemies
 {
     public class Enemy : Entity
     {
-        public Transform target;
+        [Inject] public Player target;
         
         [SerializeField] private StateDataSO[] states;
 

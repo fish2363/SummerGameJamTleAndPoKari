@@ -105,6 +105,7 @@ namespace Member.KDH.Code.Bullet
                 if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
                     Debug.Log("Hit! Enemy");
+                    DestroyBullet();
                 }
             }
             else
@@ -112,10 +113,10 @@ namespace Member.KDH.Code.Bullet
                 if (other.CompareTag("Player"))
                 {
                     Debug.Log("Hit! Player");
+                    DestroyBullet();
                 }
             }
             
-            DestroyBullet();
         }
         
         public void DestroyBullet()

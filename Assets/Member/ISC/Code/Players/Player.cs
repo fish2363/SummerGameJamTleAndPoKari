@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Blade.FSM;
 using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Entities;
@@ -20,6 +21,10 @@ namespace Member.ISC.Code.Players
 
         [Provide]
         private Player ProviderPlayer() => this;
+
+        public bool IsHitting { get; set; } = false;
+
+        public bool CanAttack { get; set; } = false;
         
         protected override void Awake()
         {
@@ -30,6 +35,8 @@ namespace Member.ISC.Code.Players
             OnDeadEvent.AddListener(HandleDeadEvent);
 
             SetActiveFrame(false);
+
+            CanAttack = false;
         }
 
         private void OnDestroy()
@@ -47,15 +54,25 @@ namespace Member.ISC.Code.Players
 
         private void HandleHitEvent()
         {
-            
         }
 
         protected override void Start()
         {
             base.Start();
+
+            StartCoroutine(PlayNextAnimation());
+        }
+
+        private IEnumerator PlayNextAnimation()
+        {
+            yield return null;
             
             const string idle = "IDLE";
-            _stateMachine.ChangeState(idle);
+            ChangeState(idle);
+
+            yield return null;
+
+            CanAttack = true;
         }
 
         private void Update()

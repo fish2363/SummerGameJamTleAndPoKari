@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a14d24a80d4b9d80c6a3713e423739, type: 3}
   m_Name: PlayerDeadState
   m_EditorClassIdentifier: 
-  stateName: MOVE
-  className: Member.ISC.Code.Players.States.PlayerMoveState
-  animParamName: MOVE
-  animationHash: -643048756
+  stateName: DEAD
+  className: Member.ISC.Code.Players.States.PlayerDeadState
+  animParamName: DEAD
+  animationHash: -609180528

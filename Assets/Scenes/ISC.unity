@@ -176,6 +176,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 527ec684728daaf42a50c1ee253889fa, type: 3}
+--- !u!1 &247620540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5765893006805300317, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+  m_PrefabInstance: {fileID: 4672071015510568130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &247620545 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6388035218388938874, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+  m_PrefabInstance: {fileID: 4672071015510568130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &283248338
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,11 +740,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596364313}
   m_CullTransparentMesh: 1
---- !u!1 &648818759 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1351768461312971195, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-  m_PrefabInstance: {fileID: 4672071015510568130}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &820937417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,13 +1683,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 726638208941367945, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: attackFrame
-      value: 
-      objectReference: {fileID: 648818759}
     - target: {fileID: 2802834118922149054, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765893006805300317, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 247620540}
+    - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: _delay
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 247620545}
+    - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: cycleNum
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

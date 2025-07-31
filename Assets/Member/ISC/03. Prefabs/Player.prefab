@@ -147,6 +147,8 @@ MonoBehaviour:
   stateDataList:
   - {fileID: 11400000, guid: ca043f5ec60584949bed2019fb73c9e1, type: 2}
   - {fileID: 11400000, guid: ef6067212dac7c44f8481c186a23ef3e, type: 2}
+  - {fileID: 11400000, guid: 59e2fcbb2e186884f8a30501d82f172e, type: 2}
+  - {fileID: 11400000, guid: 44b21ab73a05dbf42aaf7b657fef788f, type: 2}
 --- !u!50 &1788747962547233112
 Rigidbody2D:
   serializedVersion: 5
@@ -397,8 +399,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae6a8deaccd43be8fe00401b00f224d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 0
   castRadius: 0
   parryRadius: 0
+  damage: 0
+  OnParry:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5765893006805300317
 GameObject:
   m_ObjectHideFlags: 0

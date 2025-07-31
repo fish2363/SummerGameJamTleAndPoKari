@@ -10,6 +10,7 @@ namespace Member.ISC.Code.Managers
         private Contorls _controls;
         
         public Action OnAttackPressed;
+        public Action OnAttackCanceled;
         
         public Vector2 MovementKey { get; private set; }
         public Vector2 MousePos { get; private set; }
@@ -36,8 +37,11 @@ namespace Member.ISC.Code.Managers
 
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (context.canceled)
+            if (context.performed)
                 OnAttackPressed?.Invoke();
+
+            if (context.canceled)
+                OnAttackCanceled?.Invoke();
         }
 
         public void OnPos(InputAction.CallbackContext context)

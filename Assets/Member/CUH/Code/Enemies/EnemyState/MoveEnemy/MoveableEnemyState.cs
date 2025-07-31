@@ -5,6 +5,8 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
 {
     public abstract class MoveableEnemyState : EnemyCanAttackState
     {
+        protected bool _canRotate = true;
+        
         private EntityRenderer _renderer;
         
         public MoveableEnemyState(Entity entity, int animationHash) : base(entity, animationHash)
@@ -15,7 +17,8 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
         public override void Update()
         {
             base.Update();
-            _renderer.RotateToTarget(_enemy.Target.transform);
+            if(_canRotate)
+                _renderer.RotateToTarget(_enemy.Target.transform);
         }
     }
 }

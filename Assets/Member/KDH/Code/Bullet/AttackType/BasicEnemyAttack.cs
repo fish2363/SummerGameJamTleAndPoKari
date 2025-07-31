@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Combat.Enemies;
+﻿using DG.Tweening;
+using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Member.KDH.Code.Bullet.AttackType
 {
     public class BasicEnemyAttack : EnemyAttackCompo
     {
+        [SerializeField] private float bombDelay;
+        
         public override void Initialize(Entity entity)
         {
             try
@@ -26,8 +29,11 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 if (_target != null)
                 {
-                    _target.ApplyDamage(1);
-                    _enemy.KillSelf();
+                    _enemy.GetCompo<EntityMover>().StopImmediately();
+                    DOVirtual.DelayedCall(bombDelay, () =>
+                    {
+                        _target.ApplyDamage(1);
+                    }).OnComplete(() => _enemy.KillSelf());
                 }
                 else
                 {

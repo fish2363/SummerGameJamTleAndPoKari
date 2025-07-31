@@ -89,10 +89,10 @@ MonoBehaviour:
   - {fileID: 1460268436665233373, guid: 472ebff447b81aa41aa0400403643d8a, type: 3}
   - {fileID: 2590573428295614171, guid: 5d1554d642b0258428e89a545fb2ad8e, type: 3}
   - {fileID: 4931566967455783822, guid: b089a6084010e244f879613d423a0e0f, type: 3}
+  - {fileID: 3178224542240094945, guid: 0a4b798124163b74db6b806f22c86742, type: 3}
   leftBottomTrm: {fileID: 3663915162380423623}
   rightTopTrm: {fileID: 82694045636224065}
   _spawnEnemyCount: 2
-  _spawnCooldown: 15
 --- !u!1 &4071689896923896751
 GameObject:
   m_ObjectHideFlags: 0

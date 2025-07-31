@@ -23,9 +23,9 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
                 _entityMover.SetMovement(-moveDir);
             else 
                 _entityMover.SetMovement(Vector2.zero);
-            if (_attackCompo.CanAttack(_enemy.target))
+            if (_attackCompo.CanAttack(_enemy.target.transform))
             {
-                _attackCompo.Attack();
+                _enemy.ChangeState("ATTACK");
             }
         }
     }

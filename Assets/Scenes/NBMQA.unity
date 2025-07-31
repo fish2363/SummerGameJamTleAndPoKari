@@ -2525,16 +2525,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
-      propertyPath: rotateSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
-      propertyPath: stopDuration
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
-      propertyPath: invokeCooltime
-      value: 15
+      propertyPath: mouseMoveToCenter
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

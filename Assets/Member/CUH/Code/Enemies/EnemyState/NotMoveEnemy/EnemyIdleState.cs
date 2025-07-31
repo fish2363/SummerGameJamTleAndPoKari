@@ -12,7 +12,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.NotMoveEnemy
         public override void Update()
         {
             base.Update();
-            if (_attackCompo.CanAttack(_enemy.target.transform))
+            if (_attackCompo.CanAttack())
             {
                 _enemy.ChangeState("ATTACK");
             }

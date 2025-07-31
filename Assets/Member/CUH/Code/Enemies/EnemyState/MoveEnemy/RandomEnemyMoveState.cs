@@ -17,7 +17,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
         public override void Update()
         {
             base.Update();
-            if (_attackCompo.CanAttack(_enemy.target.transform))
+            if (_attackCompo.CanAttack())
             {
                 _attackCompo.Attack();
                 nextPos.x = Random.Range(-halfXSize, halfXSize);

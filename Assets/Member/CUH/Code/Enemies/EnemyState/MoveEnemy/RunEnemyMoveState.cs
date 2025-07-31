@@ -18,7 +18,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             Vector2 moveDir = (_enemy.target.transform.position - _enemy.transform.position).normalized;
             
             _entityMover.SetMovement(-moveDir);
-            if (_attackCompo.CanAttack(_enemy.target.transform))
+            if (_attackCompo.CanAttack())
             {
                 _enemy.ChangeState("ATTACK");
             }

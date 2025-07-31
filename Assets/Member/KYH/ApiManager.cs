@@ -176,7 +176,7 @@ public class ApiManager : MonoBehaviour
 
     public void Appear()
     {
-        randIdx = UnityEngine.Random.Range(4, 5);
+        randIdx = UnityEngine.Random.Range(0, 8);
         UnityEngine.Debug.Log(randIdx);
         ChangeTextEvent(randIdx);
 

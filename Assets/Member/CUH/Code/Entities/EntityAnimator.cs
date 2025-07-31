@@ -7,7 +7,6 @@ namespace Member.CUH.Code.Entities
     public class EntityAnimator : MonoBehaviour, IEntityComponent
     {
         [SerializeField] private Animator animator;
-        public UnityEvent<Vector3, Quaternion> OnAnimationMoveEvent;
         
         private Entity _entity;
 
@@ -31,11 +30,6 @@ namespace Member.CUH.Code.Entities
         public void OffAnimator()
         {
             animator.enabled = false;
-        }
-
-        private void OnAnimatorMove()
-        {
-            OnAnimationMoveEvent?.Invoke(animator.deltaPosition, animator.deltaRotation);
         }
     }
 }

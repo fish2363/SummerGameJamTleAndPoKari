@@ -43,7 +43,7 @@ namespace Member.ISC.Code.Managers
         public void OnPos(InputAction.CallbackContext context)
         {
             Vector2 pos = context.ReadValue<Vector2>();
-            MousePos = pos;
+            MousePos = Camera.main.ScreenToWorldPoint(pos);
         }
     }
 }

@@ -52,6 +52,19 @@ namespace Member.ISC.Code.Players
         {
             _stateMachine.UpdateStateMachine();
         }
+
+        private void FixedUpdate()
+        {
+            Rotate(PlayerInput.MousePos);
+        }
+
+        private void Rotate(Vector2 pos)
+        {
+            Vector2 dir = pos - (Vector2)transform.position; 
+            float q = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            
+            transform.rotation = Quaternion.Euler(0, 0, q);
+        }
         
         public void ChangeState(string newStateName, bool force = false) 
             => _stateMachine.ChangeState(newStateName, force);

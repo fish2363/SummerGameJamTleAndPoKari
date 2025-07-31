@@ -8,9 +8,8 @@ namespace Member.ISC.Code.Players
     {
         [SerializeField] private Rigidbody2D rb; 
         
-        [Header("이동속도 및 회전속도")]
+        [Header("이동속도")]
         [SerializeField] private float moveSpeed;
-        [SerializeField] private float rotationSpeed;
         
         private Player _player;
 

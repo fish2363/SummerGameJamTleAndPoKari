@@ -18,11 +18,13 @@ namespace Member.ISC.Code.Players
         
         public void ApplyDamage(float damage)
         {
+            if (_player.IsDead) return;
+            
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
 
             if (currentHealth <= 0)
                 _player.OnDeadEvent?.Invoke();
-
+            
             _player.OnHitEvent?.Invoke();
         }
     }

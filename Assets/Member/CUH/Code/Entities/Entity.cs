@@ -45,8 +45,19 @@ namespace Member.CUH.Code.Entities
                 .ToList().ForEach(compo => compo.AfterInitialize());
         }
 
-        public T GetCompo<T>() where T : IEntityComponent
-            => (T)_components.GetValueOrDefault(typeof(T));
+        public T GetCompo<T>(bool isDerived = false) where T : IEntityComponent
+        {
+            if (_components.TryGetValue(typeof(T), out IEntityComponent component))
+                return (T)component;
+            
+            if(isDerived == false) return default(T);
+            
+            Type findType = _components.Keys.FirstOrDefault(type => type.IsSubclassOf(typeof(T)));
+            if(findType != null) 
+                return (T)_components[findType];
+            
+            return default(T);
+        }
         public IEntityComponent GetCompo(Type type)
             => _components.GetValueOrDefault(type);
 

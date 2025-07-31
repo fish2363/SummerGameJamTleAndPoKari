@@ -15,8 +15,6 @@ namespace Member.ISC.Code.Players
         [SerializeField] private float castRadius;
         [SerializeField] private float parryRadius;
         [SerializeField] private float damage;
-
-        public UnityEvent<Vector2> OnParry;
         
         private bool isParry = false;
 
@@ -40,6 +38,7 @@ namespace Member.ISC.Code.Players
                         float distance = Vector2.Distance(_player.transform.position, item.transform.position);
                         if (distance > (castRadius - parryRadius))
                             isParry = true;
+                        Bullet b = item.gameObject.GetComponent<Bullet>();
                             
                         if (item.TryGetComponent(out IDamageable d))
                         {
@@ -47,9 +46,9 @@ namespace Member.ISC.Code.Players
                         }
                         else if (isParry)
                         {
-                            OnParry?.Invoke(item.transform.position);
+                            b.SetReflect(true);
+                            b.Fire(_player.transform.right);
                         }
-                        Bullet b = item.gameObject.GetComponent<Bullet>();
                         b.DestroyBullet();
                     }
                 }

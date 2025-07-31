@@ -37,7 +37,9 @@ namespace Member.ISC.Code.Players
 
         private void HandleDeadEvent()
         {
-            
+            if (IsDead) return;
+            IsDead = true;
+            ChangeState("DEAD", true);
         }
 
         private void HandleHitEvent()

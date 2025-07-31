@@ -12,6 +12,7 @@ namespace Member.KDH.Code.Bullet
         private Camera _mainCamera;
         private float _spawnTime;
         private bool _isActive;
+        private bool _isReflect;
         
         private void Awake()
         {
@@ -99,19 +100,33 @@ namespace Member.KDH.Code.Bullet
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (_isReflect)
             {
-                Debug.Log("Hit!");
-                DestroyBullet();
+                if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    Debug.Log("Hit! Enemy");
+                }
             }
+            else
+            {
+                if (other.CompareTag("Player"))
+                {
+                    Debug.Log("Hit! Player");
+                }
+            }
+            
+            DestroyBullet();
         }
         
         public void DestroyBullet()
         {
+            _isReflect = false;
             _isActive = false;
             gameObject.SetActive(false);
             
             BulletPool.Instance?.ReturnBullet(this);
         }
+        
+        public void SetReflect(bool isReflect) => _isReflect = isReflect;
     }
 }

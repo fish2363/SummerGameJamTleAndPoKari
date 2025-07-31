@@ -15,6 +15,8 @@ namespace Member.ISC.Code.Players
 
         private Vector2 _moveDir;
         private Vector2 _velocity;
+
+        public bool CanManualMovement { get; set; } = true;
         
         public void Initialize(Entity entity)
         {
@@ -34,7 +36,13 @@ namespace Member.ISC.Code.Players
 
         private void CalculateMove()
         {
-            _velocity = _moveDir * moveSpeed;
+            if (CanManualMovement)
+                _velocity = _moveDir * moveSpeed;
+        }
+
+        public void StopImmediately()
+        {
+            _moveDir = Vector2.zero;
         }
 
         private void Move()

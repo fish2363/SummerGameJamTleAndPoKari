@@ -15,7 +15,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
         public override void Update()
         {
             base.Update();
-            _renderer.RotateToTarget(_enemy.target.transform);
+            _renderer.RotateToTarget(_enemy.Target.transform);
         }
     }
 }

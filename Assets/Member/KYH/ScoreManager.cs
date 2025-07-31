@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    [Header("½ºÄÚ¾î ÅØ½ºÆ®")]
+    [Header("ìŠ¤ì½”ì–´ í…ìŠ¤íŠ¸")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
 

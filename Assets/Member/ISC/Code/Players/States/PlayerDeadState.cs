@@ -13,7 +13,13 @@ namespace Member.ISC.Code.Players.States
         {
             base.Enter();
             _moveCompo.CanManualMovement = false;
-            _moveCompo.StopImmediately();
+            _player.SetActiveFrame(false);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            Debug.Log("죽음!");
         }
     }
 }

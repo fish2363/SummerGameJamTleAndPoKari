@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Numerics;
 using Member.CUH.Code.Entities;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 namespace Member.ISC.Code.Players
 {
@@ -38,6 +40,8 @@ namespace Member.ISC.Code.Players
         {
             if (CanManualMovement)
                 _velocity = _moveDir * moveSpeed;
+            else
+                _velocity = Vector2.zero;
         }
 
         public void StopImmediately()

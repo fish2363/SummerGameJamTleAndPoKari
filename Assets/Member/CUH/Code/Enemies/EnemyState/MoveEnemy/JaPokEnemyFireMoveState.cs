@@ -15,8 +15,8 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
         public override void Update()
         {
             base.Update();
-            Vector2 moveDir = (_enemy.target.transform.position - _enemy.transform.position).normalized;
-            float dist = Vector2.Distance(_enemy.target.transform.position, _enemy.transform.position);
+            Vector2 moveDir = (_enemy.Target.transform.position - _enemy.transform.position).normalized;
+            float dist = Vector2.Distance(_enemy.Target.transform.position, _enemy.transform.position);
             _entityMover.SetMovement(moveDir);
             if (dist <= 1f)
             {

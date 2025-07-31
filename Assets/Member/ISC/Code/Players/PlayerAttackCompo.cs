@@ -37,7 +37,10 @@ namespace Member.ISC.Code.Players
                     {
                         float distance = Vector2.Distance(_player.transform.position, item.transform.position);
                         if (distance > (castRadius - parryRadius))
+                        {
+                            Debug.Log("패링!");
                             isParry = true;
+                        }
                         Bullet b = item.gameObject.GetComponent<Bullet>();
                             
                         if (item.TryGetComponent(out IDamageable d))
@@ -49,7 +52,8 @@ namespace Member.ISC.Code.Players
                             b.SetReflect(true);
                             b.Fire(_player.transform.right);
                         }
-                        b.DestroyBullet();
+                        else
+                            b?.DestroyBullet();
                     }
                 }
             }
@@ -62,7 +66,6 @@ namespace Member.ISC.Code.Players
             Vector3 dir =  target - _player.transform.position;
 
             float value = Vector3.Dot(_player.transform.right, dir.normalized);
-            Debug.Log(value);
             return value > 0;
         }
 

@@ -13,11 +13,13 @@ namespace Member.ISC.Code.Players.States
         public override void Enter()
         {
             base.Enter();
+            _player.SetActiveFrame(true);
             _player.PlayerInput.OnAttackCanceled += HandleAttackCanceled;
         }
 
         public override void Exit()
         {
+            _player.SetActiveFrame(false);
             _player.PlayerInput.OnAttackCanceled -= HandleAttackCanceled;
             base.Exit();
         }

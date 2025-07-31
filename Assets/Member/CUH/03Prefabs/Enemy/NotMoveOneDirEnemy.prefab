@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 0.5
-  _bulletSpeed: 1
-  _rotationStep: 3
+  attackCooldown: 2
+  _bulletSpeed: 2
+  _rotationStep: 30
   _initialAngle: 0
 --- !u!1 &4185066465465977850
 GameObject:

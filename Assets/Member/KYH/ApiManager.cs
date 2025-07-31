@@ -6,6 +6,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using TMPro;
+using Member.CUH.Code.Enemies;
+
 public class ApiManager : MonoBehaviour
 {
 
@@ -55,10 +57,16 @@ public class ApiManager : MonoBehaviour
 
     [Header("이벤트 발생 쿨타임")]
     [SerializeField] private float invokeCooltime = 15f;
+    [Header("api가 강화되는 강화 적 수")]
+    [SerializeField] private float overClockCnt = 2f;
 
     [Header("-----[이벤트 발생 알림]-----")]
     [SerializeField] private GameObject alim;
     [SerializeField] private TMP_Text alimText;
+    [SerializeField] private GameObject overClockText;
+    [SerializeField] private GameObject overClockAlim;
+    [Header("오버클럭 알람 깜빡 대기 시간")]
+    [SerializeField] private float overClockAlimDuration = 0.5f;
 
     [Header("처음 깜빡임 간격")]
     public float startInterval = 1.0f;
@@ -152,16 +160,12 @@ public class ApiManager : MonoBehaviour
     {
         if (!isStart) return;
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
         {
-            Application.Quit();
-
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
+            StartCoroutine(OverClockAlimRoutine());
         }
 
-        if(isInvokingEvent == false)
+        if (isInvokingEvent == false)
         {
             if (_currentTime >= invokeCooltime)
             {
@@ -174,8 +178,20 @@ public class ApiManager : MonoBehaviour
         }
     }
 
+    private IEnumerator OverClockAlimRoutine()
+    {
+        overClockAlim.SetActive(true);
+        yield return new WaitForSecondsRealtime(overClockAlimDuration);
+        overClockAlim.SetActive(false);
+        if (EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
+            StartCoroutine(OverClockAlimRoutine());
+    }
+
     public void Appear()
     {
+        if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
+            overClockText.SetActive(true);
+
         randIdx = UnityEngine.Random.Range(0, 8);
         UnityEngine.Debug.Log(randIdx);
         ChangeTextEvent(randIdx);
@@ -289,6 +305,7 @@ public class ApiManager : MonoBehaviour
                 StartCoroutine(SetSpeed(speedUp));
                 break;
         }
+        overClockText.SetActive(false);
     }
 
     private void RotateCamera()

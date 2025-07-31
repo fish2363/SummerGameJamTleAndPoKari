@@ -10,6 +10,8 @@ namespace Member.CUH.Code.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
+        public static EnemyManager Instance;
+
         public int OverClockEnemyCount { get; private set; }
         
         [SerializeField] private GameObject warningObject;
@@ -29,7 +31,12 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private int _spawnEnemyCount = 2;
         private int _currentEnemyCount = 0;
         private int nextEnemyCountUpScore = 5;
-        
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Start()
         {
             SpawnEnemies();

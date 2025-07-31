@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Entities;
+﻿using System;
+using Member.CUH.Code.Entities;
 using UnityEngine;
 
 namespace Member.ISC.Code.Players
@@ -7,9 +8,8 @@ namespace Member.ISC.Code.Players
     {
         [SerializeField] private Rigidbody2D rb; 
         
-        [Header("이동속도 및 회전속도")]
+        [Header("이동속도")]
         [SerializeField] private float moveSpeed;
-        [SerializeField] private float rotationSpeed;
         
         private Player _player;
 
@@ -24,6 +24,12 @@ namespace Member.ISC.Code.Players
         public void SetDirection(Vector2 dir)
         {
             _moveDir = dir.normalized;
+        }
+        
+        private void FixedUpdate()
+        {
+            CalculateMove();
+            Move();
         }
 
         private void CalculateMove()

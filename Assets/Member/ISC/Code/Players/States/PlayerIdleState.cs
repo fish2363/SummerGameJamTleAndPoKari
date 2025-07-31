@@ -8,7 +8,7 @@ namespace Member.ISC.Code.Players.States
         private PlayerMoveCompo _moveCompo;
 
 
-        public PlayerIdleState(Entity entity, int animationHash, PlayerMoveCompo moveCompo) : base(entity, animationHash)
+        public PlayerIdleState(Entity entity, int animationHash) : base(entity, animationHash)
         {
             _moveCompo = entity.GetCompo<PlayerMoveCompo>();
         }

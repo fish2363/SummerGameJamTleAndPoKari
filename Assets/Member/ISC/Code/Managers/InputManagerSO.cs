@@ -12,6 +12,8 @@ namespace Member.ISC.Code.Managers
         public Action OnAttackPressed;
         
         public Vector2 MovementKey { get; private set; }
+        public Vector2 MousePos { get; private set; }
+        
         
         private void OnEnable()
         { 
@@ -36,6 +38,12 @@ namespace Member.ISC.Code.Managers
         {
             if (context.canceled)
                 OnAttackPressed?.Invoke();
+        }
+
+        public void OnPos(InputAction.CallbackContext context)
+        {
+            Vector2 pos = context.ReadValue<Vector2>();
+            MousePos = Camera.main.ScreenToWorldPoint(pos);
         }
     }
 }

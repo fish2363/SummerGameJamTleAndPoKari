@@ -1,21 +1,23 @@
 ﻿using System;
 using Blade.FSM;
-using Member.CUH.Code.Combat;
+using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
-using Unity.VisualScripting;
+using Member.ISC.Code.Players;
 using UnityEngine;
 
 namespace Member.CUH.Code.Enemies
 {
-    public abstract class Enemy : Entity
+    public class Enemy : Entity
     {
-        public Transform target;
+        [Inject] public Player target;
         
         [SerializeField] private StateDataSO[] states;
+
+        [SerializeField] private bool isMoveableEnemy;
         
         private EntityStateMachine _stateMachine;
-
+        
         protected override void Awake()
         {
             base.Awake();
@@ -30,9 +32,9 @@ namespace Member.CUH.Code.Enemies
             ChangeState("DEAD", true);
         }
         
-        private void Start()
+        protected override void Start()
         {
-            _stateMachine.ChangeState("IDLE");
+            _stateMachine.ChangeState(isMoveableEnemy ? "MOVE" : "IDLE");
         }
 
         private void Update()

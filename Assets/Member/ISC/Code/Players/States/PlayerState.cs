@@ -15,5 +15,11 @@ namespace Member.ISC.Code.Players.States
             _player = entity as Player;
             Debug.Assert(_player != null, "Player State is only For Player");
         }
+
+        public override void Update()
+        {
+            base.Update();
+            Vector2 dir = (Vector2)_player.transform.position - _player.PlayerInput.MousePos;
+        }
     }
 }

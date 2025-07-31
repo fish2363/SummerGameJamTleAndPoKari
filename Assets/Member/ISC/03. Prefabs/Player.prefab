@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0222188f1ee847d6abdbd38c8eddbdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 6388035218388938874}
-  _delay: 0.5
-  duration: 3
+  sprite: {fileID: 6388035218388938874}
+  _delay: 0.2
+  cycleNum: 5
   player: {fileID: 726638208941367945}
 --- !u!1 &1082101224302878798
 GameObject:

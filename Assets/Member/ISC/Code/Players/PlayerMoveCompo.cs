@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Entities;
+﻿using System;
+using Member.CUH.Code.Entities;
 using UnityEngine;
 
 namespace Member.ISC.Code.Players
@@ -24,6 +25,12 @@ namespace Member.ISC.Code.Players
         public void SetDirection(Vector2 dir)
         {
             _moveDir = dir.normalized;
+        }
+        
+        private void FixedUpdate()
+        {
+            CalculateMove();
+            Move();
         }
 
         private void CalculateMove()

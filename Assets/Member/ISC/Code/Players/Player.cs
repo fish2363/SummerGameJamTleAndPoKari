@@ -19,7 +19,7 @@ namespace Member.ISC.Code.Players
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, stateDataList);
-            Debug.Log(_stateMachine);
+            
             OnHitEvent.AddListener(HandleHitEvent);
             OnDeadEvent.AddListener(HandleDeadEvent);
         }

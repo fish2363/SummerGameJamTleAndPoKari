@@ -49,7 +49,7 @@ namespace Member.ISC.Code.Players
                             b.SetReflect(true);
                             b.Fire(_player.transform.right);
                         }
-                        b.DestroyBullet();
+                        b?.DestroyBullet();
                     }
                 }
             }
@@ -62,7 +62,6 @@ namespace Member.ISC.Code.Players
             Vector3 dir =  target - _player.transform.position;
 
             float value = Vector3.Dot(_player.transform.right, dir.normalized);
-            Debug.Log(value);
             return value > 0;
         }
 

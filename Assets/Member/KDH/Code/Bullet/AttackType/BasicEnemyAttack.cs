@@ -8,6 +8,8 @@ namespace Member.KDH.Code.Bullet.AttackType
     public class BasicEnemyAttack : EnemyAttackCompo
     {
         [SerializeField] private float bombDelay;
+        [SerializeField] private float bombRadius = 2f;
+        [SerializeField] private LayerMask whatIsTarget;
         
         public override void Initialize(Entity entity)
         {
@@ -32,7 +34,11 @@ namespace Member.KDH.Code.Bullet.AttackType
                     _enemy.GetCompo<EntityMover>().StopImmediately();
                     DOVirtual.DelayedCall(bombDelay, () =>
                     {
-                        _target.ApplyDamage(1);
+                        Collider2D targetCol = Physics2D.OverlapCircle(transform.position, bombRadius, whatIsTarget);
+                        if (targetCol != null)
+                        {
+                            _target.ApplyDamage(1);
+                        }
                     }).OnComplete(() => _enemy.KillSelf());
                 }
                 else

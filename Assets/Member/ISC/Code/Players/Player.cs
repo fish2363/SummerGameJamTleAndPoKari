@@ -14,6 +14,7 @@ namespace Member.ISC.Code.Players
         [field: SerializeField] public InputManagerSO PlayerInput { get; private set; }
         
         [SerializeField] private StateDataSO[] stateDataList;
+        [SerializeField] private GameObject attackFrame;
         
         private EntityStateMachine _stateMachine;
 
@@ -27,6 +28,8 @@ namespace Member.ISC.Code.Players
             
             OnHitEvent.AddListener(HandleHitEvent);
             OnDeadEvent.AddListener(HandleDeadEvent);
+
+            SetActiveFrame(false);
         }
 
         private void OnDestroy()
@@ -71,6 +74,11 @@ namespace Member.ISC.Code.Players
             float q = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             
             transform.rotation = Quaternion.Euler(0, 0, q);
+        }
+
+        public void SetActiveFrame(bool isActive)
+        {
+            attackFrame.SetActive(isActive);
         }
         
         public void ChangeState(string newStateName, bool force = false) 

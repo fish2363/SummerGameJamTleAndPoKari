@@ -12,6 +12,7 @@ namespace Member.ISC.Code.Players.States
         public override void Enter()
         {
             base.Enter();
+            _player.SetActiveFrame(false);
             _moveCompo.CanManualMovement = false;
             _moveCompo.StopImmediately();
         }

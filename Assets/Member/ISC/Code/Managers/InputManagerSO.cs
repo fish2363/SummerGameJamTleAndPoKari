@@ -1,0 +1,41 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Member.ISC.Code.Managers
+{
+    [CreateAssetMenu(fileName = "InputManager", menuName = "SO/InputManager", order = 0)]
+    public class InputManagerSO : ScriptableObject, Contorls.IPlayerActions
+    {
+        private Contorls _controls;
+        
+        public Action OnAttackPressed;
+        
+        public Vector2 MovementKey { get; private set; }
+        
+        private void OnEnable()
+        { 
+            _controls ??= new Contorls();
+            
+            _controls.Player.SetCallbacks(this);
+            _controls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _controls.Disable();
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            Vector2 dir = context.ReadValue<Vector2>();
+            MovementKey = dir;
+        }
+
+        public void OnAttack(InputAction.CallbackContext context)
+        {
+            if (context.canceled)
+                OnAttackPressed?.Invoke();
+        }
+    }
+}

@@ -1,11 +1,46 @@
-﻿using Member.CUH.Code.Entities;
+﻿using System;
+using Blade.FSM;
+using Member.CUH.Code.Combat;
+using Member.CUH.Code.Entities;
+using Member.CUH.Code.Entities.FSM;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Member.CUH.Code.Enemies
 {
-    public class Enemy : Entity
+    public abstract class Enemy : Entity
     {
         public Transform target;
         
+        [SerializeField] private StateDataSO[] states;
+        
+        private EntityStateMachine _stateMachine;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _stateMachine = new EntityStateMachine(this, states);
+            OnDeadEvent.AddListener(HandleDeadEvent);
+        }
+        
+        private void HandleDeadEvent()
+        {
+            if(IsDead) return;
+            IsDead = true;
+            ChangeState("DEAD", true);
+        }
+        
+        private void Start()
+        {
+            _stateMachine.ChangeState("IDLE");
+        }
+
+        private void Update()
+        {
+            _stateMachine.UpdateStateMachine();
+        }
+        
+        public void ChangeState(string newStateName, bool forced = false)
+            => _stateMachine.ChangeState(newStateName,forced);
     }
 }

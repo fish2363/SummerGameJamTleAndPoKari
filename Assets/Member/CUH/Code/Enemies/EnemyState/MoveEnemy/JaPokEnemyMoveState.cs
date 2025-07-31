@@ -20,7 +20,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             _entityMover.SetMovement(moveDir);
             if (dist <= 1f)
             {
-                Debug.Log("자폭");
+                _attackCompo.Attack();
             }
         }
     }

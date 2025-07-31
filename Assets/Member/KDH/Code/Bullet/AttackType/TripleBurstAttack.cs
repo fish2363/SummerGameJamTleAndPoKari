@@ -9,7 +9,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     {
         [SerializeField] private int _burstCount = 3;
         [SerializeField] private float _burstDelay = 0.1f;
-        [SerializeField] private float _burstCooldown = 2f;
+        // [SerializeField] private float _burstCooldown = 2f;
         [SerializeField] private float _bulletSpeed = 3.5f;
         [SerializeField] private bool _useFixedDirection = false;
         [SerializeField] private bool _enableDebugLogs = true;
@@ -79,8 +79,8 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 if (_enableDebugLogs)
                 {
-                    Debug.Log($"[{gameObject.name}] TripleBurstAttack이 성공적으로 초기화되었습니다. " +
-                             $"(점사수: {_burstCount}발, 딜레이: {_burstDelay}초, 쿨타임: {_burstCooldown}초, 플레이어 발견: {_playerFound})");
+                    // Debug.Log($"[{gameObject.name}] TripleBurstAttack이 성공적으로 초기화되었습니다. " +
+                    //          $"(점사수: {_burstCount}발, 딜레이: {_burstDelay}초, 쿨타임: {_burstCooldown}초, 플레이어 발견: {_playerFound})");
                 }
             }
             catch (System.Exception ex)
@@ -110,10 +110,10 @@ namespace Member.KDH.Code.Bullet.AttackType
                 if (!_playerFound && Time.time - _lastPlayerSearchTime >= _playerSearchInterval)
                 {
                     FindPlayer();
-                    _lastPlayerSearchTime = Time.time;
+                    // _lastPlayerSearchTime = Time.time;
                 }
                 
-                CheckAndExecuteBurstAttack();
+                // CheckAndExecuteBurstAttack();
             }
             catch (System.Exception ex)
             {
@@ -184,18 +184,18 @@ namespace Member.KDH.Code.Bullet.AttackType
         {
             try
             {
-                if (_currentState == AttackState.Waiting && 
-                    Time.time - _lastBurstTime >= _burstCooldown)
-                {
-                    StartBurstAttack();
-                }
-                
-                if (_enableDebugLogs && Time.frameCount % 300 == 0)
-                {
-                    float remainingCooldown = _burstCooldown - (Time.time - _lastBurstTime);
-                    Debug.Log($"[{gameObject.name}] 현재 상태: {GetStateKoreanName()}, " +
-                             $"쿨타임 남은 시간: {Mathf.Max(0f, remainingCooldown):F1}초");
-                }
+                // if (_currentState == AttackState.Waiting && 
+                //     Time.time - _lastBurstTime >= _burstCooldown)
+                // {
+                //     StartBurstAttack();
+                // }
+                //
+                // if (_enableDebugLogs && Time.frameCount % 300 == 0)
+                // {
+                //     float remainingCooldown = _burstCooldown - (Time.time - _lastBurstTime);
+                //     Debug.Log($"[{gameObject.name}] 현재 상태: {GetStateKoreanName()}, " +
+                //              $"쿨타임 남은 시간: {Mathf.Max(0f, remainingCooldown):F1}초");
+                // }
             }
             catch (System.Exception ex)
             {
@@ -454,8 +454,8 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 if (_enableDebugLogs)
                 {
-                    Debug.Log($"[{gameObject.name}] 점사 완료! 성공: {successfulShots}/{_burstCount}발, " +
-                             $"다음 점사까지 {_burstCooldown}초 대기");
+                    // Debug.Log($"[{gameObject.name}] 점사 완료! 성공: {successfulShots}/{_burstCount}발, " +
+                    //          $"다음 점사까지 {_burstCooldown}초 대기");
                 }
             }
             catch (System.Exception ex)
@@ -504,25 +504,12 @@ namespace Member.KDH.Code.Bullet.AttackType
             try
             {
                 base.Attack();
+            
+                StartBurstAttack();
                 
-                if (_currentState == AttackState.Waiting && 
-                    Time.time - _lastBurstTime >= _burstCooldown)
+                if (_enableDebugLogs)
                 {
-                    StartBurstAttack();
-                    
-                    if (_enableDebugLogs)
-                    {
-                        Debug.Log($"[{gameObject.name}] 외부에서 Attack 호출로 점사 시작!");
-                    }
-                }
-                else
-                {
-                    if (_enableDebugLogs)
-                    {
-                        float remainingCooldown = _burstCooldown - (Time.time - _lastBurstTime);
-                        Debug.LogWarning($"[{gameObject.name}] 점사 공격을 할 수 없는 상태입니다. " +
-                                        $"(상태: {GetStateKoreanName()}, 쿨타임 남은 시간: {Mathf.Max(0f, remainingCooldown):F1}초)");
-                    }
+                    Debug.Log($"[{gameObject.name}] 외부에서 Attack 호출로 점사 시작!");
                 }
             }
             catch (System.Exception ex)
@@ -587,7 +574,7 @@ namespace Member.KDH.Code.Bullet.AttackType
                     return;
                 }
                 
-                _burstCooldown = newBurstCooldown;
+                // _burstCooldown = newBurstCooldown;
                 
                 if (_enableDebugLogs)
                 {
@@ -656,38 +643,38 @@ namespace Member.KDH.Code.Bullet.AttackType
             return _isInitialized && _playerFound && _playerTransform != null;
         }
         
-        public string GetCurrentStateInfo()
-        {
-            try
-            {
-                string stateKorean = GetStateKoreanName();
-                float remainingCooldown = _burstCooldown - (Time.time - _lastBurstTime);
-                
-                if (_currentState == AttackState.Waiting)
-                {
-                    return $"{stateKorean} (쿨타임 남은 시간: {Mathf.Max(0f, remainingCooldown):F1}초)";
-                }
-                else
-                {
-                    return $"{stateKorean} (진행 중)";
-                }
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"[{gameObject.name}] 상태 정보 조회 중 오류 발생: {ex.Message}");
-                return "오류 발생";
-            }
-        }
+        // public string GetCurrentStateInfo()
+        // {
+        //     try
+        //     {
+        //         string stateKorean = GetStateKoreanName();
+        //         // float remainingCooldown = _burstCooldown - (Time.time - _lastBurstTime);
+        //         
+        //         if (_currentState == AttackState.Waiting)
+        //         {
+        //             return $"{stateKorean} (쿨타임 남은 시간: {Mathf.Max(0f, remainingCooldown):F1}초)";
+        //         }
+        //         else
+        //         {
+        //             return $"{stateKorean} (진행 중)";
+        //         }
+        //     }
+        //     catch (System.Exception ex)
+        //     {
+        //         Debug.LogError($"[{gameObject.name}] 상태 정보 조회 중 오류 발생: {ex.Message}");
+        //         return "오류 발생";
+        //     }
+        // }
         
         public bool IsBursting()
         {
             return _currentState == AttackState.Bursting && _burstCoroutine != null;
         }
         
-        public float GetRemainingCooldown()
-        {
-            return Mathf.Max(0f, _burstCooldown - (Time.time - _lastBurstTime));
-        }
+        // public float GetRemainingCooldown()
+        // {
+        //     return Mathf.Max(0f, _burstCooldown - (Time.time - _lastBurstTime));
+        // }
         
         public void ForceStartBurst()
         {

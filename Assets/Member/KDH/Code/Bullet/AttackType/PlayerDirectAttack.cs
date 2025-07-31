@@ -7,7 +7,6 @@ namespace Member.CUH.Code.Combat.Enemies
     public class PlayerDirectAttack : EnemyAttackCompo
     {
         [Header("플레이어 방향 공격 설정")]
-        [SerializeField] private float _attackInterval = 1f; // 공격 간격 (초)
         [SerializeField] private float _bulletSpeed = 1f;   // 탄환 속도
         
         private Transform _playerTransform;
@@ -28,10 +27,10 @@ namespace Member.CUH.Code.Combat.Enemies
                 return;
             }
             
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                Attack();
-            }
+            // if (Time.time - _lastAttackTime >= _attackInterval)
+            // {
+            //     Attack();
+            // }
         }
         
         private void FindPlayer()

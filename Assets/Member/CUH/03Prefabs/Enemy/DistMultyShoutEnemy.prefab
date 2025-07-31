@@ -329,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8760243137210574059}
-  - component: {fileID: 6790032313760745554}
+  - component: {fileID: 7621443704284129767}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -352,7 +352,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4005728164235306817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6790032313760745554
+--- !u!114 &7621443704284129767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,8 +361,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8715216442869777706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 24bd9e3c35cd460a9e42196b6dc5ce7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 1
+  _attackInterval: 1
+  _bulletSpeed: 1
+  _spreadAngle: 15

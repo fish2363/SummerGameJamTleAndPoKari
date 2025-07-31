@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2442797664406518828}
-  - component: {fileID: 3166390187094224562}
+  - component: {fileID: 3511181095810376844}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6375781781769481905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3166390187094224562
+--- !u!114 &3511181095810376844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 951506609499382969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e770f0cf9084336a17ef5c66b9fd3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 1
 --- !u!1 &2417048791271897710
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,9 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e71df3266fffa04b911bebeab73c6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  maxMoveSpeed: 20
-  isLeapMove: 0
+  moveSpeed: 0.5
+  maxMoveSpeed: 4
+  isLeapMove: 1
 --- !u!1 &5126109748561100718
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,4 +364,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

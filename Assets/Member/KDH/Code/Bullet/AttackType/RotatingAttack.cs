@@ -7,7 +7,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     public class RotatingAttack : EnemyAttackCompo
     {
         [Header("회전 공격 설정")]
-        [SerializeField] private float _attackInterval = 0.3f; // 공격 간격 (초)
+        // [SerializeField] private float _attackInterval = 0.3f; // 공격 간격 (초)
         [SerializeField] private float _bulletSpeed = 1f; // 탄환 속도
         [SerializeField] private float _rotationStep = 3f; // 회전 각도 (도)
         [SerializeField] private float _initialAngle = 0f; // 시작 각도 (도)
@@ -21,16 +21,16 @@ namespace Member.KDH.Code.Bullet.AttackType
             
             _currentAngle = _initialAngle;
             
-            Debug.Log($"{gameObject.name}: 회전 공격 컴포넌트가 초기화되었습니다. (회전 간격: {_rotationStep}도, 공격 간격: {_attackInterval}초)");
+            // Debug.Log($"{gameObject.name}: 회전 공격 컴포넌트가 초기화되었습니다. (회전 간격: {_rotationStep}도, 공격 간격: {_attackInterval}초)");
         }
         
-        private void Update()
-        {
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                Attack();
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Time.time - _lastAttackTime >= _attackInterval)
+        //     {
+        //         Attack();
+        //     }
+        // }
         
         public override void Attack()
         {
@@ -58,6 +58,8 @@ namespace Member.KDH.Code.Bullet.AttackType
             bullet.transform.position = transform.position;
             
             bullet.Fire(direction, _bulletSpeed);
+            
+            _enemy.transform.rotation = Quaternion.Euler(0f, 0f, _currentAngle);
             
             _currentAngle += _rotationStep;
             

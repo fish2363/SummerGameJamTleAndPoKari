@@ -7,7 +7,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     public class PlayerTripleShotAttack : EnemyAttackCompo
     {
         [Header("3점사 공격 설정")]
-        [SerializeField] private float _attackInterval = 1f; // 공격 간격 (초)
+        // [SerializeField] private float _attackInterval = 1f; // 공격 간격 (초)
         [SerializeField] private float _bulletSpeed = 1f; // 탄환 속도
         [SerializeField] private float _spreadAngle = 15f; // 탄환 퍼짐 각도 (도)
         
@@ -28,10 +28,10 @@ namespace Member.KDH.Code.Bullet.AttackType
                 return;
             }
             
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                Attack();
-            }
+            // if (Time.time - _lastAttackTime >= _attackInterval)
+            // {
+            //     Attack();
+            // }
         }
         
         private void FindPlayer()

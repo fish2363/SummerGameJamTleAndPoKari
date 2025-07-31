@@ -5,9 +5,9 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
 {
     public class RandomEnemyMoveState : MoveableEnemyState
     {
-        private float halfXSize = 4.5f;
-        private float halfYSize = 4.5f;
-        private Vector2 nextPos;
+        private float _halfXSize = 4.5f;
+        private float _halfYSize = 4.5f;
+        private Vector2 _nextPos;
         
         public RandomEnemyMoveState(Entity entity, int animationHash) : base(entity, animationHash)
         {
@@ -20,9 +20,9 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             if (_attackCompo.CanAttack())
             {
                 _attackCompo.Attack();
-                nextPos.x = Random.Range(-halfXSize, halfXSize);
-                nextPos.y = Random.Range(-halfYSize, halfYSize);
-                _enemy.transform.position = nextPos;
+                _nextPos.x = Random.Range(-_halfXSize, _halfXSize);
+                _nextPos.y = Random.Range(-_halfYSize, _halfYSize);
+                _enemy.transform.position = _nextPos;
             }
         }
     }

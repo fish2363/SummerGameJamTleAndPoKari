@@ -2,18 +2,17 @@
 using Member.CUH.Code.Entities;
 using Member.ISC.Code.Players;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Member.CUH.Code.Combat.Enemies
 {
     public class EnemyAttackCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
-        [SerializeField] private float attackRange;
-        [SerializeField] private float attackCooldown;
+        [SerializeField] private float attackRange = 100f;
+        [SerializeField] private float attackCooldown = 1f;
         
         protected Enemy _enemy;
         protected Player _target;
-        private float _lastAtkTime;
+        protected float _lastAtkTime;
         
         public virtual void Initialize(Entity entity)
         {

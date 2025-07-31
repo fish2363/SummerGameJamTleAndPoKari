@@ -18,13 +18,9 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             Vector2 moveDir = (_enemy.target.transform.position - _enemy.transform.position).normalized;
             float dist = Vector2.Distance(_enemy.target.transform.position, _enemy.transform.position);
             _entityMover.SetMovement(moveDir);
-            if (_attackCompo.CanAttack())
-            {
-                _attackCompo.Attack();
-            }
             if (dist <= 1f)
             {
-                Debug.Log("자폭");
+                _attackCompo.Attack();
             }
         }
     }

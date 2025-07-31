@@ -1,0 +1,31 @@
+﻿using Member.CUH.Code.Entities;
+using UnityEngine;
+
+namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
+{
+    public class JaPokEnemyFireMoveState : MoveableEnemyState
+    {
+        private EntityMover _entityMover;
+
+        public JaPokEnemyFireMoveState(Entity entity, int animationHash) : base(entity, animationHash)
+        {
+            _entityMover = entity.GetCompo<EntityMover>();
+
+        }
+        public override void Update()
+        {
+            base.Update();
+            Vector2 moveDir = (_enemy.target.transform.position - _enemy.transform.position).normalized;
+            float dist = Vector2.Distance(_enemy.target.transform.position, _enemy.transform.position);
+            _entityMover.SetMovement(moveDir);
+            if (_attackCompo.CanAttack(_enemy.target.transform))
+            {
+                _attackCompo.Attack();
+            }
+            if (dist <= 1f)
+            {
+                Debug.Log("자폭");
+            }
+        }
+    }
+}

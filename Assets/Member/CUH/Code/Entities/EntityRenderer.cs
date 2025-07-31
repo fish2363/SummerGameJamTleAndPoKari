@@ -2,31 +2,20 @@ using UnityEngine;
 
 namespace Member.CUH.Code.Entities
 {
-    public class EntityRenderer : AnimatorCompo, IEntityComponent
+    public class EntityRenderer : MonoBehaviour, IEntityComponent
     {
-        public float FacingDirection { get; private set; } = 1;
-    
         private Entity _entity;
-    
-    
+        
         public void Initialize(Entity entity)
         {
             _entity = entity;
         }
-    
-        #region FlipController
-        public void Flip()
+
+        public void RotateToTarget(Transform target)
         {
-            FacingDirection *= -1;
-            _entity.transform.Rotate(0, 180f, 0);
+            Vector2 direction = target.position - _entity.transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
-        public void FlipController(float xMove)
-        {
-            if (Mathf.Abs(FacingDirection + xMove) < 0.5f)
-            {
-                Flip();
-            }
-        }
-        #endregion
     }
 }

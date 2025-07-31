@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Member.CUH.Code.Entities
 {
@@ -9,7 +11,7 @@ namespace Member.CUH.Code.Entities
         [SerializeField] private Animator animator;
         
         private Entity _entity;
-
+        
         public bool ApplyRootMotion
         {
             get => animator.applyRootMotion;

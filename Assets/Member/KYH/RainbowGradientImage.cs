@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class RainbowGradientImage : Image
 {
-    [SerializeField] private Color bottomColor = Color.black;
+    private Color bottomColor = new Color(0.1f, 0.1f, 0.2f);
 
     [SerializeField, Range(1f, 60f)]
     private float cycleDuration = 10f; // 한 바퀴 도는 데 걸리는 시간 (초)

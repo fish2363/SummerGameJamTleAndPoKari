@@ -23,7 +23,8 @@ namespace Member.ISC.Code.Players.States
 
         private void HandleAttackPressed()
         {
-            _player.ChangeState("ATTACK_CHARGE");
+            if (_player.CanAttack)
+                _player.ChangeState("ATTACK_CHARGE");
         }
     }
 }

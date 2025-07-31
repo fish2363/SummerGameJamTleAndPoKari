@@ -49,11 +49,8 @@ namespace Member.ISC.Code.Players
                         {
                             OnParry?.Invoke(item.transform.position);
                         }
-                        else
-                        {
-                            Bullet b = item.gameObject.GetComponent<Bullet>();
-                            b.DestroyBullet();
-                        }
+                        Bullet b = item.gameObject.GetComponent<Bullet>();
+                        b.DestroyBullet();
                     }
                 }
             }

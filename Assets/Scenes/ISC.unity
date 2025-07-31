@@ -310,7 +310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: castRadius
-      value: 5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: parryRadius
@@ -318,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: whatIsTarget.m_Bits
-      value: 1
+      value: 128
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

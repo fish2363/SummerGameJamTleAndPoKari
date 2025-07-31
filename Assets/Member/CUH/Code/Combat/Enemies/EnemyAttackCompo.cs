@@ -10,7 +10,9 @@ namespace Member.CUH.Code.Combat.Enemies
     {
         [SerializeField] private float attackRange = 100f;
         [SerializeField] private float attackCooldown = 1f;
-        
+        [Header("뽀용 대기")]
+        [SerializeField] private float attackWait;
+
         protected Enemy _enemy;
         protected IDamageable _target;
         protected float _lastAtkTime;

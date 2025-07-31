@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Member.CUH.Code.Combat;
+using UnityEngine;
 
 namespace Member.KDH.Code.Bullet
 {
@@ -104,6 +105,8 @@ namespace Member.KDH.Code.Bullet
             {
                 if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                 {
+                    if (other.TryGetComponent(out IDamageable damageable))
+                        damageable.ApplyDamage(1);
                     Debug.Log("Hit! Enemy");
                     DestroyBullet();
                 }
@@ -112,6 +115,8 @@ namespace Member.KDH.Code.Bullet
             {
                 if (other.CompareTag("Player"))
                 {
+                    if (other.TryGetComponent(out IDamageable damageable))
+                        damageable.ApplyDamage(1);
                     Debug.Log("Hit! Player");
                     DestroyBullet();
                 }

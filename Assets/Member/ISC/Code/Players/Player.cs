@@ -65,7 +65,8 @@ namespace Member.ISC.Code.Players
 
         private void FixedUpdate()
         {
-            Rotate(PlayerInput.MousePos);
+            if (!IsDead)
+                Rotate(PlayerInput.MousePos);
         }
 
         private void Rotate(Vector2 pos)

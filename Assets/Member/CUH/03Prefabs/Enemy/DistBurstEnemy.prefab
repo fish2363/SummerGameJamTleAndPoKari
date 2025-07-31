@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 4647685927921123160}
   - component: {fileID: 509920313092326203}
   - component: {fileID: 752859833481242414}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistBurstEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

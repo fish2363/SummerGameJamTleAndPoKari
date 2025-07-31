@@ -11,7 +11,7 @@ namespace Member.CUH.Code.Enemies
 {
     public class Enemy : Entity, IDamageable
     {
-        [Inject] public Player target;
+        [HideInInspector] public Player target;
         
         [SerializeField] private StateDataSO[] states;
 

@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 1.5
-  _attackInterval: 2
   _bulletSpeed: 3
   _predictionTime: 1
   _drawPredictionGizmo: 1
@@ -62,7 +61,7 @@ GameObject:
   - component: {fileID: 4931566967455783822}
   - component: {fileID: 6907496336208760718}
   - component: {fileID: 4048377772357700162}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RunEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

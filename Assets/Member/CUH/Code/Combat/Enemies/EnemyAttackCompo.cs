@@ -11,7 +11,7 @@ namespace Member.CUH.Code.Combat.Enemies
         [SerializeField] private float attackCooldown = 1f;
         
         protected Enemy _enemy;
-        protected Player _target;
+        protected IDamageable _target;
         protected float _lastAtkTime;
         
         public virtual void Initialize(Entity entity)
@@ -21,7 +21,7 @@ namespace Member.CUH.Code.Combat.Enemies
         
         public void AfterInitialize()
         {
-            _target = _enemy.target;
+            _target = _enemy.Target;
         }
         
         public virtual bool CanAttack()

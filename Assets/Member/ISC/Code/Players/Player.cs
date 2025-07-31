@@ -1,5 +1,6 @@
 ﻿using System;
 using Blade.FSM;
+using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
 using Member.ISC.Code.Managers;
@@ -7,13 +8,16 @@ using UnityEngine;
 
 namespace Member.ISC.Code.Players
 {
-    public class Player : Entity
+    public class Player : Entity, IDependencyProvider
     {
         [field: SerializeField] public InputManagerSO PlayerInput { get; private set; }
         
         [SerializeField] private StateDataSO[] stateDataList;
         
         private EntityStateMachine _stateMachine;
+
+        [Provide]
+        private Player ProviderPlayer() => this;
         
         protected override void Awake()
         {

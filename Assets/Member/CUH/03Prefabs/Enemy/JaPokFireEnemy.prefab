@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e71df3266fffa04b911bebeab73c6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.25
-  maxMoveSpeed: 4
+  moveSpeed: 0.1
+  maxMoveSpeed: 3
   isLeapMove: 1
 --- !u!1 &3910420558657802115
 GameObject:
@@ -364,5 +364,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 0.7
-  _bulletSpeed: 1
+  attackCooldown: 1.5
+  _bulletSpeed: 9

@@ -5,11 +5,9 @@ namespace Member.CUH.Code.Enemies.EnemyState.NotMoveEnemy
 {
     public class NotMoveEnemyAttackState : NotMoveEnemyState
     {
-        private EnemyAttackCompo _attackCompo;
         
         public NotMoveEnemyAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
-            _attackCompo = entity.GetCompo<EnemyAttackCompo>(true);
         }
         
         public override void Enter()

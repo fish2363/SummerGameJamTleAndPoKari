@@ -9,6 +9,8 @@ namespace Member.KDH.Code.Bullet.AttackType
     {
         [SerializeField] private float _bulletSpeed = 1f;   // 탄환 속도
         [SerializeField] private float bombDelay;
+        [SerializeField] private float bombRadius = 2f;
+        [SerializeField] private LayerMask whatIsTarget;
         
         private void Update()
         {
@@ -24,7 +26,11 @@ namespace Member.KDH.Code.Bullet.AttackType
             _enemy.GetCompo<EntityMover>().StopImmediately();
             DOVirtual.DelayedCall(bombDelay, () =>
             {
-                _target.ApplyDamage(1);
+                Collider2D targetCol = Physics2D.OverlapCircle(transform.position, bombRadius, whatIsTarget);
+                if (targetCol != null)
+                {
+                    _target.ApplyDamage(1);
+                }
             }).OnComplete(() => _enemy.KillSelf());
         }
 

@@ -10,6 +10,8 @@ namespace Member.CUH.Code.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
+        public int OverClockEnemyCount { get; private set; }
+        
         [SerializeField] private GameObject warningObject;
         [SerializeField] private Enemy[] spawnEnemies;
         [SerializeField] private Transform leftBottomTrm;
@@ -66,6 +68,12 @@ namespace Member.CUH.Code.Enemies
             spawnEnemy.SetTarget(_player.GetComponent<IDamageable>());
             _currentEnemyCount++;
             spawnEnemy.OnDeadEvent.AddListener(HandleEnemyDead);
+            spawnEnemy.OnOverClock += HandleOverClock;
+        }
+
+        private void HandleOverClock(bool isOn)
+        {
+            OverClockEnemyCount += isOn ? 1 : -1;
         }
 
         private void HandleEnemyDead()

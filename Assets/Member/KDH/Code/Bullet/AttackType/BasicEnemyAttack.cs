@@ -1,0 +1,42 @@
+﻿using Member.CUH.Code.Combat.Enemies;
+using Member.CUH.Code.Entities;
+using UnityEngine;
+
+namespace Member.KDH.Code.Bullet.AttackType
+{
+    public class BasicEnemyAttack : EnemyAttackCompo
+    {
+        public override void Initialize(Entity entity)
+        {
+            try
+            {
+                base.Initialize(entity);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[{gameObject.name}] BasicEnemyAttack 초기화 중 오류 발생: {ex.Message}");
+            }
+        }
+        
+        public override void Attack()
+        {
+            try
+            {
+                base.Attack();
+                
+                if (_target != null)
+                {
+                    Debug.Log("Hit!");
+                }
+                else
+                {
+                    Debug.LogWarning($"[{gameObject.name}] 타겟이 설정되지 않았습니다.");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[{gameObject.name}] Attack 메서드 실행 중 오류 발생: {ex.Message}");
+            }
+        }
+    }
+}

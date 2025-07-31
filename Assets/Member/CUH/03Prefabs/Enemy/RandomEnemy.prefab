@@ -255,6 +255,7 @@ MonoBehaviour:
   states:
   - {fileID: 11400000, guid: dac3ea18cc4ad764ab777eefabdcc6b9, type: 2}
   isMoveableEnemy: 1
+  deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
 --- !u!58 &2047440184827376726
 CircleCollider2D:
   m_ObjectHideFlags: 0

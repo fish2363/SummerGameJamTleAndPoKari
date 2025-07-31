@@ -71,7 +71,7 @@ namespace Member.CUH.Code.Enemies
             Instantiate(deadEffect,transform.position,Quaternion.identity);
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
-
+            GetComponentInChildren<SpriteRenderer>().DOKill();
             Destroy(gameObject);
         }
 
@@ -80,6 +80,7 @@ namespace Member.CUH.Code.Enemies
             IsDead = true;
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
+            GetComponentInChildren<SpriteRenderer>().DOKill();
             Destroy(gameObject);
         }
     }

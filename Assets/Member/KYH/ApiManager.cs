@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -53,6 +54,21 @@ public class ApiManager : MonoBehaviour
 
     [Header("이벤트 발생 쿨타임")]
     [SerializeField] private float invokeCooltime = 15f;
+
+    [Header("-----[이벤트 발생 알림]-----")]
+    [SerializeField] private GameObject alim;
+    private Coroutine flashCoroutine;
+    [Header("처음 깜빡임 간격")]
+    public float startInterval = 1.0f;
+    [Header("마지막 깜빡임 간격")]
+    public float endInterval = 0.1f;  
+    [Header("깜빡이기 전 대기 시간")]
+    public float stopDuration = 2f;  
+    [Header("전체 지속 시간")]
+    public float totalDuration = 5f;  
+    private float appearDuration = 0.4f;
+    private Ease easeType = Ease.OutBack; // 뽀용~ 느낌
+
     private float _currentTime = 0f;
     private bool isInvokingEvent = false;
     [Header("_____[마우스 조종 이벤트]_____")]
@@ -91,6 +107,7 @@ public class ApiManager : MonoBehaviour
     private float shakeMagnitude = 10f;
     private Camera camera;
 
+    private string imagePath = @"C:\Users\YourUser\Pictures\sample.jpg";
 
     private bool isStart;
 
@@ -127,19 +144,48 @@ public class ApiManager : MonoBehaviour
             {
                 isInvokingEvent = true;
                 _currentTime = 0;
-                int rand = UnityEngine.Random.Range(5, 6);
-                Debug.Log(rand);
-                ChooseEvent(rand);
+                Appear();
             }
             else
                 _currentTime += Time.deltaTime;
         }
     }
 
+    public void Appear()
+    {
+        alim.transform.localScale = new Vector3(1.620305f, 0f, 1f); // 아래서 시작
+        alim.transform.DOScaleY(1.620305f, appearDuration).SetEase(easeType);
+
+        flashCoroutine = StartCoroutine(FlashRoutine());
+    }
+    IEnumerator FlashRoutine()
+    {
+        yield return new WaitForSecondsRealtime(stopDuration);
+
+        float elapsed = 0f;
+        bool visible = true;
+        while (elapsed < totalDuration)
+        {
+            float t = elapsed / totalDuration;
+            float currentInterval = Mathf.Lerp(startInterval, endInterval, t);
+
+            alim.SetActive(visible);
+            visible = !visible;
+
+            yield return new WaitForSeconds(currentInterval);
+            elapsed += currentInterval;
+        }
+        alim.SetActive(false);
+        alim.transform.localScale = new Vector3(1f, 0f, 1f); // 아래서 시작
+        int rand = UnityEngine.Random.Range(0, 8);
+        UnityEngine.Debug.Log(rand);
+        ChooseEvent(rand);
+    }
 
     public void ChooseEvent(int idx)
     {
-        switch(idx)
+
+        switch (idx)
         {
             case 0:
                 StartCoroutine(MoveMouseSequence());
@@ -157,6 +203,17 @@ public class ApiManager : MonoBehaviour
             case 4:
                 //창 띄우기
                 isInvokingEvent = false;
+                //try
+                //{
+                //    Process.Start(new ProcessStartInfo(path)
+                //    {
+                //        UseShellExecute = true
+                //    });
+                //}
+                //catch (System.Exception e)
+                //{
+                //    UnityEngine.Debug.LogError("이미지를 여는 데 실패함: " + e.Message);
+                //}
                 break;
             case 5:
                 //카메라

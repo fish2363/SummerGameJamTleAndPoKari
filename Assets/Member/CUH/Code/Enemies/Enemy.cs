@@ -11,7 +11,7 @@ namespace Member.CUH.Code.Enemies
 {
     public class Enemy : Entity, IDamageable
     {
-        [HideInInspector] public Player target;
+        [HideInInspector] public IDamageable Target;
         
         [SerializeField] private StateDataSO[] states;
 
@@ -31,6 +31,12 @@ namespace Member.CUH.Code.Enemies
             if(IsDead) return;
             IsDead = true;
             ChangeState("DEAD", true);
+        }
+
+        public void SetTarget(IDamageable target)
+        {
+            Target = target;
+            AfterInitialize();
         }
         
         protected override void Start()

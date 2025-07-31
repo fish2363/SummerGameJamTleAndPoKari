@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Combat.Enemies;
+﻿using System.Collections;
+using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     public class RandomAttack : EnemyAttackCompo
     {
         [Header("무작위 공격 설정")]
-        [SerializeField] private float _attackInterval = 0.5f; // 공격 간격 (초)
+        [SerializeField] private float _attackInterval = 0.8f; // 공격 간격 (초)
         [SerializeField] private float _bulletSpeed = 1f; // 탄환 속도
         [SerializeField] private int _bulletsPerAttack = 1; // 한 번 공격시 발사할 탄환 수
         [SerializeField] private bool _useRandomSeed = false; // 시드를 사용한 재현 가능한 랜덤 여부
@@ -40,9 +41,9 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 if (_enableDebugLogs)
                 {
-                    Debug.Log($"[{gameObject.name}] 무작위 공격 컴포넌트가 성공적으로 초기화되었습니다. " +
-                             $"(공격 간격: {_attackInterval}초, 탄환 수: {_bulletsPerAttack}발, " +
-                             $"시드 사용: {_useRandomSeed})");
+                    // Debug.Log($"[{gameObject.name}] 무작위 공격 컴포넌트가 성공적으로 초기화되었습니다. " +
+                    //          $"(공격 간격: {_attackInterval}초, 탄환 수: {_bulletsPerAttack}발, " +
+                    //          $"시드 사용: {_useRandomSeed})");
                 }
             }
             catch (System.Exception ex)
@@ -66,10 +67,10 @@ namespace Member.KDH.Code.Bullet.AttackType
                 }
             }
             
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                Attack();
-            }
+            // if (Time.time - _lastAttackTime >= _attackInterval)
+            // {
+            //     Attack();
+            // }
         }
         
         private void SafeInitializeRandomGenerator()
@@ -143,41 +144,7 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 int successfulShots = 0;
                 
-                for (int i = 0; i < _bulletsPerAttack; i++)
-                {
-                    try
-                    {
-                        float randomAngle = GetRandomAngleSafe();
-                        
-                        float radians = randomAngle * Mathf.Deg2Rad;
-                        Vector2 randomDirection = new Vector2(
-                            Mathf.Cos(radians),
-                            Mathf.Sin(radians)
-                        );
-
-                        Bullet bullet = BulletPool.Instance.GetBullet();
-                        if (bullet == null)
-                        {
-                            Debug.LogWarning($"[{gameObject.name}] {i + 1}번째 탄환을 생성할 수 없습니다! 탄환 풀이 부족할 수 있습니다.");
-                            continue;
-                        }
-
-                        bullet.transform.position = transform.position;
-
-                        bullet.Fire(randomDirection, _bulletSpeed);
-                        
-                        successfulShots++;
-                        
-                        if (_enableDebugLogs)
-                        {
-                            Debug.Log($"[{gameObject.name}] {i + 1}번째 탄환을 {randomAngle:F1}도 방향으로 발사했습니다.");
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        Debug.LogError($"[{gameObject.name}] {i + 1}번째 탄환 발사 중 오류 발생: {ex.Message}");
-                    }
-                }
+                StartCoroutine(ShoutCoroutine(successfulShots));
                 
                 _lastAttackTime = Time.time;
                 
@@ -190,6 +157,47 @@ namespace Member.KDH.Code.Bullet.AttackType
             catch (System.Exception ex)
             {
                 Debug.LogError($"[{gameObject.name}] Attack 메서드 실행 중 오류 발생: {ex.Message}");
+            }
+        }
+
+        private IEnumerator ShoutCoroutine(int successfulShots)
+        {
+            for (int i = 0; i < _bulletsPerAttack; i++)
+            {
+                try
+                {
+                    float randomAngle = GetRandomAngleSafe();
+                        
+                    float radians = randomAngle * Mathf.Deg2Rad;
+                    Vector2 randomDirection = new Vector2(
+                        Mathf.Cos(radians),
+                        Mathf.Sin(radians)
+                    );
+
+                    Bullet bullet = BulletPool.Instance.GetBullet();
+                    if (bullet == null)
+                    {
+                        Debug.LogWarning($"[{gameObject.name}] {i + 1}번째 탄환을 생성할 수 없습니다! 탄환 풀이 부족할 수 있습니다.");
+                        continue;
+                    }
+
+                    bullet.transform.position = transform.position;
+
+                    bullet.Fire(randomDirection, _bulletSpeed);
+                        
+                    successfulShots++;
+                        
+                    if (_enableDebugLogs)
+                    {
+                        Debug.Log($"[{gameObject.name}] {i + 1}번째 탄환을 {randomAngle:F1}도 방향으로 발사했습니다.");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"[{gameObject.name}] {i + 1}번째 탄환 발사 중 오류 발생: {ex.Message}");
+                }
+
+                yield return new WaitForSeconds(_attackInterval);
             }
         }
 

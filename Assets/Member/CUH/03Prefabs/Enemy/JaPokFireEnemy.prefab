@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e71df3266fffa04b911bebeab73c6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  maxMoveSpeed: 20
-  isLeapMove: 0
+  moveSpeed: 0.25
+  maxMoveSpeed: 4
+  isLeapMove: 1
 --- !u!1 &3910420558657802115
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &6931409524062967847
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6062235123019910803}
-  - component: {fileID: 2603612775598797878}
+  - component: {fileID: 1477183546032004674}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -351,7 +351,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6439162595318709410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2603612775598797878
+--- !u!114 &1477183546032004674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,8 +360,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8493702255486933911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 942af7d85eb54576afbd20fa32bf2f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 0.7
+  _bulletSpeed: 1

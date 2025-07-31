@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8971789930661375956}
-  - component: {fileID: 6005093352215584031}
+  - component: {fileID: 7373023493900684889}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 238959763483191913}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6005093352215584031
+--- !u!114 &7373023493900684889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1500257750439106986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 062a58987a6d4f6c9ef3eb3eb8823e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 0.5
+  _attackInterval: 0.3
+  _bulletSpeed: 1
+  _rotationStep: 3
+  _initialAngle: 0
 --- !u!1 &4185066465465977850
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +322,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &6588803105089405717
 GameObject:
   m_ObjectHideFlags: 0

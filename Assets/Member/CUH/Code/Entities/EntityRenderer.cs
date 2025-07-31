@@ -17,5 +17,10 @@ namespace Member.CUH.Code.Entities
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
+
+        public void Rotate(float angle)
+        {
+            transform.Rotate(new Vector3(0f, 0f, angle));
+        }
     }
 }

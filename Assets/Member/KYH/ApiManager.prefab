@@ -308,11 +308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0426bd6b2d3232409915e578a6d1727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invokeCooltime: 5
+  invokeCooltime: 15
   alim: {fileID: 6684585917966484796}
+  alimText: {fileID: 7840627853215806210}
   startInterval: 0.4
   endInterval: 0.01
-  stopDuration: 2
+  stopDuration: 1.2
   totalDuration: 4
   movePath:
   - {x: 0, y: 0}
@@ -320,17 +321,28 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1920, y: 1080}
   mouseSpeed: 1
-  mouseMoveToCenter: 3
+  alimEventText_mouse: "\uB9C8\uC6B0\uC2A4 \uC774\uB3D9 \uC624\uB958 \uBC1C\uC0DD"
+  mouseMoveToCenter: 5
+  alimEventText_fixedMouseMiddlePoint: "\uB9C8\uC6B0\uC2A4 \uC88C\uD45C \uC624\uB958
+    \uBC1C\uC0DD"
   dodgeRadius: 600
   moveDuration: 5
   moveSpeed: 30
+  alimEventText_runawayScreen: "\uD654\uBA74 \uBC14\uC774\uB7EC\uC2A4 \uAC10\uC5FC
+    \uBC1C\uC0DD"
   speedChangeDuration: 0
   speedDown: 2
   speedUp: 2
+  alimEventText_upSpeed: "\uC2DC\uAC04 \uAC00\uC18D \uC624\uB958 \uBC1C\uC0DD"
+  alimEventText_downSpeed: "\uC2DC\uAC04 \uC9C0\uC5F0 \uC624\uB958 \uBC1C\uC0DD"
   rotationEase: 9
   rotateDuration: 7
-  rotateSpeed: 1
+  rotateSpeed: 0.5
   shakeDuration: 0.5
+  alimEventText_rotateCamera: "\uCE74\uBA54\uB77C \uC624\uB958 \uBC1C\uC0DD"
+  fileName: ItsMine
+  alimEventText_photo: "\uD30C\uC77C \uC624\uB958 \uBC1C\uC0DD"
+  alimEventText_Minimalize: "\uAC8C\uC784 \uD06C\uB798\uC2DC \uBC1C\uC0DD"
 --- !u!1 &6684585917966484796
 GameObject:
   m_ObjectHideFlags: 0

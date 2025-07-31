@@ -14,6 +14,7 @@ namespace Member.ISC.Code.Players
         private Player _player;
 
         private Vector2 _moveDir;
+        private Vector2 _velocity;
         
         public void Initialize(Entity entity)
         {
@@ -22,7 +23,17 @@ namespace Member.ISC.Code.Players
 
         public void SetDirection(Vector2 dir)
         {
-            _moveDir = dir;
+            _moveDir = dir.normalized;
+        }
+
+        private void CalculateMove()
+        {
+            _velocity = _moveDir * moveSpeed;
+        }
+
+        private void Move()
+        {
+            rb.linearVelocity = _velocity;
         }
     }
 }

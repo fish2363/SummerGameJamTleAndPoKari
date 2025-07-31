@@ -6,23 +6,30 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
     public class MoveableEnemyAttackState : MoveableEnemyState
     {
         private EnemyAttackCompo _attackCompo;
+        private EntityMover _mover;
         
         public MoveableEnemyAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
             _attackCompo = entity.GetCompo<EnemyAttackCompo>(true);
+            _mover = entity.GetCompo<EntityMover>();
         }
 
         public override void Enter()
         {
             base.Enter();
+            _mover.StopImmediately();
+            _canRotate = false;
             _attackCompo.Attack();
         }
 
         public override void Update()
         {
             base.Update();
-            if(_isTriggerCall)
+            if (_isTriggerCall)
+            {
+                _canRotate = false;
                 _enemy.ChangeState("MOVE");
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Member.CUH.Code.Combat.Enemies;
+﻿using DG.Tweening;
+using Member.CUH.Code.Combat.Enemies;
+using Member.CUH.Code.Entities;
 using UnityEngine;
 
 namespace Member.KDH.Code.Bullet.AttackType
@@ -6,6 +8,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     public class PlayerChaseFireAttack : EnemyAttackCompo
     {
         [SerializeField] private float _bulletSpeed = 1f;   // 탄환 속도
+        [SerializeField] private float bombDelay;
         
         private void Update()
         {
@@ -18,8 +21,11 @@ namespace Member.KDH.Code.Bullet.AttackType
         public override void Attack()
         {
             base.Attack();
-            _target.ApplyDamage(1);
-            _enemy.KillSelf();
+            _enemy.GetCompo<EntityMover>().StopImmediately();
+            DOVirtual.DelayedCall(bombDelay, () =>
+            {
+                _target.ApplyDamage(1);
+            }).OnComplete(() => _enemy.KillSelf());
         }
 
         private void FireBullet()

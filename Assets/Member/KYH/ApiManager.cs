@@ -1,10 +1,11 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
-
+using TMPro;
 public class ApiManager : MonoBehaviour
 {
 
@@ -52,64 +53,86 @@ public class ApiManager : MonoBehaviour
     private Vector2 targetPos;
     private Vector2 windowSize;
 
-    [Header("ÀÌº¥Æ® ¹ß»ı ÄğÅ¸ÀÓ")]
+    [Header("ì´ë²¤íŠ¸ ë°œìƒ ì¿¨íƒ€ì„")]
     [SerializeField] private float invokeCooltime = 15f;
 
-    [Header("-----[ÀÌº¥Æ® ¹ß»ı ¾Ë¸²]-----")]
+    [Header("-----[ì´ë²¤íŠ¸ ë°œìƒ ì•Œë¦¼]-----")]
     [SerializeField] private GameObject alim;
-    private Coroutine flashCoroutine;
-    [Header("Ã³À½ ±ôºıÀÓ °£°İ")]
+    [SerializeField] private TMP_Text alimText;
+
+    [Header("ì²˜ìŒ ê¹œë¹¡ì„ ê°„ê²©")]
     public float startInterval = 1.0f;
-    [Header("¸¶Áö¸· ±ôºıÀÓ °£°İ")]
+    [Header("ë§ˆì§€ë§‰ ê¹œë¹¡ì„ ê°„ê²©")]
     public float endInterval = 0.1f;  
-    [Header("±ôºıÀÌ±â Àü ´ë±â ½Ã°£")]
+    [Header("ê¹œë¹¡ì´ê¸° ì „ ëŒ€ê¸° ì‹œê°„")]
     public float stopDuration = 2f;  
-    [Header("ÀüÃ¼ Áö¼Ó ½Ã°£")]
+    [Header("ì „ì²´ ì§€ì† ì‹œê°„")]
     public float totalDuration = 5f;  
     private float appearDuration = 0.4f;
-    private Ease easeType = Ease.OutBack; // »Ç¿ë~ ´À³¦
+    private Ease easeType = Ease.OutBack; // ë½€ìš©~ ëŠë‚Œ
+    private Coroutine flashCoroutine;
 
     private float _currentTime = 0f;
     private bool isInvokingEvent = false;
-    [Header("_____[¸¶¿ì½º Á¶Á¾ ÀÌº¥Æ®]_____")]
-    [Header("¸¶¿ì½º ¿òÁ÷ÀÏ À§Ä¡ 0,0 ÀÌ ¸Ç ¿ŞÂÊ")]
+    [Header("_____[ë§ˆìš°ìŠ¤ ì¡°ì¢… ì´ë²¤íŠ¸]_____")]
+    [Header("ë§ˆìš°ìŠ¤ ì›€ì§ì¼ ìœ„ì¹˜ 0,0 ì´ ë§¨ ì™¼ìª½")]
     public Vector2[] movePath;
-    [Header("¸¶¿ì½º°¡ °¢ ÁöÁ¡À¸·Î ÀÌµ¿ÇÏ´Âµ¥ °É¸®´Â ¼Óµµ")]
+    [Header("ë§ˆìš°ìŠ¤ê°€ ê° ì§€ì ìœ¼ë¡œ ì´ë™í•˜ëŠ”ë° ê±¸ë¦¬ëŠ” ì†ë„")]
     public float mouseSpeed;
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_mouse;
 
-    [Header("_____[¸¶¿ì½º °íÁ¤ ÀÌº¥Æ®]_____")]
-    [Header("¸¶¿ì½º °íÁ¤ Áö¼Ó½Ã°£")]
+    [Header("_____[ë§ˆìš°ìŠ¤ ê³ ì • ì´ë²¤íŠ¸]_____")]
+    [Header("ë§ˆìš°ìŠ¤ ê³ ì • ì§€ì†ì‹œê°„")]
     [SerializeField]
     private float mouseMoveToCenter = 3f;
-    [Header("_____[Ã¢ÀÌ ÇÇÇØ´Ù´Ï´Â ÀÌº¥Æ®]_____")]
-    [Header("¸¶¿ì½º °¨Áö ¹üÀ§")]
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_fixedMouseMiddlePoint;
+    [Header("_____[ì°½ì´ í”¼í•´ë‹¤ë‹ˆëŠ” ì´ë²¤íŠ¸]_____")]
+    [Header("ë§ˆìš°ìŠ¤ ê°ì§€ ë²”ìœ„")]
     public float dodgeRadius = 200f;
-    [Header("Áö¼Ó ½Ã°£")]
+    [Header("ì§€ì† ì‹œê°„")]
     public float moveDuration = 5f;
-    [Header("Ã¢ÀÌ ¿òÁ÷ÀÌ´Â ¼Óµµ")]
+    [Header("ì°½ì´ ì›€ì§ì´ëŠ” ì†ë„")]
     public float moveSpeed = 10f;
-    [Header("_____[¼Óµµ º¯°æ ÀÌº¥Æ®]_____")]
-    [Header("[¼Óµµ º¯°æ Áö¼Ó½Ã°£]")]
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_runawayScreen;
+    [Header("_____[ì†ë„ ë³€ê²½ ì´ë²¤íŠ¸]_____")]
+    [Header("[ì†ë„ ë³€ê²½ ì§€ì†ì‹œê°„]")]
     public float speedChangeDuration = 2f;
-    [Header("[°¨¼Ò ÀÌº¥Æ® Á¤µµ ( 1 / n )]")]
+    [Header("[ê°ì†Œ ì´ë²¤íŠ¸ ì •ë„ ( 1 / n )]")]
     public int speedDown = 2;
-    [Header("[Áõ°¡ ÀÌº¥Æ® Á¤µµ ( 1 * n )]")]
+    [Header("[ì¦ê°€ ì´ë²¤íŠ¸ ì •ë„ ( 1 * n )]")]
     public int speedUp = 2;
-    [Header("_____[Ä«¸Ş¶ó È¸Àü ÀÌº¥Æ®]_____")]
-    [Header("È¸Àü Ease")]
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_upSpeed;
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_downSpeed;
+    [Header("_____[ì¹´ë©”ë¼ íšŒì „ ì´ë²¤íŠ¸]_____")]
+    [Header("íšŒì „ Ease")]
     public Ease rotationEase;
-    [Header("È¸Àü Áö¼Ó½Ã°£")]
+    [Header("íšŒì „ ì§€ì†ì‹œê°„")]
     public float rotateDuration = 2f;
-    [Header("È¸ÀüµÇ´Â ½Ã°£")]
+    [Header("íšŒì „ë˜ëŠ” ì‹œê°„")]
     public float rotateSpeed = 2f;
-    [Header("Èçµé±â Áö¼Ó½Ã°£")]
+    [Header("í”ë“¤ê¸° ì§€ì†ì‹œê°„")]
     public float shakeDuration = 1f;
     private float shakeMagnitude = 10f;
     private Camera camera;
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_rotateCamera;
+    [Header("_____[ì‚¬ì§„ ë„ìš°ê¸° ì´ë²¤íŠ¸]_____")]
+    [Header("Resource í´ë” ë‚´ì— ì‚¬ì§„ ì´ë¦„")]
+    public string fileName = "ItsMine"; // Resources í´ë” ë‚´ë¶€ ê²½ë¡œ
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_photo;
 
-    private string imagePath = @"C:\Users\YourUser\Pictures\sample.jpg";
+    [Header("_____[ì°½ ìµœì†Œí™” ì´ë²¤íŠ¸]_____")]
+    [Header("ê²½ê³  ë©”ì„¸ì§€")]
+    public string alimEventText_Minimalize;
 
     private bool isStart;
+    private int randIdx;
 
     void Start()
     {
@@ -153,11 +176,49 @@ public class ApiManager : MonoBehaviour
 
     public void Appear()
     {
-        alim.transform.localScale = new Vector3(1.620305f, 0f, 1f); // ¾Æ·¡¼­ ½ÃÀÛ
+        randIdx = UnityEngine.Random.Range(4, 5);
+        UnityEngine.Debug.Log(randIdx);
+        ChangeTextEvent(randIdx);
+
+        alim.transform.localScale = new Vector3(1.620305f, 0f, 1f); // ì•„ë˜ì„œ ì‹œì‘
         alim.transform.DOScaleY(1.620305f, appearDuration).SetEase(easeType);
 
         flashCoroutine = StartCoroutine(FlashRoutine());
     }
+
+    public void ChangeTextEvent(int idx)
+    {
+        switch (idx)
+        {
+            case 0:
+                alimText.text = alimEventText_mouse;
+                break;
+            case 1:
+                alimText.text = alimEventText_runawayScreen;
+                break;
+            case 2:
+                alimText.text = alimEventText_fixedMouseMiddlePoint;
+                break;
+            case 3:
+                alimText.text = alimEventText_Minimalize;
+                break;
+            case 4:
+                alimText.text = alimEventText_photo;
+                break;
+            case 5:
+                alimText.text = alimEventText_rotateCamera;
+                break;
+            case 6:
+                //ì†ë„ ë‚®ì¶”ê¸°
+                alimText.text = alimEventText_downSpeed;
+                break;
+            case 7:
+                //ì†ë„ ì˜¬ë¦¬ê¸°
+                alimText.text = alimEventText_upSpeed;
+                break;
+        }
+    }
+
     IEnumerator FlashRoutine()
     {
         yield return new WaitForSecondsRealtime(stopDuration);
@@ -176,10 +237,8 @@ public class ApiManager : MonoBehaviour
             elapsed += currentInterval;
         }
         alim.SetActive(false);
-        alim.transform.localScale = new Vector3(1f, 0f, 1f); // ¾Æ·¡¼­ ½ÃÀÛ
-        int rand = UnityEngine.Random.Range(0, 8);
-        UnityEngine.Debug.Log(rand);
-        ChooseEvent(rand);
+        alim.transform.localScale = new Vector3(1f, 0f, 1f); // ì•„ë˜ì„œ ì‹œì‘
+        ChooseEvent(randIdx);
     }
 
     public void ChooseEvent(int idx)
@@ -201,30 +260,32 @@ public class ApiManager : MonoBehaviour
                 Minimize();
                 break;
             case 4:
-                //Ã¢ ¶ç¿ì±â
+                //ì°½ ë„ìš°ê¸°
                 isInvokingEvent = false;
-                //try
-                //{
-                //    Process.Start(new ProcessStartInfo(path)
-                //    {
-                //        UseShellExecute = true
-                //    });
-                //}
-                //catch (System.Exception e)
-                //{
-                //    UnityEngine.Debug.LogError("ÀÌ¹ÌÁö¸¦ ¿©´Â µ¥ ½ÇÆĞÇÔ: " + e.Message);
-                //}
+
+                Texture2D texture = Resources.Load<Texture2D>("MyImages/ItsMine");
+                if (texture == null)
+                {
+                    UnityEngine.Debug.LogError("Resourcesì—ì„œ ì´ë¯¸ì§€ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+                    return;
+                }
+
+                string destPath = Path.Combine(Application.persistentDataPath, "ItsMine.png");
+                byte[] pngBytes = texture.EncodeToPNG();
+                File.WriteAllBytes(destPath, pngBytes);
+
+                Process.Start(new ProcessStartInfo(destPath) { UseShellExecute = true });
                 break;
             case 5:
-                //Ä«¸Ş¶ó
+                //ì¹´ë©”ë¼
                 RotateCamera();
                 break;
             case 6:
-                //¼Óµµ ³·Ãß±â
+                //ì†ë„ ë‚®ì¶”ê¸°
                 StartCoroutine(SetSpeed(speedDown));
                 break;
             case 7:
-                //¼Óµµ ¿Ã¸®±â
+                //ì†ë„ ì˜¬ë¦¬ê¸°
                 StartCoroutine(SetSpeed(speedUp));
                 break;
         }
@@ -254,7 +315,7 @@ public class ApiManager : MonoBehaviour
             yield return null;
         }
 
-        // ¿ø·¡ À§Ä¡·Î º¹±¸
+        // ì›ë˜ ìœ„ì¹˜ë¡œ ë³µêµ¬
         MoveWindow(hWnd, (int)originalPos.x, (int)originalPos.y, width, height, true);
         camera.transform.DORotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(rotationEase);
         DOVirtual.DelayedCall(rotateDuration, () =>
@@ -284,7 +345,7 @@ public class ApiManager : MonoBehaviour
         isInvokingEvent = false;
     }
 
-    #region Ã¢ ¿òÁ÷ÀÌ±â
+    #region ì°½ ì›€ì§ì´ê¸°
 
     IEnumerator MoveScreenRoutine()
     {
@@ -304,18 +365,18 @@ public class ApiManager : MonoBehaviour
 
             if (dist < dodgeRadius)
             {
-                // µµ¸Á°¥ ¹æÇâÀº ¸¶¿ì½º¿¡¼­ ¸Ö¾îÁö´Â ¹æÇâ
+                // ë„ë§ê°ˆ ë°©í–¥ì€ ë§ˆìš°ìŠ¤ì—ì„œ ë©€ì–´ì§€ëŠ” ë°©í–¥
                 Vector2 dir = (currentPos + windowSize / 2f - mousePos).normalized;
                 Vector2 newTarget = currentPos + dir * dodgeRadius;
 
-                // È­¸é °æ°è ¾ÈÂÊÀ¸·Î Á¦ÇÑ
+                // í™”ë©´ ê²½ê³„ ì•ˆìª½ìœ¼ë¡œ ì œí•œ
                 newTarget.x = Mathf.Clamp(newTarget.x, 0, Screen.currentResolution.width - windowSize.x);
                 newTarget.y = Mathf.Clamp(newTarget.y, 0, Screen.currentResolution.height - windowSize.y);
 
                 targetPos = newTarget;
             }
 
-            // ºÎµå·´°Ô ÀÌµ¿
+            // ë¶€ë“œëŸ½ê²Œ ì´ë™
             currentPos = Vector2.Lerp(currentPos, targetPos, Time.deltaTime * moveSpeed);
             MoveWindow(hWnd, (int)currentPos.x, (int)currentPos.y, (int)windowSize.x, (int)windowSize.y, true);
             elapsed += Time.deltaTime;
@@ -324,7 +385,7 @@ public class ApiManager : MonoBehaviour
         isInvokingEvent = false;
     }
     #endregion
-    #region ¸¶¿ì½º °íÁ¤
+    #region ë§ˆìš°ìŠ¤ ê³ ì •
     IEnumerator FixMouseToCenter(float duration)
     {
         float elapsed = 0f;
@@ -342,7 +403,7 @@ public class ApiManager : MonoBehaviour
 
     }
     #endregion
-    #region ¸¶¿ì½º ¿òÁ÷ÀÌ±â
+    #region ë§ˆìš°ìŠ¤ ì›€ì§ì´ê¸°
     IEnumerator MoveMouseSequence()
     {
         POINT p;
@@ -399,11 +460,11 @@ public class ApiManager : MonoBehaviour
         SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
     }
     #endregion
-    #region ¸¶¿ì½º ¿òÁ÷ÀÌ±â
+    #region ë§ˆìš°ìŠ¤ ì›€ì§ì´ê¸°
     public void Minimize()
     {
-        IntPtr handle = GetActiveWindow(); // Unity ½ÇÇàÃ¢ ÇÚµé ¾ò±â
-        ShowWindow(handle, SW_MINIMIZE);   // ÃÖ¼ÒÈ­ ¸í·É
+        IntPtr handle = GetActiveWindow(); // Unity ì‹¤í–‰ì°½ í•¸ë“¤ ì–»ê¸°
+        ShowWindow(handle, SW_MINIMIZE);   // ìµœì†Œí™” ëª…ë ¹
         isInvokingEvent = false;
     }
     #endregion

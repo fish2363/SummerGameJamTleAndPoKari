@@ -308,6 +308,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: castRadius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: parryRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: whatIsTarget.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

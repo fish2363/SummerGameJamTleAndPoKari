@@ -1,6 +1,7 @@
 ﻿using System;
 using Blade.FSM;
 using Chuh007Lib.Dependencies;
+using Member.CUH.Code.Combat;
 using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
 using Member.ISC.Code.Players;
@@ -8,9 +9,9 @@ using UnityEngine;
 
 namespace Member.CUH.Code.Enemies
 {
-    public class Enemy : Entity
+    public class Enemy : Entity, IDamageable
     {
-        [Inject] public Player target;
+        [HideInInspector] public Player target;
         
         [SerializeField] private StateDataSO[] states;
 
@@ -44,5 +45,13 @@ namespace Member.CUH.Code.Enemies
         
         public void ChangeState(string newStateName, bool forced = false)
             => _stateMachine.ChangeState(newStateName,forced);
+
+        public void ApplyDamage(float damage)
+        {
+            if(IsDead) return;
+            IsDead = true;
+            OnDeadEvent?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

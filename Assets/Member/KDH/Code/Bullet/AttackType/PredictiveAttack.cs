@@ -7,7 +7,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     public class PredictiveAttack : EnemyAttackCompo
     {
         [Header("예측 공격 설정")]
-        [SerializeField] private float _attackInterval = 2f; // 공격 간격 (초)
+        // [SerializeField] private float _attackInterval = 2f; // 공격 간격 (초)
         [SerializeField] private float _bulletSpeed = 3f; // 고속탄 속도 (기본보다 빠름)
         [SerializeField] private float _predictionTime = 1f; // 예측 시간 (초) - 얼마나 미래를 예측할지
         [SerializeField] private bool _drawPredictionGizmo = true; // 예측 지점 시각화 여부
@@ -23,7 +23,7 @@ namespace Member.KDH.Code.Bullet.AttackType
             
             FindPlayerComponents();
             
-            Debug.Log($"{gameObject.name}: 예측 공격 컴포넌트가 초기화되었습니다. (공격 간격: {_attackInterval}초, 예측 시간: {_predictionTime}초)");
+            // Debug.Log($"{gameObject.name}: 예측 공격 컴포넌트가 초기화되었습니다. (공격 간격: {_attackInterval}초, 예측 시간: {_predictionTime}초)");
         }
         
         private void Update()
@@ -34,10 +34,10 @@ namespace Member.KDH.Code.Bullet.AttackType
                 return;
             }
             
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                Attack();
-            }
+            // if (Time.time - _lastAttackTime >= _attackInterval)
+            // {
+            //     Attack();
+            // }
         }
         
         private void FindPlayerComponents()

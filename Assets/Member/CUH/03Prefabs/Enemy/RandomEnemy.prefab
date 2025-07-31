@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 2590573428295614171}
   - component: {fileID: 2047440184827376726}
   - component: {fileID: 3185279789365548716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RandomEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &8087377834900694195
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5640143223475893257}
-  - component: {fileID: 1453573629155390857}
+  - component: {fileID: 7353085728505392127}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -351,7 +351,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6268608971341457244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1453573629155390857
+--- !u!114 &7353085728505392127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,8 +360,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8087377834900694195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 40e45023784145a4b6e800ffe82c53a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 4
+  _attackInterval: 0.8
+  _bulletSpeed: 1
+  _bulletsPerAttack: 5
+  _useRandomSeed: 0
+  _randomSeed: 12345
+  _enableDebugLogs: 1

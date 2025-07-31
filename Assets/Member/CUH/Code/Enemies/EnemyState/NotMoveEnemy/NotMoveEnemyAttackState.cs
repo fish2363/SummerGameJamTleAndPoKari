@@ -9,7 +9,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.NotMoveEnemy
         
         public NotMoveEnemyAttackState(Entity entity, int animationHash) : base(entity, animationHash)
         {
-            _attackCompo = entity.GetCompo<EnemyAttackCompo>();
+            _attackCompo = entity.GetCompo<EnemyAttackCompo>(true);
         }
         
         public override void Enter()

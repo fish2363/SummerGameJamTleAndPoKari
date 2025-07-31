@@ -5,6 +5,7 @@ using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
 using Member.ISC.Code.Managers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Member.ISC.Code.Players
 {

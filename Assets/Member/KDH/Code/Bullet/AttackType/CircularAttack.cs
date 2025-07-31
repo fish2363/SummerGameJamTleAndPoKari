@@ -8,7 +8,7 @@ namespace Member.KDH.Code.Bullet.AttackType
     {
         [Header("원형 공격 설정")]
         [SerializeField] private int _bulletCount = 20; // 발사할 탄환 개수
-        [SerializeField] private float _attackInterval = 2f; // 공격 간격 (초)
+        // [SerializeField] private float _attackInterval = 2f; // 공격 간격 (초)
         [SerializeField] private float _bulletSpeed = 1f; // 탄환 속도
         
         private float _lastAttackTime;
@@ -20,13 +20,13 @@ namespace Member.KDH.Code.Bullet.AttackType
             Debug.Log($"{gameObject.name}: 원형 공격 컴포넌트가 초기화되었습니다. (탄환 수: {_bulletCount}개)");
         }
         
-        private void Update()
-        {
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                Attack();
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Time.time - _lastAttackTime >= _attackInterval)
+        //     {
+        //         Attack();
+        //     }
+        // }
         
         public override void Attack()
         {

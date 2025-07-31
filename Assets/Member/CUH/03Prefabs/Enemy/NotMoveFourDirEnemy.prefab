@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6040302072696714441}
-  - component: {fileID: 5554603733794602746}
+  - component: {fileID: 7462546159886578704}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1559675276150085471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5554603733794602746
+--- !u!114 &7462546159886578704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3922951766931827473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: afcc14a481854a1aabfa98d0cf6bf9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 0.7
+  _bulletSpeed: 1
+  _rotationStep: 45
+  _initialAngle: 0
 --- !u!1 &4360092314933244393
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +258,7 @@ GameObject:
   - component: {fileID: 7010623812881273125}
   - component: {fileID: 8725139277751964640}
   - component: {fileID: 3900536865621849477}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NotMoveFourDirEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,4 +368,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

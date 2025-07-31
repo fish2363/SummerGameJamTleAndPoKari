@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3450176416573777660}
-  - component: {fileID: 5462945790315273744}
+  - component: {fileID: 6669366719373496278}
   m_Layer: 0
   m_Name: EnemyAttackCompo
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8746136418498814222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5462945790315273744
+--- !u!114 &6669366719373496278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 527143105630610305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9859a3efdf0f4aacbe3acab9317ca6d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 006934345c3548bc9c6ab9c8127416c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 1.8
+  _bulletCount: 20
+  _bulletSpeed: 1
 --- !u!1 &2328743019878872649
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +257,7 @@ GameObject:
   - component: {fileID: 344684338467609584}
   - component: {fileID: 2285733317469994623}
   - component: {fileID: 5124694202217090609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NotMoveEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,4 +367,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

@@ -25,7 +25,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             base.Update();
             if (_isTriggerCall)
             {
-                _canRotate = false;
+                _canRotate = true;
                 _enemy.ChangeState("MOVE");
             }
         }

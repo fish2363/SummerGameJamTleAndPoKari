@@ -68,7 +68,7 @@ namespace Member.ISC.Code.Players
             {
                 OnDashStart?.Invoke();
                 Dash();
-                sr.DOFade(0.2adf, dashDuration);
+                sr.DOFade(0.2f, dashDuration);
             }
         }
 

@@ -21,13 +21,13 @@ namespace Member.ISC.Code.Players
         [field: SerializeField] public float DashCool { get; private set; }
         [SerializeField] private float dashPower;
 
-        public UnityEvent OnDash;
+        public UnityEvent OnDashStart;
+        public UnityEvent OnDashEnd;
         
         private Player _player;
         private PlayerHealth _playerHealth;
         private Tweener _tweener;
-        
-        private bool _canDash = true;
+
         private float _previousMoveSpeed;
         
         private Vector2 _moveDir;
@@ -35,6 +35,7 @@ namespace Member.ISC.Code.Players
         private Vector2 _autoDir = Vector2.zero;
 
         
+        public bool CanDash { get; private set; } = true;
         public bool CanManualMovement { get; set; } = true;
         public float CurrentDashTime { get; set; }
         
@@ -62,9 +63,9 @@ namespace Member.ISC.Code.Players
 
         private void HandleDashPressed()
         {
-            if (_canDash)
+            if (CanDash)
             {
-                OnDash?.Invoke();
+                OnDashStart?.Invoke();
                 Dash();
             }
         }
@@ -82,7 +83,7 @@ namespace Member.ISC.Code.Players
 
             if (CurrentDashTime >= DashCool)
             {
-                _canDash = true;
+                CanDash = true;
                 CurrentDashTime = 0;
             }
         }
@@ -113,7 +114,7 @@ namespace Member.ISC.Code.Players
 
         private void Dash()
         {
-            _canDash = false;
+            CanDash = false;
             _playerHealth.Ignore = true;
             
             CanManualMovement = false;
@@ -128,6 +129,8 @@ namespace Member.ISC.Code.Players
                     CanManualMovement = true;
                     moveSpeed = _previousMoveSpeed;
                     _playerHealth.Ignore = false;
+
+                    OnDashEnd?.Invoke();
                 });
         }
     }

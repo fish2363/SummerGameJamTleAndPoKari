@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 790314785568685618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -5, z: 0}
+  m_LocalPosition: {x: -5, y: -4.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815a37b3d78446718ee5bfedbc7cc099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <OverClockEnemyCount>k__BackingField: 0
   warningObject: {fileID: 5342985060079509810, guid: 77a0633009bcf644788856c5eb8810b6, type: 3}
   spawnEnemies:
   - {fileID: 4647685927921123160, guid: e0a3b030e7266ca4abab412cd08848d3, type: 3}
@@ -92,6 +93,9 @@ MonoBehaviour:
   - {fileID: 3178224542240094945, guid: 0a4b798124163b74db6b806f22c86742, type: 3}
   leftBottomTrm: {fileID: 3663915162380423623}
   rightTopTrm: {fileID: 82694045636224065}
+  totalDuration: 1.5
+  startInterval: 0.5
+  endInterval: 0.05
   _spawnEnemyCount: 2
 --- !u!1 &4071689896923896751
 GameObject:
@@ -118,7 +122,7 @@ Transform:
   m_GameObject: {fileID: 4071689896923896751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 5, z: 0}
+  m_LocalPosition: {x: 5.11, y: 4.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

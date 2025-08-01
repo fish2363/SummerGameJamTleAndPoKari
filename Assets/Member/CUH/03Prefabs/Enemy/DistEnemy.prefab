@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e71df3266fffa04b911bebeab73c6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   maxMoveSpeed: 20
   isLeapMove: 0
 --- !u!1 &4245886338840040040
@@ -107,6 +107,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f92a7bc54a7ea04993ae434df63e8ee, type: 2}
   isMoveableEnemy: 1
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 1351792464371498471}
+  - {fileID: 5894444160512701009}
 --- !u!58 &9050093157539095953
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -302,8 +305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
-  _bulletSpeed: 3
+  attackCooldown: 1
+  _bulletSpeed: 1.5
 --- !u!1 &7042904345211055780
 GameObject:
   m_ObjectHideFlags: 0

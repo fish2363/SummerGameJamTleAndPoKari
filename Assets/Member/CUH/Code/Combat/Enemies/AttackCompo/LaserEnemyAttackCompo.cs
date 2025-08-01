@@ -47,10 +47,10 @@ namespace Member.CUH.Code.Combat.Enemies.AttackCompo
                     laserWarning1.SetActive(false);
                     laserWarning2.SetActive(false);
                     RaycastHit2D hit = Physics2D.Raycast(transform.position,
-                        targetDir, 20f, whatIsTarget);
+                        targetDir, 30f, whatIsTarget);
                     _laserLine.positionCount = 2;
                     _laserLine.SetPosition(0, transform.position);
-                    _laserLine.SetPosition(1, transform.position + targetDir * 20f);
+                    _laserLine.SetPosition(1, transform.position + targetDir * 30f);
                     DOTween.To(() => _laserLine.widthMultiplier, 
                         x => _laserLine.widthMultiplier = x, 0f, shootTime);
                     if (hit.collider != null)

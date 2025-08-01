@@ -147,6 +147,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f92a7bc54a7ea04993ae434df63e8ee, type: 2}
   isMoveableEnemy: 1
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 7884658862973581125}
+  - {fileID: 7400889282057598515}
 --- !u!58 &418090111691897288
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -524,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e71df3266fffa04b911bebeab73c6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   maxMoveSpeed: 20
   isLeapMove: 0
 --- !u!1 &7956604838345390103
@@ -662,7 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 3
+  attackCooldown: 3.5
   laserWarning1: {fileID: 4143313825981721974}
   laserWarning2: {fileID: 8362846493715857277}
   whatIsTarget:

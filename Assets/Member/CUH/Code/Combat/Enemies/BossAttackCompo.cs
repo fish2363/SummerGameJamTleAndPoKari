@@ -11,9 +11,10 @@ namespace Member.CUH.Code.Combat.Enemies
         
         [SerializeField] private float attackCooldown = 5f;
         
-        protected Boss _boss;
-        protected IDamageable _target;
-        protected float _lastAtkTime;
+        private Boss _boss;
+        private IDamageable _target;
+        private float _lastAtkTime;
+        private BossPatternBase _currentPattern;
         
         public void Initialize(Entity entity)
         {
@@ -33,11 +34,18 @@ namespace Member.CUH.Code.Combat.Enemies
 
         public virtual bool CanAttack()
             => _lastAtkTime + attackCooldown < Time.time;
+
+        public string GetRandomAttack()
+        {
+            _currentPattern = bossPatterns[Random.Range(0, bossPatterns.Length)];
+            string animName = _currentPattern.AnimationString;
+            return animName;
+        }
         
-        public virtual void Attack()
+        public void Attack()
         {
             _lastAtkTime = Time.time;
-            bossPatterns[Random.Range(0,bossPatterns.Length)].UsePattern();
+            _currentPattern.UsePattern();
         }
     }
 }

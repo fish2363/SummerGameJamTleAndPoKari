@@ -550,7 +550,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8319616166698774186}
   - component: {fileID: 8621784908388091536}
-  - component: {fileID: 8093741092205909562}
+  - component: {fileID: 5295791087907014494}
+  - component: {fileID: 710073001573193668}
   m_Layer: 0
   m_Name: AttackCompo
   m_TagString: Untagged
@@ -587,7 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossPatterns: []
   attackCooldown: 5
---- !u!114 &8093741092205909562
+--- !u!114 &5295791087907014494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -596,13 +597,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 3614644260402164630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cd90ffad708405c9dd24bd94e5359fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 901a243e15054beba5c12420e7199804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCount: 10
-  fireDelay: 0.3
-  laserPrefab: {fileID: 526105166653921955, guid: 7311374966844e3458bbe1086c554221, type: 3}
-  randomValue: 1
+  AnimationString: ATTACK1
+  fireCount: 5
+  fireDelay: 0.5
+  bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
+  bulletSpeed: 3
+  bulletLifeTime: 5
+  spreadAngle: 15
+--- !u!114 &710073001573193668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3614644260402164630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b753db2c4b49aca40cb46aae58602d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationString: ATTACK2
+  fireCount: 3
+  fireDelay: 0.2
+  bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
+  bulletSpeed: 3
+  bulletLifeTime: 5
+  bulletsPerShot: 8
+  angleOffsetPerFire: 10
 --- !u!1 &4538466623417722721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,8 +1091,9 @@ GameObject:
   - component: {fileID: 1875714941417143595}
   - component: {fileID: 7624281171329786726}
   - component: {fileID: 2444111796595797321}
-  m_Layer: 0
-  m_Name: Boss
+  - component: {fileID: 3807895145152586176}
+  m_Layer: 7
+  m_Name: Boss1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1111,6 +1136,7 @@ MonoBehaviour:
       m_Calls: []
   states:
   - {fileID: 11400000, guid: fec1d585d2f2f9045a0c83de1e4ebd4e, type: 2}
+  - {fileID: 11400000, guid: 27a9937311da4494e96c3b16bb760c47, type: 2}
   - {fileID: 11400000, guid: 86fac480a52dbf34baf2fc9a2382bc65, type: 2}
 --- !u!58 &7624281171329786726
 CircleCollider2D:
@@ -1175,6 +1201,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3807895145152586176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062580692849458165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed051df312e45af84bc6959476e70c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <currentHealth>k__BackingField: 0
+  <maxHealth>k__BackingField: 20
 --- !u!1 &7072685793455384755
 GameObject:
   m_ObjectHideFlags: 0

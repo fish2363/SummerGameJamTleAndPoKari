@@ -100,5 +100,14 @@ namespace Member.CUH.Code.Enemies
             GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOKill();
             Destroy(gameObject);
         }
+
+        private void OnDestroy()
+        {
+            transform.DOKill();
+            foreach (var sprite in sprites)
+            {
+                sprite.DOKill();
+            }
+        }
     }
 }

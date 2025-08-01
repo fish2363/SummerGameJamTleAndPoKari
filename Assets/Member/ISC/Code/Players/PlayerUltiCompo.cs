@@ -58,7 +58,8 @@ namespace Member.ISC.Code.Players
                     b.SetReflect(true);
                     parryParticle.Play();
                     Instantiate(parryParticle, b.transform);
-                    b.Fire(_player.transform.right);
+                    Vector2 dir = _player.transform.position - b.transform.position;
+                    b.Fire(-dir);
                 }
                 _ultNum--;
                 CanUlt = false;

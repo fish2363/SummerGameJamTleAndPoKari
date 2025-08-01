@@ -38,6 +38,7 @@ namespace Member.CUH.Code.Enemies
         {
             if(IsDead) return;
             IsDead = true;
+            StageChangeManager.Instance.ClosePanels();
             Destroy(gameObject);
         }
         

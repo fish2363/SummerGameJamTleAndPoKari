@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private float bombRadius = 2f;
         [SerializeField] private LayerMask whatIsTarget;
         
+        private Tween _tween;
+        
         private void Update()
         {
             if (CanAttack())
@@ -24,7 +27,7 @@ namespace Member.KDH.Code.Bullet.AttackType
         {
             base.Attack();
             _enemy.GetCompo<EntityMover>().StopImmediately();
-            DOVirtual.DelayedCall(bombDelay, () =>
+            _tween = DOVirtual.DelayedCall(bombDelay, () =>
             {
                 Collider2D targetCol = Physics2D.OverlapCircle(transform.position, bombRadius, whatIsTarget);
                 if (targetCol != null)
@@ -44,6 +47,11 @@ namespace Member.KDH.Code.Bullet.AttackType
             bullet.transform.position = transform.position;
             bullet.Fire(direction, _bulletSpeed);
             _lastAtkTime = Time.time;
+        }
+
+        private void OnDestroy()
+        {
+            _tween.Kill();
         }
     }
 }

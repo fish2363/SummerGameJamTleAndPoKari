@@ -61,7 +61,7 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 EnsureRandomGeneratorExists();
             }
-            originalScale = _enemy.transform.position;
+            originalScale = _enemy.transform.localScale;
             SetTeleportSequence();
         }
         
@@ -210,6 +210,10 @@ namespace Member.KDH.Code.Bullet.AttackType
 
                 yield return new WaitForSeconds(_attackInterval);
             }
+            TeleportAnimation();
+            _nextPos.x = Random.Range(-_halfXSize, _halfXSize);
+            _nextPos.y = Random.Range(-_halfYSize, _halfYSize);
+            _enemy.transform.position = _nextPos;
         }
 
         private float GetRandomAngleSafe()
@@ -320,11 +324,6 @@ namespace Member.KDH.Code.Bullet.AttackType
 
             seq.Append(transform.DOShakePosition(shakeDuration, 0.2f))
            .Join(transform.DOScale(originalScale * scaleFactor, shrinkDuration))
-           .AppendCallback(() => {
-               _nextPos.x = Random.Range(-_halfXSize, _halfXSize);
-               _nextPos.y = Random.Range(-_halfYSize, _halfYSize);
-               _enemy.transform.position = _nextPos;
-           })
            .Append(transform.DOScale(originalScale, 0.2f))
            .SetEase(Ease.InOutQuad);
         }
@@ -347,7 +346,7 @@ namespace Member.KDH.Code.Bullet.AttackType
         {
             _randomGenerator = null;
             _isInitialized = false;
-            
+            transform.DOKill();
             if (_enableDebugLogs)
             {
                 Debug.Log($"[{gameObject.name}] RandomAttack 컴포넌트가 정리되었습니다.");

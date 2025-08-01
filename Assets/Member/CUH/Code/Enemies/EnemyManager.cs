@@ -53,7 +53,7 @@ namespace Member.CUH.Code.Enemies
 
         private IEnumerator SpawnBoss()
         {
-            Debug.Log("보스가 왔다");
+            StageChangeManager.Instance.OpenPanels();
             GameObject obj = Instantiate(warningObject, Vector2.zero, Quaternion.identity);
             float elapsed = 0f;
             bool visible = true;

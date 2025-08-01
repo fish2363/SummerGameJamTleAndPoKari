@@ -95,6 +95,7 @@ namespace Member.CUH.Code.Enemies
             OverClockEnemyCount += isOn ? 1 : -1;
         }
 
+        [ContextMenu("웨이브 체크")]
         public void HandleEnemyDead()
         {
             _currentEnemyCount--;

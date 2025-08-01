@@ -22,10 +22,12 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private bool isMoveableEnemy;
 
         [SerializeField] private ParticleSystem deadEffect;
-
+        [SerializeField] private SpriteRenderer[] sprites;
+        
         private EntityStateMachine _stateMachine;
 
         private float _lifeTime;
+        private bool _isOverClock = false;
         
         protected override void Awake()
         {
@@ -50,15 +52,20 @@ namespace Member.CUH.Code.Enemies
         protected override void Start()
         {
             _stateMachine.ChangeState(isMoveableEnemy ? "MOVE" : "IDLE");
-            GetComponentInChildren<SpriteRenderer>().DOColor(Color.red, 30f).SetEase(Ease.InQuart);
+            foreach (var sprite in sprites)
+            {
+                sprite.DOColor(Color.red, 30f).SetEase(Ease.InQuart);
+            }
         }
 
         private void Update()
         {
             _stateMachine.UpdateStateMachine();
-            if (_lifeTime >= 30f)
+            _lifeTime += Time.deltaTime;
+            if (_lifeTime >= 30f && !_isOverClock)
             {
                 OnOverClock?.Invoke(true);
+                _isOverClock = true;
             }
         }
         

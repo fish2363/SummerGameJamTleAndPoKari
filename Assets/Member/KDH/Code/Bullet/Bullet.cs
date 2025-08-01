@@ -9,13 +9,15 @@ namespace Member.KDH.Code.Bullet
         [Header("탄환 설정")]
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _lifeTime = 10f;
-
+        [SerializeField] private Color reflectColor = Color.blue;
+        
         private Vector2 _direction;
         private Camera _mainCamera;
         private float _spawnTime;
         private bool _isActive;
         private bool _isReflect;
-
+        private SpriteRenderer _spriteRenderer;
+        
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -24,6 +26,9 @@ namespace Member.KDH.Code.Bullet
                 Debug.LogError("메인 카메라를 찾을 수 없습니다!");
             }
             originalPos = _mainCamera.transform.position;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            Debug.Assert(_spriteRenderer != null, "_spriteRenderer != null");
+            _spriteRenderer.color = Color.red;
         }
 
         private void Update()
@@ -149,7 +154,10 @@ namespace Member.KDH.Code.Bullet
         public void SetReflect(bool isReflect)
         {
             if (isReflect)
+            {
                 ShakeCamera();
+                _spriteRenderer.color = reflectColor;
+            }
             _isReflect = isReflect;
         }
     }

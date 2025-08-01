@@ -7,6 +7,7 @@ namespace Member.ISC.Code.Players
 {
     public class PlayerHealth : MonoBehaviour, IEntityComponent, IDamageable, IAfterInitialize
     {
+
         [field: SerializeField] public float currentHealth { get; private set; }
         [field: SerializeField] public float maxHealth { get; private set; }
 

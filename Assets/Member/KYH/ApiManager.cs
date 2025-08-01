@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using TMPro;
 using Member.CUH.Code.Enemies;
+using UnityEngine.UI;
 
 public class ApiManager : MonoBehaviour
 {
-
+    public static ApiManager Instance;
     [DllImport("user32.dll")] private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     [DllImport("user32.dll")] private static extern IntPtr GetActiveWindow();
     [DllImport("user32.dll")] private static extern bool GetCursorPos(out POINT lpPoint);
@@ -67,6 +68,9 @@ public class ApiManager : MonoBehaviour
     [SerializeField] private GameObject overClockAlim;
     [Header("오버클럭 알람 깜빡 대기 시간")]
     [SerializeField] private float overClockAlimDuration = 0.5f;
+    [SerializeField] private Slider gageSlider;
+    [SerializeField] private Slider backSlider;
+
 
     [Header("처음 깜빡임 간격")]
     public float startInterval = 1.0f;
@@ -142,8 +146,14 @@ public class ApiManager : MonoBehaviour
     private bool isStart;
     private int randIdx;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
+        
         camera = Camera.main;
         hWnd = GetActiveWindow();
 
@@ -151,6 +161,14 @@ public class ApiManager : MonoBehaviour
         {
             currentPos = new Vector2(rect.Left, rect.Top);
             windowSize = new Vector2(rect.Right - rect.Left, rect.Bottom - rect.Top);
+        }
+
+        gageSlider.maxValue = invokeCooltime;
+        gageSlider.value = 0;
+        if (backSlider != null)
+        {
+            backSlider.maxValue = invokeCooltime;
+            backSlider.value = 0;
         }
 
         isStart = true;
@@ -176,7 +194,28 @@ public class ApiManager : MonoBehaviour
             else
                 _currentTime += Time.deltaTime;
         }
+
+        gageSlider.value = _currentTime;
+        if (backSlider.value > gageSlider.value)
+        {
+            DOTween.Sequence()
+                .AppendInterval(0.5f)
+                .Append(backSlider.DOValue(_currentTime, 0.5f).SetEase(Ease.OutCubic));
+        }
+        else if (backSlider.value < gageSlider.value)
+        {
+            backSlider.value = _currentTime;
+        }
     }
+
+    public void MinusGageValue(int value)
+    {
+        _currentTime -= value;
+    }
+    [Header("api 게이지 흔들리는 시간")]
+    public float gageShakeDuration = 0.1f;
+    [Header("api 게이지 흔들림 강도")]
+    public float gageShakeStrength = 0.1f;
 
     private IEnumerator OverClockAlimRoutine()
     {

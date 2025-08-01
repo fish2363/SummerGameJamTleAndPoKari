@@ -462,7 +462,7 @@ MonoBehaviour:
   _useRandomSeed: 0
   _randomSeed: 12345
   _enableDebugLogs: 1
-  teleportParticle: {fileID: 0}
+  teleportParticle: {fileID: 2344171489837634120, guid: b14952d76dd00e14caaf0db33257ccf7, type: 3}
   shakeDuration: 0.2
   shrinkDuration: 0.15
   scaleFactor: 0.6

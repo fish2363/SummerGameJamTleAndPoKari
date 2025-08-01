@@ -11,7 +11,8 @@ namespace Member.ISC.Code.Players
 {
     public class PlayerMoveCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
-        [SerializeField] private Rigidbody2D rb; 
+        [SerializeField] private Rigidbody2D rb;
+        [SerializeField] private SpriteRenderer sr;
         
         [Header("이동속도")]
         [SerializeField] private float moveSpeed;
@@ -67,6 +68,7 @@ namespace Member.ISC.Code.Players
             {
                 OnDashStart?.Invoke();
                 Dash();
+                sr.DOFade(0.2f, dashDuration);
             }
         }
 
@@ -123,13 +125,13 @@ namespace Member.ISC.Code.Players
             
             SetAutoMovement(_moveDir);
             
-            _tweener = DOVirtual.Float(moveSpeed, (moveSpeed*dashPower), dashDuration, (x) => moveSpeed = x)
+            _tweener = DOVirtual.Float(moveSpeed, (moveSpeed*dashPower), dashDuration, (x) => moveSpeed = x).SetEase(Ease.OutSine)
                 .OnComplete(() =>
                 {
                     CanManualMovement = true;
                     moveSpeed = _previousMoveSpeed;
                     _playerHealth.Ignore = false;
-
+                    sr.DOFade(1, 0);
                     OnDashEnd?.Invoke();
                 });
         }

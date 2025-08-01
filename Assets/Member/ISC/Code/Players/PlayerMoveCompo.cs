@@ -3,6 +3,8 @@ using System.Numerics;
 using DG.Tweening;
 using Member.CUH.Code.Entities;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
 namespace Member.ISC.Code.Players
@@ -16,14 +18,15 @@ namespace Member.ISC.Code.Players
 
         [Header("대쉬 지속시간 쿨타임 세기")]
         [SerializeField] private float dashDuration;
-        [SerializeField] private float dashCool;
+        [field: SerializeField] public float DashCool { get; private set; }
         [SerializeField] private float dashPower;
+
+        public UnityEvent OnDash;
         
         private Player _player;
         private PlayerHealth _playerHealth;
         private Tweener _tweener;
-
-        private float _currentDashTime;
+        
         private bool _canDash = true;
         private float _previousMoveSpeed;
         
@@ -33,6 +36,7 @@ namespace Member.ISC.Code.Players
 
         
         public bool CanManualMovement { get; set; } = true;
+        public float CurrentDashTime { get; set; }
         
         public void Initialize(Entity entity)
         {
@@ -59,7 +63,10 @@ namespace Member.ISC.Code.Players
         private void HandleDashPressed()
         {
             if (_canDash)
+            {
+                OnDash?.Invoke();
                 Dash();
+            }
         }
 
         public void SetDirection(Vector2 dir)
@@ -71,12 +78,12 @@ namespace Member.ISC.Code.Players
 
         private void Update()
         {
-            _currentDashTime += Time.deltaTime;
+            CurrentDashTime += Time.deltaTime;
 
-            if (_currentDashTime >= dashCool)
+            if (CurrentDashTime >= DashCool)
             {
                 _canDash = true;
-                _currentDashTime = 0;
+                CurrentDashTime = 0;
             }
         }
 
@@ -114,7 +121,6 @@ namespace Member.ISC.Code.Players
                 _moveDir = _player.transform.right;
             
             SetAutoMovement(_moveDir);
-
             
             _tweener = DOVirtual.Float(moveSpeed, (moveSpeed*dashPower), dashDuration, (x) => moveSpeed = x)
                 .OnComplete(() =>

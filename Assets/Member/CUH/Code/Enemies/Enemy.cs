@@ -69,7 +69,11 @@ namespace Member.CUH.Code.Enemies
         {
             if(IsDead) return;
             IsDead = true;
-            StartCoroutine(DeadRoutine());
+            Instantiate(deadEffect, transform.position, Quaternion.identity);
+            OnDeadEvent?.Invoke();
+            if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
+            GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOKill();
+            Destroy(gameObject);
         }
 
         private IEnumerator DeadRoutine()
@@ -77,11 +81,6 @@ namespace Member.CUH.Code.Enemies
             GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOColor(Color.white,0.05f)
                 .OnComplete(()=>transform.DOScale(new Vector2(0.1f,0.1f),0.2f));
             yield return new WaitForSeconds(0.4f);
-            Instantiate(deadEffect, transform.position, Quaternion.identity);
-            OnDeadEvent?.Invoke();
-            if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
-            GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOKill();
-            Destroy(gameObject);
         }
 
         public void KillSelf()

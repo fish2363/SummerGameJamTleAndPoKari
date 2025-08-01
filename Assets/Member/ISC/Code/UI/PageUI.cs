@@ -24,7 +24,13 @@ namespace Member.ISC.Code.UI
             ButtonUpdate();
             _currentPageX = trm.anchoredPosition.x;
         }
-        
+
+        private void OnDestroy()
+        {
+            if (_tween.IsActive()) 
+                _tween.Kill();
+        }
+
         public void NextPage()
         {
             _currentPage++;

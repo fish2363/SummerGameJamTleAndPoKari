@@ -346,10 +346,10 @@ public class ApiManager : MonoBehaviour
 
     private void RotateCamera()
     {
-        StartCoroutine(ShakeCoroutine());
+        StartCoroutine(RotateAndShakeRoutine());
     }
 
-    IEnumerator ShakeCoroutine()
+    IEnumerator RotateAndShakeRoutine()
     {
         GetWindowRect(hWnd, out RECT rect);
         int width = rect.Right - rect.Left;
@@ -376,6 +376,34 @@ public class ApiManager : MonoBehaviour
             camera.transform.DORotate(new Vector3(0, 0, 0), 0.2f).SetEase(Ease.Linear);
             isInvokingEvent = false;
         });
+    }
+
+    public void ShakeScreen()
+    {
+        StartCoroutine(ScreenShakeRoutine());
+    }
+
+    IEnumerator ScreenShakeRoutine()
+    {
+        GetWindowRect(hWnd, out RECT rect);
+        int width = rect.Right - rect.Left;
+        int height = rect.Bottom - rect.Top;
+
+        float timer = 0f;
+        Vector2 originalPos = new Vector2(rect.Left, rect.Top);
+
+        while (timer < shakeDuration)
+        {
+            float offsetX = UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+            float offsetY = UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+
+            MoveWindow(hWnd, (int)(originalPos.x + offsetX), (int)(originalPos.y + offsetY), width, height, true);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // 원래 위치로 복구
+        MoveWindow(hWnd, (int)originalPos.x, (int)originalPos.y, width, height, true);
     }
 
     private void ShowError()

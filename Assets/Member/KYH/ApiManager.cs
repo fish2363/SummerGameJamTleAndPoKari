@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using TMPro;
 using Member.CUH.Code.Enemies;
+using UnityEngine.UI;
 
 public class ApiManager : MonoBehaviour
 {
-
+    public static ApiManager Instance;
     [DllImport("user32.dll")] private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     [DllImport("user32.dll")] private static extern IntPtr GetActiveWindow();
     [DllImport("user32.dll")] private static extern bool GetCursorPos(out POINT lpPoint);
@@ -67,6 +68,8 @@ public class ApiManager : MonoBehaviour
     [SerializeField] private GameObject overClockAlim;
     [Header("오버클럭 알람 깜빡 대기 시간")]
     [SerializeField] private float overClockAlimDuration = 0.5f;
+
+
 
     [Header("처음 깜빡임 간격")]
     public float startInterval = 1.0f;
@@ -141,9 +144,16 @@ public class ApiManager : MonoBehaviour
 
     private bool isStart;
     private int randIdx;
+    public bool IsBoss { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
+        
         camera = Camera.main;
         hWnd = GetActiveWindow();
 
@@ -164,20 +174,46 @@ public class ApiManager : MonoBehaviour
         {
             StartCoroutine(OverClockAlimRoutine());
         }
-
-        if (isInvokingEvent == false)
+        if(!IsBoss)
         {
-            if (_currentTime >= invokeCooltime)
+            if (isInvokingEvent == false)
             {
-                isInvokingEvent = true;
-                _currentTime = 0;
-                Appear();
+                if (_currentTime >= invokeCooltime)
+                {
+                    isInvokingEvent = true;
+                    _currentTime = 0;
+                    Appear();
+                }
+                else
+                {
+                    _currentTime += Time.deltaTime;
+                }
+            }
+
+            foregroundImage.fillAmount = Mathf.Clamp01(_currentTime / invokeCooltime);
+
+            if (backgroundImage.fillAmount > Mathf.Clamp01(_currentTime / invokeCooltime))
+            {
+                backgroundImage.fillAmount -= Time.deltaTime * delaySpeed;
+                if (backgroundImage.fillAmount < Mathf.Clamp01(_currentTime / invokeCooltime))
+                    backgroundImage.fillAmount = Mathf.Clamp01(_currentTime / invokeCooltime);
             }
             else
-                _currentTime += Time.deltaTime;
+            {
+                backgroundImage.fillAmount = Mathf.Clamp01(_currentTime / invokeCooltime);
+            }
         }
     }
 
+    public Image foregroundImage;    
+    public Image backgroundImage;
+    public TextMeshProUGUI _warningText;
+    public float delaySpeed = 0.5f;  
+
+    public void MinusGageValue(int value)
+    {
+        _currentTime = Mathf.Clamp(_currentTime - value,0,invokeCooltime);
+    }
     private IEnumerator OverClockAlimRoutine()
     {
         overClockAlim.SetActive(true);

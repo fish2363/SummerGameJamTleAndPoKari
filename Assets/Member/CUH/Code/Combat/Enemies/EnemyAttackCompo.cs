@@ -26,6 +26,7 @@ namespace Member.CUH.Code.Combat.Enemies
         public void AfterInitialize()
         {
             _target = _enemy.Target;
+            _lastAtkTime = Time.time;
         }
         
         public virtual bool CanAttack()

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 1
   _bulletSpeed: 2
   _rotationStep: 30
   _initialAngle: 0
@@ -130,7 +130,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3323863022940025888, guid: 2bb628fb7288fcf4a98d2b56189b99b6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.30980393, g: 0.9490196, b: 0.76862746, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -259,6 +259,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a4f124384df10d42b27d91f56e0749e, type: 2}
   isMoveableEnemy: 0
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 8278742893063648625}
 --- !u!58 &59802535098876359
 CircleCollider2D:
   m_ObjectHideFlags: 0

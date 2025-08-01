@@ -1,16 +1,17 @@
-using Ami.BroAudio;
+Ôªøusing Ami.BroAudio;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System.Linq;
 using TMPro;
-using System.Collections.Generic;
 
 public class ESCManager : MonoBehaviour
 {
-    private bool isOn;
-    [SerializeField] CanvasGroup escCanvas;
+    private bool isChoosePanelOn;
+    private bool isEscPanelOn;
+
+    [SerializeField] private CanvasGroup escCanvas;     // ÏÑ§Ï†ïÏ∞Ω (EscPanel)
+    [SerializeField] private CanvasGroup chooseCanvas;  // ESC ÎàåÎ†ÄÏùÑ Îïå Îú®Îäî Ï≤´ Ìå®ÎÑê
 
     [SerializeField] private BroAudioType _bgm;
     [SerializeField] private BroAudioType _sfx;
@@ -20,75 +21,104 @@ public class ESCManager : MonoBehaviour
     [SerializeField] private Slider _bgmSlider;
     [SerializeField] private Slider _sfxSlider;
 
-
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private Toggle fullscreenToggle;
-
-    private List<Resolution> resolutions=new();
-    private bool _isInitialized;
-
-    void Start()
-    {
-        SetupResolutionDropdown();
-        SetupFullscreenToggle(fullscreenToggle.isOn);
-
-        resolutionDropdown.onValueChanged.AddListener(OnResolutionSelected);
-        fullscreenToggle.onValueChanged.AddListener(SetupFullscreenToggle);
-    }
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            ESC();
-    }
-
-    void SetupResolutionDropdown()
-    {
-        for (int i = 0; i < Screen.resolutions.Length; i++)
         {
-            Resolution r = Screen.resolutions[i];
-            float aspect = (float)r.width / r.height;
-            float refreshRate = r.refreshRateRatio.numerator / (float)r.refreshRateRatio.denominator;
-
-            if (Mathf.Abs(aspect - (16f / 9f)) < 0.1f && r.width >= 1280)
-            {
-                resolutions.Add(r);
-            }
+            HandleEscapeKey();
         }
-        resolutionDropdown.ClearOptions();
-        resolutions.Reverse();
-
-        var options = resolutions.Select(r => $"{r.width} x {r.height}").ToList();
-        resolutionDropdown.AddOptions(options);
-
-        _isInitialized = true;
     }
 
-    void SetupFullscreenToggle(bool isOn)
+    private void HandleEscapeKey()
     {
-        Screen.fullScreen = isOn;
+        if (isChoosePanelOn)
+        {
+            CloseChoosePanel();
+            ResumeGame();
+        }
+        else if (isEscPanelOn)
+        {
+            CloseEscPanel();
+            ResumeGame();
+        }
+        else
+        {
+            OpenChoosePanel();
+            PauseGame();
+        }
     }
 
-    void OnResolutionSelected(int index)
+    private void PauseGame()
     {
-        if (!_isInitialized) return;
-
-        bool isFullscreen = fullscreenToggle.isOn;
-        Resolution res = resolutions[index];
-
-        Screen.SetResolution(res.width, res.height, isFullscreen);
+        Time.timeScale = 0f;
     }
 
-    
-
-    public void ESC()
+    private void ResumeGame()
     {
-        isOn = !isOn;
-        float force = isOn ? 1 : 0;
-        escCanvas.DOFade(force, 0.2f);
-        escCanvas.blocksRaycasts = isOn;
-        escCanvas.interactable = isOn;
+        Time.timeScale = 1f;
     }
 
+    private void OpenChoosePanel()
+    {
+        isChoosePanelOn = true;
+
+        // Ìå®ÎÑê ÏïåÌåå Î∞è Ïù∏ÌÑ∞ÎûôÏÖò ÏÑ§Ï†ï
+        chooseCanvas.alpha = 1;
+        chooseCanvas.interactable = true;
+        chooseCanvas.blocksRaycasts = true;
+
+        // Ïï†ÎãàÎ©îÏù¥ÏÖòÏö© RectTransform Í∞ÄÏ†∏Ïò§Í∏∞
+        RectTransform rect = chooseCanvas.GetComponent<RectTransform>();
+        rect.localScale = new Vector3(0f, 1f, 1f); // XÎßå 0ÏúºÎ°ú ÏãúÏûë
+
+        // DOTween Ïï†ÎãàÎ©îÏù¥ÏÖò (UnscaledTimeÏúºÎ°ú Ïû¨ÏÉù)
+        rect.DOScaleX(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
+    }
+
+    private void CloseChoosePanel()
+    {
+        isChoosePanelOn = false;
+        chooseCanvas.alpha = 0;
+        chooseCanvas.interactable = false;
+        chooseCanvas.blocksRaycasts = false;
+    }
+
+    private void OpenEscPanel()
+    {
+        isEscPanelOn = true;
+        escCanvas.alpha = 1;
+        escCanvas.interactable = true;
+        escCanvas.blocksRaycasts = true;
+    }
+
+    private void CloseEscPanel()
+    {
+        isEscPanelOn = false;
+        escCanvas.alpha = 0;
+        escCanvas.interactable = false;
+        escCanvas.blocksRaycasts = false;
+    }
+
+    public void OnClickContinue()
+    {
+        CloseChoosePanel();
+        ResumeGame();
+    }
+
+    public void OnClickSettings()
+    {
+        CloseChoosePanel();
+        OpenEscPanel();
+    }
+
+    public void OnClickQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 
     public void BGM(float volume)
     {
@@ -106,15 +136,5 @@ public class ESCManager : MonoBehaviour
     {
         _masterSlider.value = volume;
         BroAudio.SetVolume(_main, volume);
-    }
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        // ø°µ≈Õ ∏µÂø°º≠ Ω««‡ ¡ﬂ¿Ã∏È Play ∏µÂ∏¶ ≤˚
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        // ∫ÙµÂµ» ∞‘¿”ø°º≠¥¬ æ÷«√∏Æƒ…¿Ãº« ¡æ∑·
-        Application.Quit();
-#endif
     }
 }

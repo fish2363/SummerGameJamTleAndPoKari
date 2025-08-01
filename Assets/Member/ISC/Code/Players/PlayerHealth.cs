@@ -7,16 +7,19 @@ namespace Member.ISC.Code.Players
 {
     public class PlayerHealth : MonoBehaviour, IEntityComponent, IDamageable, IAfterInitialize
     {
+
         [field: SerializeField] public float currentHealth { get; private set; }
         [field: SerializeField] public float maxHealth { get; private set; }
 
+        public bool Ignore { get; set; } = false;
+        
         private Player _player;
-
+        
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
         }
-
+        
         public void AfterInitialize()
         {
             currentHealth = maxHealth;
@@ -24,7 +27,7 @@ namespace Member.ISC.Code.Players
         
         public void ApplyDamage(float damage)
         {
-            if (_player.IsDead || _player.IsHitting) return;
+            if (_player.IsDead || _player.IsHitting || Ignore) return;
 
             _player.IsHitting = true;
             
@@ -32,8 +35,8 @@ namespace Member.ISC.Code.Players
 
             if (currentHealth <= 0)
                 _player.OnDeadEvent?.Invoke();
-            else
-                _player.OnHitEvent?.Invoke();
+            
+            _player.OnHitEvent?.Invoke();
         }
 
     }

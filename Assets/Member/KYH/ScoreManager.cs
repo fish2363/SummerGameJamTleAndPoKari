@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -19,16 +20,11 @@ public class ScoreManager : MonoBehaviour
     {
         Instance = this;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-            Score(1);
-    }
+    
     public void Score(int score)
     {
         CurrentScore += score;
         SetText();
-        
     }
 
     void SetText()

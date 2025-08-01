@@ -15,11 +15,5 @@ namespace Member.ISC.Code.Players.States
             _moveCompo.CanManualMovement = false;
             _player.SetActiveFrame(false);
         }
-
-        public override void Update()
-        {
-            base.Update();
-            Debug.Log("죽음!");
-        }
     }
 }

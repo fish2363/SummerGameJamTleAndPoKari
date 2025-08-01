@@ -885,6 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1788747962547233112}
+  sr: {fileID: 9127067506361115438}
   moveSpeed: 7
   dashDuration: 0.3
   <DashCool>k__BackingField: 3

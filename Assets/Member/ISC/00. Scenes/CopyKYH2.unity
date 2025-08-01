@@ -3219,6 +3219,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1332868673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+  m_PrefabInstance: {fileID: 1941350006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515c410c1f0d4c4881d2b60e01bb196d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1493659432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3888,8 +3899,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboPrefab: {fileID: 3971250706356878136, guid: d345953111d3991498c155dbd356652e, type: 3}
+  ComboChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1332868673}
+        m_TargetAssemblyTypeName: Member.ISC.Code.Players.PlayerUltiCompo, Assembly-CSharp
+        m_MethodName: SkillCheck
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   comboBonusLine: 3
-  comboBreakTime: 5
+  comboBreakTime: 3
 --- !u!1 &1920146877
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,10 +4177,6 @@ PrefabInstance:
       propertyPath: OnHitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2127208533}
-    - target: {fileID: 726638208941367945, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: OnHitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UpdateLife
-      objectReference: {fileID: 0}
     - target: {fileID: 2142963479712587923, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4166,18 +4188,6 @@ PrefabInstance:
     - target: {fileID: 2802834118922149054, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3503589696958998699, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: moveSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: ultCombo
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: whatIsBullet.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_AnchorMax.x

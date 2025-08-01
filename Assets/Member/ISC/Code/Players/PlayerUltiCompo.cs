@@ -17,6 +17,7 @@ namespace Member.ISC.Code.Players
         private Player _player;
 
         private int _ultNum;
+        private int _currentUltCombo;
         private int _idx = 1;
         
         public bool CanUlt { get; set; } = false;
@@ -59,22 +60,27 @@ namespace Member.ISC.Code.Players
                     Instantiate(parryParticle, b.transform);
                     b.Fire(_player.transform.right);
                 }
+                _ultNum--;
+                CanUlt = false;
             }
-
-            _ultNum--;
-            CanUlt = false;
         }
 
         public void SkillCheck()
         {
-            if (ComboManager.COMBO_CNT >= ultCombo)
+            int value = ComboManager.COMBO_CNT;
+            if (value < ultCombo)
             {
-                Debug.Log("넘었다!");
+                _idx = 1;
+                _currentUltCombo = ultCombo;
+            }
+            
+            if (ComboManager.COMBO_CNT >= _currentUltCombo)
+            {
                 _ultNum++;
                 if (_ultNum > 1)
                     _ultNum = 1;
                 _idx++;
-                ultCombo *= _idx;
+                _currentUltCombo = ultCombo * _idx;
                 CanUlt = true;
             }
         }

@@ -57,5 +57,7 @@ public class ComboManager : MonoBehaviour
         COMBO_CNT = 0;
         multiple = 1;
         _currentComboValue = 0f;
+        
+        ComboChanged?.Invoke();
     }
 }

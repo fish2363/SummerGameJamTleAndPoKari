@@ -742,7 +742,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.66, y: 1.66, z: 1.66}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 859143460}
@@ -791,8 +791,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2311659948842064771, guid: ed822d2037c2c0949913c8aeefd82e83, type: 3}
-  m_Color: {r: 0.7219255, g: 0.29626986, b: 0.8805031, a: 0.06666667}
+  m_Sprite: {fileID: 1282028943509491997, guid: 72f7a32ac9c7676409eb438757bc6b4a, type: 3}
+  m_Color: {r: 0.6431373, g: 0.47058824, b: 1, a: 0.06666667}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1190,8 +1190,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2311659948842064771, guid: ed822d2037c2c0949913c8aeefd82e83, type: 3}
-  m_Color: {r: 0.7219255, g: 0.29626986, b: 0.8805031, a: 0.41960785}
+  m_Sprite: {fileID: -2207236230058056998, guid: e3c1887a68aef5c469604d4f3aa22370, type: 3}
+  m_Color: {r: 0.6421402, g: 0.4666667, b: 1, a: 0.41960785}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3424,15 +3424,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4967245332977578943, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Color.b
-      value: 0.57547164
+      value: 0.68235296
       objectReference: {fileID: 0}
     - target: {fileID: 4967245332977578943, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Color.g
-      value: 0.57547164
+      value: 0.68235296
       objectReference: {fileID: 0}
     - target: {fileID: 4967245332977578943, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.90588236
       objectReference: {fileID: 0}
     - target: {fileID: 6388035218388938874, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Enabled
@@ -3464,15 +3464,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8587612040414908639, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Color.b
-      value: 0.57547164
+      value: 0.68066925
       objectReference: {fileID: 0}
     - target: {fileID: 8587612040414908639, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Color.g
-      value: 0.57547164
+      value: 0.68066925
       objectReference: {fileID: 0}
     - target: {fileID: 8587612040414908639, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.9056604
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

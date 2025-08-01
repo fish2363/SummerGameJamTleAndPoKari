@@ -21,6 +21,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             if (_attackCompo.CanAttack())
             {
                 _attackCompo.Attack();
+                randomAttack.TeleportAnimation();
             }
         }
 

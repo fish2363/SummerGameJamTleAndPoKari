@@ -550,8 +550,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8319616166698774186}
   - component: {fileID: 8621784908388091536}
-  - component: {fileID: 5295791087907014494}
   - component: {fileID: 710073001573193668}
+  - component: {fileID: 7974388935962128186}
   m_Layer: 0
   m_Name: AttackCompo
   m_TagString: Untagged
@@ -588,25 +588,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossPatterns: []
   attackCooldown: 5
---- !u!114 &5295791087907014494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3614644260402164630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901a243e15054beba5c12420e7199804, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimationString: ATTACK1
-  fireCount: 5
-  fireDelay: 0.5
-  bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
-  bulletSpeed: 3
-  bulletLifeTime: 5
-  spreadAngle: 15
 --- !u!114 &710073001573193668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,13 +601,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationString: ATTACK2
-  fireCount: 5
-  fireDelay: 0.2
+  fireCount: 3
+  fireDelay: 0.5
   bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
   bulletSpeed: 3
   bulletLifeTime: 5
-  bulletsPerShot: 8
-  angleOffsetPerFire: 10
+  bulletsPerShot: 10
+  angleOffsetPerFire: 90
+--- !u!114 &7974388935962128186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3614644260402164630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094963b70c884819b154fc68e11994f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationString: ATTACK1
+  fireCount: 50
+  fireDelay: 0.05
+  laserPrefab: {fileID: 526105166653921955, guid: 7311374966844e3458bbe1086c554221, type: 3}
+  rotationValue: 10
 --- !u!1 &4538466623417722721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1028,7 @@ Animator:
   m_GameObject: {fileID: 6747977957224545906}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 431c380d8f62b7f419c79c396d93a5ea, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6974ba60df27eb4c96dc45c1d75bad4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1093,7 +1091,7 @@ GameObject:
   - component: {fileID: 2444111796595797321}
   - component: {fileID: 3807895145152586176}
   m_Layer: 7
-  m_Name: Boss1
+  m_Name: Boss4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,10 +1,12 @@
 ﻿using System;
+using DG.Tweening;
 using Member.CUH.Code.Combat;
 using Member.CUH.Code.Enemies;
 using Member.CUH.Code.Entities;
 using Member.KDH.Code.Bullet;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Member.ISC.Code.Players
 {
@@ -17,14 +19,15 @@ namespace Member.ISC.Code.Players
         [SerializeField] private float damage;
         
         private bool isParry = false;
-
+        private EntityAnimatorTrigger _triggers;
         private Player _player;
         
         public void Initialize(Entity entity)
         {
             _player = entity as Player;
+            originalPos = Camera.main.transform.localPosition;
         }
-        
+
         public void Attack()
         {
             Collider2D[] c = Physics2D.OverlapCircleAll(_player.transform.position, castRadius, whatIsTarget);
@@ -45,6 +48,7 @@ namespace Member.ISC.Code.Players
                             
                         if (item.TryGetComponent(out IDamageable d))
                         {
+                            ShakeCamera();
                             d.ApplyDamage(damage);
                         }
                         else if (isParry)
@@ -68,6 +72,18 @@ namespace Member.ISC.Code.Players
             float value = Vector3.Dot(_player.transform.right, dir.normalized);
             return value > 0;
         }
+        public float shakeDuration = 0.3f;
+        public float shakeStrength = 0.3f;
+
+        private Vector3 originalPos;
+        public void ShakeCamera()
+        {
+            Camera.main.transform.localPosition = originalPos; // 혹시 이전 흔들림에서 안 돌아왔으면 리셋
+
+            Camera.main.transform
+                .DOShakePosition(shakeDuration, shakeStrength, vibrato: 10, randomness: 90, snapping: false, fadeOut: true)
+                .OnComplete(() => Camera.main.transform.localPosition = originalPos); // 흔들고 난 뒤 원위치 보정
+        }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
@@ -78,6 +94,8 @@ namespace Member.ISC.Code.Players
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, castRadius - parryRadius);
         }
-        #endif
+
+        
+#endif
     }
 }

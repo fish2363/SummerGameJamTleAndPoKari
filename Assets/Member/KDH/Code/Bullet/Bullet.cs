@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Combat;
+﻿using DG.Tweening;
+using Member.CUH.Code.Combat;
 using UnityEngine;
 
 namespace Member.KDH.Code.Bullet
@@ -8,13 +9,13 @@ namespace Member.KDH.Code.Bullet
         [Header("탄환 설정")]
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _lifeTime = 10f;
-        
+
         private Vector2 _direction;
         private Camera _mainCamera;
         private float _spawnTime;
         private bool _isActive;
         private bool _isReflect;
-        
+
         private void Awake()
         {
             _mainCamera = Camera.main;
@@ -22,19 +23,20 @@ namespace Member.KDH.Code.Bullet
             {
                 Debug.LogError("메인 카메라를 찾을 수 없습니다!");
             }
+            originalPos = _mainCamera.transform.position;
         }
-        
+
         private void Update()
         {
             if (!_isActive) return;
-            
+
             MoveBullet();
-            
+
             CheckScreenBoundary();
 
             CheckLifeTime();
         }
-        
+
         public void Fire(Vector2 direction, float speed = 0f)
         {
             _direction = direction.normalized;
@@ -42,25 +44,25 @@ namespace Member.KDH.Code.Bullet
             {
                 _speed = speed;
             }
-            
+
             _spawnTime = Time.time;
             _isActive = true;
             gameObject.SetActive(true);
         }
-        
+
         private void MoveBullet()
         {
             transform.Translate(_direction * _speed * Time.deltaTime);
         }
-        
+
         private void CheckScreenBoundary()
         {
             if (_mainCamera == null) return;
-            
+
             Vector3 viewportPosition = _mainCamera.WorldToViewportPoint(transform.position);
             Vector3 newPosition = transform.position;
             bool teleported = false;
-            
+
             if (viewportPosition.x < 0f)
             {
                 viewportPosition.x = 1f;
@@ -71,7 +73,7 @@ namespace Member.KDH.Code.Bullet
                 viewportPosition.x = 0f;
                 teleported = true;
             }
-            
+
             if (viewportPosition.y < 0f)
             {
                 viewportPosition.y = 1f;
@@ -82,7 +84,7 @@ namespace Member.KDH.Code.Bullet
                 viewportPosition.y = 0f;
                 teleported = true;
             }
-            
+
             if (teleported)
             {
                 newPosition = _mainCamera.ViewportToWorldPoint(viewportPosition);
@@ -90,7 +92,7 @@ namespace Member.KDH.Code.Bullet
                 transform.position = newPosition;
             }
         }
-        
+
         private void CheckLifeTime()
         {
             if (Time.time - _spawnTime >= _lifeTime)
@@ -98,7 +100,7 @@ namespace Member.KDH.Code.Bullet
                 DestroyBullet();
             }
         }
-        
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (_isReflect)
@@ -121,18 +123,34 @@ namespace Member.KDH.Code.Bullet
                     DestroyBullet();
                 }
             }
-            
+
         }
-        
+        float shakeDuration = 0.1f;
+        float shakeStrength = 0.1f;
+
+        private Vector3 originalPos;
+        public void ShakeCamera()
+        {
+            Camera.main.transform.localPosition = originalPos; // 혹시 이전 흔들림에서 안 돌아왔으면 리셋
+
+            Camera.main.transform
+                .DOShakePosition(shakeDuration, shakeStrength, vibrato: 5, randomness: 10, snapping: false, fadeOut: true)
+                .OnComplete(() => Camera.main.transform.localPosition = originalPos); // 흔들고 난 뒤 원위치 보정
+        }
         public void DestroyBullet()
         {
             _isReflect = false;
             _isActive = false;
             gameObject.SetActive(false);
-            
+
             BulletPool.Instance?.ReturnBullet(this);
         }
-        
-        public void SetReflect(bool isReflect) => _isReflect = isReflect;
+
+        public void SetReflect(bool isReflect)
+        {
+            if (isReflect)
+                ShakeCamera();
+            _isReflect = isReflect;
+        }
     }
 }

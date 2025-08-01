@@ -12,7 +12,7 @@ namespace Member.CUH.Code.Enemies
     {
         public static EnemyManager Instance;
 
-        public int OverClockEnemyCount { get; private set; }
+        [field: SerializeField] public int OverClockEnemyCount { get; private set; }
         
         [SerializeField] private GameObject warningObject;
         [SerializeField] private Enemy[] spawnEnemies;

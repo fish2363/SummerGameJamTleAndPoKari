@@ -6,7 +6,8 @@ namespace Member.CUH.Code.Entities
     public class EntityAnimatorTrigger : MonoBehaviour, IEntityComponent
     {
         public Action OnAnimationEndTrigger;
-        
+        public event Action<bool> OnDamageToggleTrigger;
+
         private Entity _entity;
 
         public void Initialize(Entity entity)
@@ -18,6 +19,7 @@ namespace Member.CUH.Code.Entities
         {
             OnAnimationEndTrigger?.Invoke();
         }
-
+        private void StartDamageCast() => OnDamageToggleTrigger?.Invoke(true);
+        private void StopDamageCast() => OnDamageToggleTrigger?.Invoke(false);
     }
 }

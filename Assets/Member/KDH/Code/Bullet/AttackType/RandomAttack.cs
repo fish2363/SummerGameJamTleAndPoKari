@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DG.Tweening;
 using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
@@ -16,9 +17,16 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private bool _enableDebugLogs = true; // 디버그 로그 활성화 여부
         [SerializeField] private ParticleSystem teleportParticle;
 
+        public float shakeDuration = 0.2f;
+        public float shrinkDuration = 0.15f;
+        public float scaleFactor = 0.6f;
+
+
         private float _lastAttackTime;
         private System.Random _randomGenerator;
         private bool _isInitialized = false;
+        private Vector3 originalScale;
+        Sequence seq;
 
         private void Awake()
         {
@@ -53,6 +61,8 @@ namespace Member.KDH.Code.Bullet.AttackType
                 
                 EnsureRandomGeneratorExists();
             }
+            originalScale = _enemy.transform.position;
+            SetTeleportSequence();
         }
         
         private void Update()
@@ -295,7 +305,30 @@ namespace Member.KDH.Code.Bullet.AttackType
             Gizmos.color = IsInitialized() ? Color.green : Color.red;
             Gizmos.DrawWireCube(transform.position, Vector3.one * 0.2f);
         }
-        
+        public void TeleportAnimation()
+        {
+            if (seq.IsActive()) seq.Restart(); // 매번 새로 만들지 않고 재시작
+        }
+
+        private float _halfXSize = 4.5f;
+        private float _halfYSize = 4.5f;
+        private Vector2 _nextPos;
+
+        private void SetTeleportSequence()
+        {
+            seq = DOTween.Sequence();
+
+            seq.Append(transform.DOShakePosition(shakeDuration, 0.2f))
+           .Join(transform.DOScale(originalScale * scaleFactor, shrinkDuration))
+           .AppendCallback(() => {
+               _nextPos.x = Random.Range(-_halfXSize, _halfXSize);
+               _nextPos.y = Random.Range(-_halfYSize, _halfYSize);
+               _enemy.transform.position = _nextPos;
+           })
+           .Append(transform.DOScale(originalScale, 0.2f))
+           .SetEase(Ease.InOutQuad);
+        }
+
         private void OnEnable()
         {
             if (!IsInitialized())

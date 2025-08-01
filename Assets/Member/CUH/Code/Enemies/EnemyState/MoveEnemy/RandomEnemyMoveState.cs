@@ -1,17 +1,18 @@
 ﻿using Member.CUH.Code.Entities;
+using Member.KDH.Code.Bullet.AttackType;
+using System.Collections;
 using UnityEngine;
 
 namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
 {
     public class RandomEnemyMoveState : MoveableEnemyState
     {
-        private float _halfXSize = 4.5f;
-        private float _halfYSize = 4.5f;
-        private Vector2 _nextPos;
+        
+        private RandomAttack randomAttack;
         
         public RandomEnemyMoveState(Entity entity, int animationHash) : base(entity, animationHash)
         {
-            
+            randomAttack = entity.GetCompo<RandomAttack>();
         }
 
         public override void Update()
@@ -20,10 +21,10 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             if (_attackCompo.CanAttack())
             {
                 _attackCompo.Attack();
-                _nextPos.x = Random.Range(-_halfXSize, _halfXSize);
-                _nextPos.y = Random.Range(-_halfYSize, _halfYSize);
-                _enemy.transform.position = _nextPos;
+                randomAttack.TeleportAnimation();
             }
         }
+
+        
     }
 }

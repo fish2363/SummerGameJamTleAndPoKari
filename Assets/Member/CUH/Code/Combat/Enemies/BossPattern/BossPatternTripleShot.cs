@@ -25,11 +25,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
         private void FireTriple()
         {
             Vector2 baseDir = ((Vector2)_target.transform.position - (Vector2)transform.position).normalized;
-
-            // 중심
             FireBullet(baseDir);
-
-            // 좌우 방향
             Vector2 leftDir = RotateVector(baseDir, spreadAngle);
             Vector2 rightDir = RotateVector(baseDir, -spreadAngle);
 

@@ -20,12 +20,18 @@ namespace Member.CUH.Code.Enemies
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
             OnDeadEvent.AddListener(HandleDeadEvent);
+            OnHitEvent.AddListener(HandleHitEvent);
         }
         
         public void SetTarget(IDamageable target)
         {
             Target = target;
             AfterInitialize();
+        }
+        
+        private void HandleHitEvent()
+        {
+            ComboManager.Instance.PlusCombo(transform);
         }
         
         private void HandleDeadEvent()

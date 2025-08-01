@@ -9,10 +9,18 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
         
         public override void UsePattern()
         {
-            Laser laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
-            laser.transform.localScale *= laserScale;
-            laser.Shoot(_target.transform.position, transform, laserScale);
+            StartCoroutine(LaserRampage());
         }
 
+        private IEnumerator LaserRampage()
+        {
+            for (int i = 0; i < fireCount; i++)
+            {
+                Laser laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+                laser.transform.localScale *= laserScale;
+                laser.Shoot(_target.transform.position, transform, laserScale);
+                yield return new WaitForSeconds(fireDelay);
+            }
+        }
     }
 }

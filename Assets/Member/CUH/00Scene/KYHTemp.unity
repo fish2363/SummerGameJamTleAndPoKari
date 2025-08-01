@@ -233,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: 'spawnBosses.Array.data[0]'
       value: 
-      objectReference: {fileID: 1875714941417143595, guid: c39f368c37b19644c8969a393cecbd64, type: 3}
+      objectReference: {fileID: 1875714941417143595, guid: 53892c81d7403d1419fc05e2697df462, type: 3}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: 'spawnBosses.Array.data[1]'
       value: 
@@ -3850,6 +3850,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboPrefab: {fileID: 3971250706356878136, guid: d345953111d3991498c155dbd356652e, type: 3}
+  ComboChanged:
+    m_PersistentCalls:
+      m_Calls: []
   comboBonusLine: 3
   comboBreakTime: 5
 --- !u!1 &1920146877
@@ -4057,6 +4060,10 @@ PrefabInstance:
     - target: {fileID: 3503589696958998699, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: moveSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8259398743906251301, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: damage
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_AnchorMax.x

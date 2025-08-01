@@ -7,7 +7,8 @@ namespace Member.CUH.Code.Entities
     {
         public Action OnAnimationEndTrigger;
         public event Action<bool> OnDamageToggleTrigger;
-
+        public Action OnAttackTrigger;
+        
         private Entity _entity;
 
         public void Initialize(Entity entity)
@@ -21,5 +22,6 @@ namespace Member.CUH.Code.Entities
         }
         private void StartDamageCast() => OnDamageToggleTrigger?.Invoke(true);
         private void StopDamageCast() => OnDamageToggleTrigger?.Invoke(false);
+        private void AttactCall() => OnAttackTrigger?.Invoke();
     }
 }

@@ -150,7 +150,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3910420558657802115}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -366,8 +366,8 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 1.5
   _bulletSpeed: 7
-  bombDelay: 0
+  bombDelay: 1
   bombRadius: 2
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

@@ -457,7 +457,7 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 4
   _attackInterval: 0.8
-  _bulletSpeed: 2
+  _bulletSpeed: 1
   _bulletsPerAttack: 5
   _useRandomSeed: 0
   _randomSeed: 12345

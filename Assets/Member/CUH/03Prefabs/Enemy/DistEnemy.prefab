@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 2
-  _bulletSpeed: 3
+  _bulletSpeed: 1.5
 --- !u!1 &7042904345211055780
 GameObject:
   m_ObjectHideFlags: 0

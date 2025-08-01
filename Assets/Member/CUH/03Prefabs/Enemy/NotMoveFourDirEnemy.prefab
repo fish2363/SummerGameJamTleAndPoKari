@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 4
-  _bulletSpeed: 2
+  _bulletSpeed: 1.2
   _rotationStep: 45
   _initialAngle: 0
 --- !u!1 &4360092314933244393

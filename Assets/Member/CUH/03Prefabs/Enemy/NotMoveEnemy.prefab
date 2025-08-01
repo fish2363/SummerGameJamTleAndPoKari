@@ -47,7 +47,7 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 5
   _bulletCount: 8
-  _bulletSpeed: 2
+  _bulletSpeed: 1
 --- !u!1 &2328743019878872649
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ namespace Member.CUH.Code.Enemies
         private EntityStateMachine _stateMachine;
 
         private float _lifeTime;
+        private bool _isOverClock;
         
         protected override void Awake()
         {
@@ -55,9 +56,11 @@ namespace Member.CUH.Code.Enemies
         private void Update()
         {
             _stateMachine.UpdateStateMachine();
-            if (_lifeTime >= 30f)
+            _lifeTime += Time.deltaTime;
+            if (_lifeTime >= 30f && !_isOverClock)
             {
                 OnOverClock?.Invoke(true);
+                _isOverClock = true;
             }
         }
         
@@ -77,6 +80,7 @@ namespace Member.CUH.Code.Enemies
 
         public void KillSelf()
         {
+            if(IsDead) return;
             IsDead = true;
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);

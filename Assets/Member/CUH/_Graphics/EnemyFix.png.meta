@@ -450,9 +450,9 @@ TextureImporter:
       name: EnemyFix_8
       rect:
         serializedVersion: 2
-        x: 1992
+        x: 2000
         y: 1253
-        width: 249
+        width: 241
         height: 250
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

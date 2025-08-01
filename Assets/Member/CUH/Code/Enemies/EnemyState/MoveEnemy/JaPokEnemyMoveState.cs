@@ -21,7 +21,7 @@ namespace Member.CUH.Code.Enemies.EnemyState.MoveEnemy
             Vector2 moveDir = (_enemy.Target.transform.position - _enemy.transform.position).normalized;
             float dist = Vector2.Distance(_enemy.Target.transform.position, _enemy.transform.position);
             _entityMover.SetMovement(moveDir);
-            if (dist <= 1.5f)
+            if (dist <= 1f)
             {
                 isBomb = true;
                 _attackCompo.Attack();

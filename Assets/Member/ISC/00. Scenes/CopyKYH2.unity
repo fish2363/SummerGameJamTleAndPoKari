@@ -4189,6 +4189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: ultCombo
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

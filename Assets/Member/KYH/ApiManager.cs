@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using TMPro;
 using Member.CUH.Code.Enemies;
+using UnityEngine.UI;
 
 public class ApiManager : MonoBehaviour
 {
@@ -67,6 +68,9 @@ public class ApiManager : MonoBehaviour
     [SerializeField] private GameObject overClockAlim;
     [Header("오버클럭 알람 깜빡 대기 시간")]
     [SerializeField] private float overClockAlimDuration = 0.5f;
+    [SerializeField] private Slider gageSlider;
+    [SerializeField] private Slider backSlider;
+
 
     [Header("처음 깜빡임 간격")]
     public float startInterval = 1.0f;
@@ -153,6 +157,14 @@ public class ApiManager : MonoBehaviour
             windowSize = new Vector2(rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
+        gageSlider.maxValue = invokeCooltime;
+        gageSlider.value = 0;
+        if (backSlider != null)
+        {
+            backSlider.maxValue = invokeCooltime;
+            backSlider.value = 0;
+        }
+
         isStart = true;
     }
 
@@ -176,6 +188,38 @@ public class ApiManager : MonoBehaviour
             else
                 _currentTime += Time.deltaTime;
         }
+
+        gageSlider.value = _currentTime;
+        if (backSlider.value > gageSlider.value)
+        {
+            DOTween.Sequence()
+                .AppendInterval(0.2f)
+                .Append(backSlider.DOValue(_currentTime, 0.5f).SetEase(Ease.OutCubic));
+        }
+        else if (backSlider.value < gageSlider.value)
+        {
+            backSlider.value = _currentTime;
+        }
+    }
+
+    public void MinusGageValue(int value)
+    {
+        _currentTime -= value;
+        ShakeCamera();
+    }
+    [Header("api 게이지 흔들리는 시간")]
+    public float gageShakeDuration = 0.3f;
+    [Header("api 게이지 흔들림 강도")]
+    public float gageShakeStrength = 0.3f;
+
+    private Vector3 originalPos;
+    public void ShakeCamera()
+    {
+        Camera.main.transform.localPosition = originalPos; // 혹시 이전 흔들림에서 안 돌아왔으면 리셋
+
+        Camera.main.transform
+            .DOShakePosition(gageShakeDuration, gageShakeStrength, vibrato: 10, randomness: 90, snapping: false, fadeOut: true)
+            .OnComplete(() => Camera.main.transform.localPosition = originalPos); // 흔들고 난 뒤 원위치 보정
     }
 
     private IEnumerator OverClockAlimRoutine()

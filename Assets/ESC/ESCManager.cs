@@ -22,7 +22,6 @@ public class ESCManager : MonoBehaviour
     [SerializeField] private Slider _bgmSlider;
     [SerializeField] private Slider _sfxSlider;
 
-
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)

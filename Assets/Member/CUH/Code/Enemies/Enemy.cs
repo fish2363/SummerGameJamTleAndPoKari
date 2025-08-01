@@ -74,6 +74,8 @@ namespace Member.CUH.Code.Enemies
 
         private IEnumerator DeadRoutine()
         {
+            GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOColor(Color.white,0.05f)
+                .OnComplete(()=>transform.DOScale(new Vector2(0.1f,0.1f),0.2f));
             yield return new WaitForSeconds(0.4f);
             Instantiate(deadEffect, transform.position, Quaternion.identity);
             OnDeadEvent?.Invoke();

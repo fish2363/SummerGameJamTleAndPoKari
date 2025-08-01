@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 1.5
-  _bulletSpeed: 7
+  attackCooldown: 2
+  _bulletSpeed: 6
   _predictionTime: 1
   _drawPredictionGizmo: 1
 --- !u!1 &632995989314292947

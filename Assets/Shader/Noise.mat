@@ -46,9 +46,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _Power: 0
-    - _Scale: 152.5
-    - _Spd: 7.89
+    - _Power: 0.5
+    - _Scale: 70
+    - _Spd: 0.5
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

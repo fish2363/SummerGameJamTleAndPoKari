@@ -456,9 +456,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 2
+  attackCooldown: 1.5
   _burstCount: 3
-  _burstDelay: 0.1
+  _burstDelay: 0.25
   _bulletSpeed: 1.5
   _useFixedDirection: 0
   _enableDebugLogs: 1

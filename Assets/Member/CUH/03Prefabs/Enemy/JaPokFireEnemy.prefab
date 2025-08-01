@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 1.5
+  attackCooldown: 2
   _bulletSpeed: 4
   bombDelay: 1
   bombRadius: 2

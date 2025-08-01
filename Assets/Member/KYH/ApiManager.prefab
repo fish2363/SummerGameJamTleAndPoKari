@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invokeCooltime: 15
-  overClockCnt: 2
+  overClockCnt: 1
   alim: {fileID: 6684585917966484796}
   alimText: {fileID: 7840627853215806210}
   overClockText: {fileID: 5116387707894639992}

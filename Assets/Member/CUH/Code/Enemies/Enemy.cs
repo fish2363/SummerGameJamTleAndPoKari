@@ -26,7 +26,6 @@ namespace Member.CUH.Code.Enemies
         private EntityStateMachine _stateMachine;
 
         private float _lifeTime;
-        private bool _isOverClock;
         
         protected override void Awake()
         {
@@ -57,11 +56,9 @@ namespace Member.CUH.Code.Enemies
         private void Update()
         {
             _stateMachine.UpdateStateMachine();
-            _lifeTime += Time.deltaTime;
-            if (_lifeTime >= 30f && !_isOverClock)
+            if (_lifeTime >= 30f)
             {
                 OnOverClock?.Invoke(true);
-                _isOverClock = true;
             }
         }
         
@@ -77,6 +74,8 @@ namespace Member.CUH.Code.Enemies
 
         private IEnumerator DeadRoutine()
         {
+            GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOColor(Color.white,0.05f)
+                .OnComplete(()=>transform.DOScale(new Vector2(0.1f,0.1f),0.2f));
             yield return new WaitForSeconds(0.4f);
             Instantiate(deadEffect, transform.position, Quaternion.identity);
             OnDeadEvent?.Invoke();
@@ -87,7 +86,6 @@ namespace Member.CUH.Code.Enemies
 
         public void KillSelf()
         {
-            if(IsDead) return;
             IsDead = true;
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);

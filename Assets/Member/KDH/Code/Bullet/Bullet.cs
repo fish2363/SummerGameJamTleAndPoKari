@@ -162,5 +162,7 @@ namespace Member.KDH.Code.Bullet
             }
             _isReflect = isReflect;
         }
+        
+        public Vector2 GetDirection() => _direction;
     }
 }

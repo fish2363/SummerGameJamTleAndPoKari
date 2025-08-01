@@ -61,9 +61,18 @@ public class ESCManager : MonoBehaviour
     private void OpenChoosePanel()
     {
         isChoosePanelOn = true;
+
+        // 패널 알파 및 인터랙션 설정
         chooseCanvas.alpha = 1;
         chooseCanvas.interactable = true;
         chooseCanvas.blocksRaycasts = true;
+
+        // 애니메이션용 RectTransform 가져오기
+        RectTransform rect = chooseCanvas.GetComponent<RectTransform>();
+        rect.localScale = new Vector3(0f, 1f, 1f); // X만 0으로 시작
+
+        // DOTween 애니메이션 (UnscaledTime으로 재생)
+        rect.DOScaleX(1f, 0.3f).SetEase(Ease.OutBack).SetUpdate(true);
     }
 
     private void CloseChoosePanel()

@@ -10,6 +10,7 @@ namespace Member.KDH.Code.Bullet
         [SerializeField] private float _speed = 1f;
         [SerializeField] private float _lifeTime = 10f;
         [SerializeField] private Color reflectColor = Color.blue;
+        [SerializeField] private float reflectMinSpeed = 5f;
         
         private Vector2 _direction;
         private Camera _mainCamera;
@@ -157,6 +158,7 @@ namespace Member.KDH.Code.Bullet
             {
                 ShakeCamera();
                 _spriteRenderer.color = reflectColor;
+                _speed = _speed > reflectMinSpeed ? _speed : reflectMinSpeed;
             }
             _isReflect = isReflect;
         }

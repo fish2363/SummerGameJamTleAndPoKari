@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 3
+  attackCooldown: 3.5
   laserWarning1: {fileID: 4143313825981721974}
   laserWarning2: {fileID: 8362846493715857277}
   whatIsTarget:

@@ -210,6 +210,7 @@ namespace Member.KDH.Code.Bullet.AttackType
 
                 yield return new WaitForSeconds(_attackInterval);
             }
+            TeleportAnimation();
         }
 
         private float GetRandomAngleSafe()
@@ -347,7 +348,7 @@ namespace Member.KDH.Code.Bullet.AttackType
         {
             _randomGenerator = null;
             _isInitialized = false;
-            
+            transform.DOKill();
             if (_enableDebugLogs)
             {
                 Debug.Log($"[{gameObject.name}] RandomAttack 컴포넌트가 정리되었습니다.");

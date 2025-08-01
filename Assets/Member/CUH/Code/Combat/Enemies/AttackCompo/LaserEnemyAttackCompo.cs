@@ -60,5 +60,13 @@ namespace Member.CUH.Code.Combat.Enemies.AttackCompo
                     }
                 });
         }
+
+        private void OnDestroy()
+        {
+            transform.DOKill();
+            laserWarning1.transform.DOKill();
+            laserWarning2.transform.DOKill();
+            _laserLine.DOKill();
+        }
     }
 }

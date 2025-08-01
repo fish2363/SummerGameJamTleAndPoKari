@@ -10,7 +10,9 @@ using System.Collections.Generic;
 public class ESCManager : MonoBehaviour
 {
     private bool isOn;
+    private bool isEscOn;
     [SerializeField] CanvasGroup escCanvas;
+    [SerializeField] CanvasGroup chooseCanvas;
 
     [SerializeField] private BroAudioType _bgm;
     [SerializeField] private BroAudioType _sfx;
@@ -38,7 +40,7 @@ public class ESCManager : MonoBehaviour
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            ESC();
+            PressEscape();
     }
 
     void SetupResolutionDropdown()
@@ -82,11 +84,29 @@ public class ESCManager : MonoBehaviour
 
     public void ESC()
     {
+        ChoosePanel();
+        isEscOn = !isEscOn;
+        float force = isEscOn ? 1 : 0;
+        escCanvas.DOFade(force, 0.2f);
+        escCanvas.blocksRaycasts = isEscOn;
+        escCanvas.interactable = isEscOn;
+    }
+
+    private void PressEscape()
+    {
+        if (isEscOn)
+            ESC();
+        else
+            ChoosePanel();
+    }
+
+    public void ChoosePanel()
+    {
         isOn = !isOn;
         float force = isOn ? 1 : 0;
-        escCanvas.DOFade(force, 0.2f);
-        escCanvas.blocksRaycasts = isOn;
-        escCanvas.interactable = isOn;
+        chooseCanvas.DOFade(force, 0.2f);
+        chooseCanvas.blocksRaycasts = isOn;
+        chooseCanvas.interactable = isOn;
     }
 
 

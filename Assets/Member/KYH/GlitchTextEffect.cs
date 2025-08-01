@@ -11,6 +11,7 @@ public class GlitchTextEffect : MonoBehaviour
     [Header("UI References")]
     public TMP_Text tmpText;
     public Button startButton;
+    public GameObject virusBackGround;
 
     [Header("Scramble Settings")]
     public string targetText = "WHAT ABOUT TOMORROW?";
@@ -88,6 +89,7 @@ public class GlitchTextEffect : MonoBehaviour
             yield return tf.DOScale(new Vector3(0.65f, 0.65f, 1f), 2.05f).SetEase(Ease.OutCubic).OnComplete(() =>
             {
                 tf.localScale = new Vector3(0.7f, 0.7f, 1f);
+                virusBackGround.SetActive(true);
                 tf.DOScale(new Vector3(0.8f, 0.8f, 1f), 2f).SetEase(Ease.OutCubic);
             }).WaitForCompletion();
 

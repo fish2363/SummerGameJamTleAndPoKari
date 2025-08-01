@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _lifeTime: 10
+  reflectColor: {r: 0, g: 0, b: 1, a: 1}
+  reflectMinSpeed: 5
 --- !u!212 &2278462693146703702
 SpriteRenderer:
   m_ObjectHideFlags: 0

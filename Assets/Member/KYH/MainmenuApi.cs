@@ -106,14 +106,15 @@ public class MainmenuApi : MonoBehaviour
 
     public void ClickStart()
     {
-        if (volume.profile.TryGet(out chromatic))
-        {
-            Debug.Log("시작");
-            StartCoroutine(FadeChromaticAberration());
-        }
+        //if (volume.profile.TryGet(out chromatic))
+        //{
+        //    Debug.Log("시작");
+        //    StartCoroutine(FadeChromaticAberration());
+        //}
         pressStartButton.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
         title.transform.DOMove(titlePos.position, moveButtonDuration).SetEase(moveEase);
+        title.transform.DOScale(new Vector3(1.3f, 1.3f), moveButtonDuration).SetEase(moveEase); //크기도 같이 제어
         StartCoroutine(ShowButtonsSequentially());
     }
 

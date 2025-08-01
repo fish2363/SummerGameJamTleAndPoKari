@@ -36,7 +36,7 @@ namespace Member.CUH.Code.Enemies
         [Inject] private Player _player;
 
         [SerializeField] private int _spawnEnemyCount = 2;
-        private int _currentEnemyCount = 0;
+        [SerializeField]private int _currentEnemyCount = 0;
         private int nextEnemyCountUpScore = 5;
         private int _currentWave = 1;
 
@@ -49,12 +49,12 @@ namespace Member.CUH.Code.Enemies
 
         private void HandleBossStartEvent()
         {
-            _currentEnemyCount++;
             StartCoroutine(SpawnBoss());
         }
 
         private IEnumerator SpawnBoss()
         {
+            Debug.Log("보스가 왔다");
             GameObject obj = Instantiate(warningObject, Vector2.zero, Quaternion.identity);
             float elapsed = 0f;
             bool visible = true;
@@ -70,7 +70,7 @@ namespace Member.CUH.Code.Enemies
                 elapsed += currentInterval;
             }
             Destroy(obj);
-                        
+            _currentEnemyCount++;
             Boss spawnBoss = Instantiate(spawnBosses[Random.Range(0, spawnBosses.Length)], Vector2.zero, Quaternion.identity);
             spawnBoss.SetTarget(_player.GetComponent<IDamageable>());
             spawnBoss.OnDeadEvent.AddListener(HandleEnemyDead);
@@ -134,12 +134,12 @@ namespace Member.CUH.Code.Enemies
 
             if (_currentEnemyCount <= 0)
             {
+                _currentWave++;
                 if (bossCutWave != 0 && (_currentWave) % bossCutWave == 0)
                 {
                     OnBossStartEvent?.Invoke();
                     return;
                 }
-                _currentWave++;
                 SpawnEnemies();
             }
         }

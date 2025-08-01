@@ -1,5 +1,6 @@
 ﻿using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
+using UnityEngine;
 
 namespace Member.CUH.Code.Enemies.BossStates
 {
@@ -17,7 +18,9 @@ namespace Member.CUH.Code.Enemies.BossStates
             base.Update();
             if (_attackCompo.CanAttack())
             {
-                _boss.ChangeState("ATTACK");
+                string animString = _attackCompo.GetRandomAttack();
+                Debug.Log(animString);
+                _boss.ChangeState(animString);
             }
         }
     }

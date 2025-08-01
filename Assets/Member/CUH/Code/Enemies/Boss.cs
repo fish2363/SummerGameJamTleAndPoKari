@@ -19,6 +19,7 @@ namespace Member.CUH.Code.Enemies
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
+            OnDeadEvent.AddListener(HandleDeadEvent);
         }
         
         public void SetTarget(IDamageable target)
@@ -26,7 +27,14 @@ namespace Member.CUH.Code.Enemies
             Target = target;
             AfterInitialize();
         }
-
+        
+        private void HandleDeadEvent()
+        {
+            if(IsDead) return;
+            IsDead = true;
+            Destroy(gameObject);
+        }
+        
         protected override void Start()
         {
             base.Start();

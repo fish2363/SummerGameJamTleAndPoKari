@@ -1,5 +1,5 @@
-using Member.KYH;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ComboManager : MonoBehaviour
 {
@@ -8,12 +8,14 @@ public class ComboManager : MonoBehaviour
     public ComboCount comboPrefab;
     public static int COMBO_CNT;
 
-    [Header("comboBonusLineï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¾î°¡ nï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É´Ï´ï¿½")]
+    public UnityEvent ComboChanged;
+
+    [Header("comboBonusLineÀÇ ¹è¼ö¸¦ ³ÑÀ»¶§¸¶´Ù ½ºÄÚ¾î°¡ n¹è·Î µé¾î¿É´Ï´Ù")]
     [SerializeField]
     private float comboBonusLine;
-    private int multiple = 1;//ï¿½ï¿½ï¿½
+    private int multiple = 1;//¹è¼ö
 
-    [Header("ï¿½Þºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    [Header("ÄÞº¸ ²÷±â´Â ±âÁØ")]
     [SerializeField] private float comboBreakTime = 5f;
     private float _currentComboValue=0f;
     private bool isComboBreak;
@@ -46,6 +48,8 @@ public class ComboManager : MonoBehaviour
         Debug.Log($"{comboCount.transform.position}");
         comboCount.SetText($"{COMBO_CNT}",$"x{multiple}");
         comboCount.Animate(COMBO_CNT);
+
+        ComboChanged?.Invoke();
     }
 
     public void ResetCombo()
@@ -53,5 +57,7 @@ public class ComboManager : MonoBehaviour
         COMBO_CNT = 0;
         multiple = 1;
         _currentComboValue = 0f;
+        
+        ComboChanged?.Invoke();
     }
 }

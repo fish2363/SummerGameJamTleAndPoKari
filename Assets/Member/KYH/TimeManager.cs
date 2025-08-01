@@ -4,8 +4,7 @@ using UnityEngine;
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance;
-
-    [Header("시간 텍스트")]
+    
     [SerializeField] private TextMeshProUGUI timeText;
 
     [field:SerializeField] public float CurrentTime => _floatTime;

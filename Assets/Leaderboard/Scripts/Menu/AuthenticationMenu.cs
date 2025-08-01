@@ -7,12 +7,13 @@ namespace Leaderboard.Scripts.Menu
 {
     public class AuthenticationMenu : Panel
     {
+        [Header("플레이어 이름 입력")]
+        [SerializeField] private TMP_InputField playerNameInput = null;
+        [SerializeField] private Button confirmButton = null;
 
-        [SerializeField] private TMP_InputField usernameInput = null;
-        [SerializeField] private TMP_InputField passwordInput = null;
-        [SerializeField] private Button signinButton = null;
-        [SerializeField] private Button signupButton = null;
-        [SerializeField] private Button anonymousButton = null;
+        // PlayerPrefs 키 상수
+        private const string PLAYER_NAME_KEY = "SavedPlayerName";
+        private const string HAS_REGISTERED_KEY = "HasRegistered";
 
         public override void Initialize()
         {
@@ -20,85 +21,83 @@ namespace Leaderboard.Scripts.Menu
             {
                 return;
             }
-            anonymousButton.onClick.AddListener(AnonymousSignIn);
-            signinButton.onClick.AddListener(SignIn);
-            signupButton.onClick.AddListener(SignUp);
+            
+            // 플레이어 이름 확인 버튼 이벤트 등록
+            confirmButton.onClick.AddListener(OnConfirmPlayerName);
+            
             base.Initialize();
         }
 
         public override void Open()
         {
-            usernameInput.text = "";
-            passwordInput.text = "";
+            // 이미 등록된 플레이어인지 확인
+            if (PlayerPrefs.GetInt(HAS_REGISTERED_KEY, 0) == 1)
+            {
+                // 이미 등록된 경우 자동으로 로그인 진행
+                string savedName = PlayerPrefs.GetString(PLAYER_NAME_KEY, "Player");
+                Debug.Log($"기존 플레이어 감지됨: {savedName}");
+                AutoLogin(savedName);
+                return;
+            }
+            
+            // 첫 실행인 경우 이름 입력 UI 표시
+            playerNameInput.text = "";
             base.Open();
         }
 
-        private void AnonymousSignIn()
+        /// <summary>
+        /// 플레이어 이름 확인 버튼 클릭 시 호출
+        /// </summary>
+        private void OnConfirmPlayerName()
         {
-            MenuManager.Singleton.SignInAnonymouslyAsync();
+            string playerName = playerNameInput.text.Trim();
+            
+            // 이름 유효성 검사
+            if (string.IsNullOrEmpty(playerName))
+            {
+                ShowError("플레이어 이름을 입력해주세요.");
+                return;
+            }
+            
+            if (playerName.Length < 2 || playerName.Length > 12)
+            {
+                ShowError("이름은 2자 이상 12자 이하로 입력해주세요.");
+                return;
+            }
+            
+            // 이름 저장 및 로그인 진행
+            SavePlayerName(playerName);
+            MenuManager.Singleton.SignInAnonymouslyAsyncWithName(playerName);
         }
 
-        private void SignIn()
+        /// <summary>
+        /// 플레이어 이름을 로컬에 저장
+        /// </summary>
+        private void SavePlayerName(string name)
         {
-            string user = usernameInput.text.Trim();
-            string pass = passwordInput.text.Trim();
-            if (string.IsNullOrEmpty(user) == false && string.IsNullOrEmpty(pass) == false)
-            {
-                MenuManager.Singleton.SignInWithUsernameAndPasswordAsync(user, pass);
-            }
+            PlayerPrefs.SetString(PLAYER_NAME_KEY, name);
+            PlayerPrefs.SetInt(HAS_REGISTERED_KEY, 1);
+            PlayerPrefs.Save();
+            Debug.Log($"플레이어 이름 저장됨: {name}");
         }
 
-        private void SignUp()
+        /// <summary>
+        /// 기존 플레이어 자동 로그인
+        /// </summary>
+        private void AutoLogin(string playerName)
         {
-            string user = usernameInput.text.Trim();
-            string pass = passwordInput.text.Trim();
-            if (string.IsNullOrEmpty(user) == false && string.IsNullOrEmpty(pass) == false)
-            {
-                if (IsPasswordValid(pass))
-                {
-                    MenuManager.Singleton.SignUpWithUsernameAndPasswordAsync(user, pass);
-                }
-                else
-                {
-                    ErrorMenu panel = (ErrorMenu)PanelManager.GetSingleton("error");
-                    panel.Open(ErrorMenu.Action.None, "Password does not match requirements. Insert at least 1 uppercase, 1 lowercase, 1 digit and 1 symbol. With minimum 8 and a maximum of 30 characters.", "OK");
-                }
-            }
+            // 로딩 화면 표시 후 자동 로그인
+            PanelManager.Close("auth");
+            MenuManager.Singleton.SignInAnonymouslyAsyncWithName(playerName);
         }
-    
-        private bool IsPasswordValid(string password)
-        {
-            if (password.Length < 8 || password.Length > 30)
-            {
-                return false;
-            }
-        
-            bool hasUppercase = false;
-            bool hasLowercase = false;
-            bool hasDigit = false;
-            bool hasSymbol = false;
 
-            foreach (char c in password)
-            {
-                if (char.IsUpper(c))
-                {
-                    hasUppercase = true;
-                }
-                else if (char.IsLower(c))
-                {
-                    hasLowercase = true;
-                }
-                else if (char.IsDigit(c))
-                {
-                    hasDigit = true;
-                }
-                else if (!char.IsLetterOrDigit(c))
-                {
-                    hasSymbol = true;
-                }
-            }
-            return hasUppercase && hasLowercase && hasDigit && hasSymbol;
+        /// <summary>
+        /// 에러 메시지 표시
+        /// </summary>
+        private void ShowError(string message)
+        {
+            ErrorMenu panel = (ErrorMenu)PanelManager.GetSingleton("error");
+            panel.Open(ErrorMenu.Action.None, message, "확인");
         }
-    
     }
 }

@@ -77,7 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815a37b3d78446718ee5bfedbc7cc099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnBossStartEvent:
+    m_PersistentCalls:
+      m_Calls: []
   <OverClockEnemyCount>k__BackingField: 0
+  bossCutWave: 3
   warningObject: {fileID: 5342985060079509810, guid: 77a0633009bcf644788856c5eb8810b6, type: 3}
   spawnEnemies:
   - {fileID: 4647685927921123160, guid: e0a3b030e7266ca4abab412cd08848d3, type: 3}
@@ -91,12 +95,16 @@ MonoBehaviour:
   - {fileID: 2590573428295614171, guid: 5d1554d642b0258428e89a545fb2ad8e, type: 3}
   - {fileID: 4931566967455783822, guid: b089a6084010e244f879613d423a0e0f, type: 3}
   - {fileID: 3178224542240094945, guid: 0a4b798124163b74db6b806f22c86742, type: 3}
+  spawnBosses:
+  - {fileID: 1875714941417143595, guid: c39f368c37b19644c8969a393cecbd64, type: 3}
+  - {fileID: 1875714941417143595, guid: 53892c81d7403d1419fc05e2697df462, type: 3}
   leftBottomTrm: {fileID: 3663915162380423623}
   rightTopTrm: {fileID: 82694045636224065}
   totalDuration: 1.5
   startInterval: 0.5
   endInterval: 0.05
   _spawnEnemyCount: 2
+  _currentEnemyCount: 0
 --- !u!1 &4071689896923896751
 GameObject:
   m_ObjectHideFlags: 0

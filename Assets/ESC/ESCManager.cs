@@ -1,18 +1,17 @@
-using Ami.BroAudio;
+Ôªøusing Ami.BroAudio;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System.Linq;
 using TMPro;
-using System.Collections.Generic;
 
 public class ESCManager : MonoBehaviour
 {
-    private bool isOn;
-    private bool isEscOn;
-    [SerializeField] CanvasGroup escCanvas;
-    [SerializeField] CanvasGroup chooseCanvas;
+    private bool isChoosePanelOn;
+    private bool isEscPanelOn;
+
+    [SerializeField] private CanvasGroup escCanvas;     // ÏÑ§Ï†ïÏ∞Ω (EscPanel)
+    [SerializeField] private CanvasGroup chooseCanvas;  // ESC ÎàåÎ†ÄÏùÑ Îïå Îú®Îäî Ï≤´ Ìå®ÎÑê
 
     [SerializeField] private BroAudioType _bgm;
     [SerializeField] private BroAudioType _sfx;
@@ -25,39 +24,92 @@ public class ESCManager : MonoBehaviour
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            PressEscape();
+        {
+            HandleEscapeKey();
+        }
     }
 
-    public void ESC()
+    private void HandleEscapeKey()
     {
-        if(!isEscOn)
-            ChoosePanel();
-        isEscOn = !isEscOn;
-        float force = isEscOn ? 1 : 0;
-        escCanvas.DOFade(force, 0.2f);
-        escCanvas.blocksRaycasts = isEscOn;
-        escCanvas.interactable = isEscOn;
-        Time.timeScale = isEscOn ? 0f : 1f;
-    }
-
-    private void PressEscape()
-    {
-        if (isEscOn)
-            ESC();
+        if (isChoosePanelOn)
+        {
+            CloseChoosePanel();
+            ResumeGame();
+        }
+        else if (isEscPanelOn)
+        {
+            CloseEscPanel();
+            ResumeGame();
+        }
         else
-            ChoosePanel();
+        {
+            OpenChoosePanel();
+            PauseGame();
+        }
     }
 
-    public void ChoosePanel()
+    private void PauseGame()
     {
-        isOn = !isOn;
-        float force = isOn ? 1 : 0;
-        chooseCanvas.DOFade(force, 0.2f);
-        chooseCanvas.blocksRaycasts = isOn;
-        chooseCanvas.interactable = isOn;
-        Time.timeScale = isOn ? 0f : 1f;
+        Time.timeScale = 0f;
     }
 
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+
+    private void OpenChoosePanel()
+    {
+        isChoosePanelOn = true;
+        chooseCanvas.alpha = 1;
+        chooseCanvas.interactable = true;
+        chooseCanvas.blocksRaycasts = true;
+    }
+
+    private void CloseChoosePanel()
+    {
+        isChoosePanelOn = false;
+        chooseCanvas.alpha = 0;
+        chooseCanvas.interactable = false;
+        chooseCanvas.blocksRaycasts = false;
+    }
+
+    private void OpenEscPanel()
+    {
+        isEscPanelOn = true;
+        escCanvas.alpha = 1;
+        escCanvas.interactable = true;
+        escCanvas.blocksRaycasts = true;
+    }
+
+    private void CloseEscPanel()
+    {
+        isEscPanelOn = false;
+        escCanvas.alpha = 0;
+        escCanvas.interactable = false;
+        escCanvas.blocksRaycasts = false;
+    }
+
+    public void OnClickContinue()
+    {
+        CloseChoosePanel();
+        ResumeGame();
+    }
+
+    public void OnClickSettings()
+    {
+        CloseChoosePanel();
+        OpenEscPanel();
+    }
+
+    public void OnClickQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 
     public void BGM(float volume)
     {
@@ -75,15 +127,5 @@ public class ESCManager : MonoBehaviour
     {
         _masterSlider.value = volume;
         BroAudio.SetVolume(_main, volume);
-    }
-    public void QuitGame()
-    {
-#if UNITY_EDITOR
-        // ø°µ≈Õ ∏µÂø°º≠ Ω««‡ ¡ﬂ¿Ã∏È Play ∏µÂ∏¶ ≤˚
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        // ∫ÙµÂµ» ∞‘¿”ø°º≠¥¬ æ÷«√∏Æƒ…¿Ãº« ¡æ∑·
-        Application.Quit();
-#endif
     }
 }

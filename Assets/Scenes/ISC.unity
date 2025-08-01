@@ -181,11 +181,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5765893006805300317, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
   m_PrefabInstance: {fileID: 4672071015510568130}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &247620545 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6388035218388938874, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-  m_PrefabInstance: {fileID: 4672071015510568130}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &283248338
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &416520519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +695,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  bottomColor: {r: 0, g: 0, b: 0, a: 1}
   cycleDuration: 10
 --- !u!114 &596364316
 MonoBehaviour:
@@ -1245,7 +1239,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  bottomColor: {r: 0, g: 0, b: 0, a: 1}
   cycleDuration: 10
 --- !u!114 &1246283868
 MonoBehaviour:
@@ -1635,6 +1628,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!212 &2109577996 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9127067506361115438, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+  m_PrefabInstance: {fileID: 4672071015510568130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4672071015510568130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1687,9 +1685,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3503589696958998699, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: dashCool
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503589696958998699, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: dashPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503589696958998699, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: dashDuration
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5765893006805300317, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6388035218388938874, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: obj
@@ -1702,12 +1716,13 @@ PrefabInstance:
     - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 247620545}
+      objectReference: {fileID: 2109577996}
     - target: {fileID: 7853520979901410940, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: cycleNum
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6388035218388938874, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

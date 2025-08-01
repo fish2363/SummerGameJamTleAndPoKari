@@ -6,11 +6,13 @@ namespace Member.ISC.Code.Managers
 {
     [CreateAssetMenu(fileName = "InputManager", menuName = "SO/InputManager", order = 0)]
     public class InputManagerSO : ScriptableObject, Contorls.IPlayerActions
+    
     {
         private Contorls _controls;
         
         public Action OnAttackPressed;
         public Action OnAttackCanceled;
+        public Action OnDashPressed;
         
         public Vector2 MovementKey { get; private set; }
         public Vector2 MousePos { get; private set; }
@@ -48,6 +50,12 @@ namespace Member.ISC.Code.Managers
         {
             Vector2 pos = context.ReadValue<Vector2>();
             MousePos = Camera.main.ScreenToWorldPoint(pos);
+        }
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                OnDashPressed?.Invoke();
         }
     }
 }

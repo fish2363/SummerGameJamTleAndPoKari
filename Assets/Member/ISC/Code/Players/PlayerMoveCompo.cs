@@ -110,10 +110,11 @@ namespace Member.ISC.Code.Players
             _playerHealth.Ignore = true;
             
             CanManualMovement = false;
-            SetAutoMovement(_moveDir);
-
             if (_moveDir == Vector2.zero)
                 _moveDir = _player.transform.right;
+            
+            SetAutoMovement(_moveDir);
+
             
             _tweener = DOVirtual.Float(moveSpeed, (moveSpeed*dashPower), dashDuration, (x) => moveSpeed = x)
                 .OnComplete(() =>

@@ -68,8 +68,8 @@ public class StageChangeManager : MonoBehaviour
         ApiManager.Instance.IsBoss = true;
         for(int i=0;i<2;i++)
         {
-            smallColli[i].enabled = false;
-            bigColli[i].enabled = true;
+          smallColli[i].gameObject.SetActive(false);
+            bigColli[i].gameObject.SetActive(true);
         }
         leftPanel.rectTransform.DOAnchorPos(leftPos.anchoredPosition, duration).SetEase(Ease.InOutQuad);
         rightPanel.rectTransform.DOAnchorPos(rightPos.anchoredPosition, duration).SetEase(Ease.InOutQuad);
@@ -80,8 +80,8 @@ public class StageChangeManager : MonoBehaviour
         ApiManager.Instance.IsBoss = false;
         for (int i = 0; i < 2; i++)
         {
-            smallColli[i].enabled = true;
-            bigColli[i].enabled = false;
+          smallColli[i].gameObject.SetActive(true);
+            bigColli[i].gameObject.SetActive(false);
         }
         leftPanel.rectTransform.DOAnchorPos(leftOriginalPos, duration).SetEase(Ease.InOutQuad);
         rightPanel.rectTransform.DOAnchorPos(rightOriginalPos, duration).SetEase(Ease.InOutQuad);

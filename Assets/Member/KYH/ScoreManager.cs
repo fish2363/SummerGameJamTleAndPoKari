@@ -44,17 +44,17 @@ public class ScoreManager : MonoBehaviour
     private IEnumerator ScoreUp()
     {
 
-        scoreText.text = $"> ";
+        scoreText.text = $"";
         yield return new WaitForSeconds(0.1f);
         for(int i=0;i<scoreChange;i++)
         {
-            scoreText.text = $"> _";
+            scoreText.text = $"_";
             yield return new WaitForSeconds(0.2f);
-            scoreText.text = $"> ";
+            scoreText.text = $"";
             yield return new WaitForSeconds(0.2f);
             yield return null;
         }
-        scoreText.text = $"> {CurrentScore}";
+        scoreText.text = $"{CurrentScore}";
 
     }
 

@@ -18,6 +18,9 @@ namespace Member.KDH.Code.Bullet
         private bool _isActive;
         private bool _isReflect;
         private SpriteRenderer _spriteRenderer;
+
+        public static bool isSlowy;
+        public static bool isFaster;
         
         private void Awake()
         {
@@ -58,7 +61,12 @@ namespace Member.KDH.Code.Bullet
 
         private void MoveBullet()
         {
-            transform.Translate(_direction * _speed * Time.deltaTime);
+            if(isSlowy)
+                transform.Translate(_direction * (_speed / 4f) * Time.deltaTime);
+            else if (isFaster)
+                transform.Translate(_direction * (_speed * 1.3f) * Time.deltaTime);
+            else
+                transform.Translate(_direction * _speed * Time.deltaTime);
         }
 
         private void CheckScreenBoundary()

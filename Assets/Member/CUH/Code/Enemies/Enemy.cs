@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Blade.FSM;
 using Chuh007Lib.Dependencies;
 using DG.Tweening;
@@ -71,7 +72,13 @@ namespace Member.CUH.Code.Enemies
         {
             if(IsDead) return;
             IsDead = true;
-            Instantiate(deadEffect,transform.position,Quaternion.identity);
+            StartCoroutine(DeadRoutine());
+        }
+
+        private IEnumerator DeadRoutine()
+        {
+            yield return new WaitForSeconds(0.4f);
+            Instantiate(deadEffect, transform.position, Quaternion.identity);
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
             GetComponentInChildren<SpriteRenderer>().DOKill();

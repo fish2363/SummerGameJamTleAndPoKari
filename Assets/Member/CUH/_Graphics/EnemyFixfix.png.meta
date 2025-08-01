@@ -1,0 +1,1096 @@
+fileFormatVersion: 2
+guid: 6962c57093c352b4692b4f02c18852aa
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4899880514444671468
+    second: EnemyFixfix_0
+  - first:
+      213: -3162189767814892401
+    second: EnemyFixfix_1
+  - first:
+      213: 1551328630937659996
+    second: EnemyFixfix_2
+  - first:
+      213: 3474742668208987627
+    second: EnemyFixfix_3
+  - first:
+      213: -7477838090101541547
+    second: EnemyFixfix_4
+  - first:
+      213: 8145416941991950758
+    second: EnemyFixfix_5
+  - first:
+      213: -8279118477673918290
+    second: EnemyFixfix_6
+  - first:
+      213: -6381734240016923632
+    second: EnemyFixfix_7
+  - first:
+      213: -6976034096708354884
+    second: EnemyFixfix_8
+  - first:
+      213: 5409276582773988967
+    second: EnemyFixfix_9
+  - first:
+      213: -8307313587171202740
+    second: EnemyFixfix_10
+  - first:
+      213: 1245041817257332819
+    second: EnemyFixfix_11
+  - first:
+      213: 921842293887362155
+    second: EnemyFixfix_12
+  - first:
+      213: 5674345274554280089
+    second: EnemyFixfix_13
+  - first:
+      213: -1005891017793155273
+    second: EnemyFixfix_14
+  - first:
+      213: 5315264447203106909
+    second: EnemyFixfix_15
+  - first:
+      213: -4607325162585377637
+    second: EnemyFixfix_16
+  - first:
+      213: -6556554202976471675
+    second: EnemyFixfix_17
+  - first:
+      213: -6926445969962506682
+    second: EnemyFixfix_18
+  - first:
+      213: -4484852978003940502
+    second: EnemyFixfix_19
+  - first:
+      213: 5988704424070168189
+    second: EnemyFixfix_20
+  - first:
+      213: 754758300943072451
+    second: EnemyFixfix_21
+  - first:
+      213: 8629633255227630113
+    second: EnemyFixfix_22
+  - first:
+      213: -7042709813595477698
+    second: EnemyFixfix_23
+  - first:
+      213: 8967139347032183655
+    second: EnemyFixfix_24
+  - first:
+      213: -5939673471826738368
+    second: EnemyFixfix_25
+  - first:
+      213: 1808476255901815873
+    second: EnemyFixfix_26
+  - first:
+      213: 4565481055637352108
+    second: EnemyFixfix_27
+  - first:
+      213: -7535288028746915545
+    second: EnemyFixfix_28
+  - first:
+      213: -4383450637092811063
+    second: EnemyFixfix_29
+  - first:
+      213: -1195398206051863051
+    second: EnemyFixfix_30
+  - first:
+      213: 3529128805860638865
+    second: EnemyFixfix_31
+  - first:
+      213: 620366922446746303
+    second: EnemyFixfix_32
+  - first:
+      213: 5340859478098570282
+    second: EnemyFixfix_33
+  - first:
+      213: -7259052667304540920
+    second: EnemyFixfix_34
+  - first:
+      213: -2777005243701161672
+    second: EnemyFixfix_35
+  - first:
+      213: -1730456863515685996
+    second: EnemyFixfix_36
+  - first:
+      213: -8237234333873145499
+    second: EnemyFixfix_37
+  - first:
+      213: 347805632173181278
+    second: EnemyFixfix_38
+  - first:
+      213: 6027850970763094696
+    second: EnemyFixfix_39
+  - first:
+      213: 491415829598575958
+    second: EnemyFixfix_40
+  - first:
+      213: -6556976667604988912
+    second: EnemyFixfix_41
+  - first:
+      213: 7218011105496835955
+    second: EnemyFixfix_42
+  - first:
+      213: 172746024578649510
+    second: EnemyFixfix_43
+  - first:
+      213: -8376126331115517796
+    second: EnemyFixfix_44
+  - first:
+      213: -6643158805474793543
+    second: EnemyFixfix_45
+  - first:
+      213: -4066029156609466371
+    second: EnemyFixfix_46
+  - first:
+      213: 5234365619547464311
+    second: EnemyFixfix_47
+  - first:
+      213: 641611457072376611
+    second: EnemyFixfix_48
+  - first:
+      213: -6525864961013462494
+    second: EnemyFixfix_49
+  - first:
+      213: -2435310572947966432
+    second: EnemyFixfix_50
+  - first:
+      213: 2508816871010803774
+    second: EnemyFixfix_51
+  - first:
+      213: 109629212762109579
+    second: EnemyFixfix_52
+  - first:
+      213: 1274587390233151170
+    second: EnemyFixfix_53
+  - first:
+      213: 5921746844662919496
+    second: EnemyFixfix_54
+  - first:
+      213: 9073624983304099760
+    second: EnemyFixfix_55
+  - first:
+      213: -2898127435540159959
+    second: EnemyFixfix_56
+  - first:
+      213: 7781523180648601118
+    second: EnemyFixfix_57
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 550
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EnemyFixfix_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce935510e5fdff340800000000000000
+      internalID: 4899880514444671468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_1
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f84b4010925ad14d0800000000000000
+      internalID: -3162189767814892401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_2
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5aaee8ab2d678510800000000000000
+      internalID: 1551328630937659996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_3
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bed5d78fb04c83030800000000000000
+      internalID: 3474742668208987627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_4
+      rect:
+        serializedVersion: 2
+        x: 996
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 555bc9750e1693890800000000000000
+      internalID: -7477838090101541547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_5
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a9f0ee6d855a0170800000000000000
+      internalID: 8145416941991950758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_6
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea09fd4fb99aa1d80800000000000000
+      internalID: -8279118477673918290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_7
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01408d445868f67a0800000000000000
+      internalID: -6381734240016923632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_8
+      rect:
+        serializedVersion: 2
+        x: 1992
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc7fac13f5203f90800000000000000
+      internalID: -6976034096708354884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_9
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 1253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76e1518746c911b40800000000000000
+      internalID: 5409276582773988967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1003
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4962e67e4e76bc80800000000000000
+      internalID: -8307313587171202740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_11
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 1003
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3505120bfe6474110800000000000000
+      internalID: 1245041817257332819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_12
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 1003
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b646612aeaa0bcc00800000000000000
+      internalID: 921842293887362155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_13
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 1003
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99869b696f25fbe40800000000000000
+      internalID: 5674345274554280089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_14
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 1003
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73fcea1e27b5a02f0800000000000000
+      internalID: -1005891017793155273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 753
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d50edce6adc93c940800000000000000
+      internalID: 5315264447203106909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_16
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 753
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b94316fdc2e7f00c0800000000000000
+      internalID: -4607325162585377637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_17
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 753
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5853ef4c0b07205a0800000000000000
+      internalID: -6556554202976471675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_18
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 753
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 646e274961250ef90800000000000000
+      internalID: -6926445969962506682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_19
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 753
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6be8307af992c1c0800000000000000
+      internalID: -4484852978003940502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 503
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7e3385b1f62c1350800000000000000
+      internalID: 5988704424070168189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_21
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 503
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cc3df20da0797a00800000000000000
+      internalID: 754758300943072451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_22
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 503
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 122adbf49bd92c770800000000000000
+      internalID: 8629633255227630113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_23
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 503
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e39eb780db4434e90800000000000000
+      internalID: -7042709813595477698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_24
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 503
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7631847e9bda17c70800000000000000
+      internalID: 8967139347032183655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 043c4f5727a029da0800000000000000
+      internalID: -5939673471826738368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_26
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14491c1b29ff81910800000000000000
+      internalID: 1808476255901815873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_27
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae2a06c4d8db5f30800000000000000
+      internalID: 4565481055637352108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_28
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 721694626774d6790800000000000000
+      internalID: -7535288028746915545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_29
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 253
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ce8f9dbedada23c0800000000000000
+      internalID: -4383450637092811063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f5b3234aa7196fe0800000000000000
+      internalID: -1195398206051863051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_31
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 3
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1900ce763fbf9f030800000000000000
+      internalID: 3529128805860638865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_32
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 3
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb237dadd6cfb9800800000000000000
+      internalID: 620366922446746303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_33
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 3
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2ce753f56b8e1a40800000000000000
+      internalID: 5340859478098570282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyFixfix_34
+      rect:
+        serializedVersion: 2
+        x: 2241
+        y: 3
+        width: 249
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80506772f0aa24b90800000000000000
+      internalID: -7259052667304540920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c17718fc58a67ae4580545cef6b6299c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EnemyFixfix_0: 4899880514444671468
+      EnemyFixfix_1: -3162189767814892401
+      EnemyFixfix_10: -8307313587171202740
+      EnemyFixfix_11: 1245041817257332819
+      EnemyFixfix_12: 921842293887362155
+      EnemyFixfix_13: 5674345274554280089
+      EnemyFixfix_14: -1005891017793155273
+      EnemyFixfix_15: 5315264447203106909
+      EnemyFixfix_16: -4607325162585377637
+      EnemyFixfix_17: -6556554202976471675
+      EnemyFixfix_18: -6926445969962506682
+      EnemyFixfix_19: -4484852978003940502
+      EnemyFixfix_2: 1551328630937659996
+      EnemyFixfix_20: 5988704424070168189
+      EnemyFixfix_21: 754758300943072451
+      EnemyFixfix_22: 8629633255227630113
+      EnemyFixfix_23: -7042709813595477698
+      EnemyFixfix_24: 8967139347032183655
+      EnemyFixfix_25: -5939673471826738368
+      EnemyFixfix_26: 1808476255901815873
+      EnemyFixfix_27: 4565481055637352108
+      EnemyFixfix_28: -7535288028746915545
+      EnemyFixfix_29: -4383450637092811063
+      EnemyFixfix_3: 3474742668208987627
+      EnemyFixfix_30: -1195398206051863051
+      EnemyFixfix_31: 3529128805860638865
+      EnemyFixfix_32: 620366922446746303
+      EnemyFixfix_33: 5340859478098570282
+      EnemyFixfix_34: -7259052667304540920
+      EnemyFixfix_4: -7477838090101541547
+      EnemyFixfix_5: 8145416941991950758
+      EnemyFixfix_6: -8279118477673918290
+      EnemyFixfix_7: -6381734240016923632
+      EnemyFixfix_8: -6976034096708354884
+      EnemyFixfix_9: 5409276582773988967
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

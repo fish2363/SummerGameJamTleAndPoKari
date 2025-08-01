@@ -4,6 +4,7 @@ using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Combat;
 using Member.ISC.Code.Players;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Member.CUH.Code.Enemies
@@ -12,7 +13,10 @@ namespace Member.CUH.Code.Enemies
     {
         public static EnemyManager Instance;
 
+        public UnityEvent OnBossStartEvent; 
+        
         [field: SerializeField] public int OverClockEnemyCount { get; private set; }
+        [SerializeField] private int bossCutWave;
         
         [SerializeField] private GameObject warningObject;
         [SerializeField] private Enemy[] spawnEnemies;
@@ -31,10 +35,18 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private int _spawnEnemyCount = 2;
         private int _currentEnemyCount = 0;
         private int nextEnemyCountUpScore = 5;
+        private int _currentWave = 1;
 
         private void Awake()
         {
             Instance = this;
+
+            OnBossStartEvent.AddListener(HandleBossStartEvent);
+        }
+
+        private void HandleBossStartEvent()
+        {
+            _currentEnemyCount++;
         }
 
         private void Start()
@@ -83,7 +95,8 @@ namespace Member.CUH.Code.Enemies
             OverClockEnemyCount += isOn ? 1 : -1;
         }
 
-        private void HandleEnemyDead()
+        [ContextMenu("웨이브 체크")]
+        public void HandleEnemyDead()
         {
             _currentEnemyCount--;
             ScoreManager.Instance.Score(1);
@@ -95,6 +108,12 @@ namespace Member.CUH.Code.Enemies
 
             if (_currentEnemyCount <= 0)
             {
+                if (bossCutWave != 0 && (_currentWave) % bossCutWave == 0)
+                {
+                    OnBossStartEvent?.Invoke();
+                    return;
+                }
+                _currentWave++;
                 SpawnEnemies();
             }
         }

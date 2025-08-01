@@ -13,6 +13,7 @@ namespace Member.ISC.Code.Managers
         public Action OnAttackPressed;
         public Action OnAttackCanceled;
         public Action OnDashPressed;
+        public Action OnUltPressed;
         
         public Vector2 MovementKey { get; private set; }
         public Vector2 MousePos { get; private set; }
@@ -56,6 +57,12 @@ namespace Member.ISC.Code.Managers
         {
             if (context.performed)
                 OnDashPressed?.Invoke();
+        }
+
+        public void OnUlt(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                OnUltPressed?.Invoke();
         }
     }
 }

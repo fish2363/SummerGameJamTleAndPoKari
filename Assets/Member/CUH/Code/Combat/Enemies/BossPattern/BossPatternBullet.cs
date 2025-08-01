@@ -5,8 +5,8 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
 {
     public abstract class BossPatternBullet : BossPatternBase
     {
-        [SerializeField] private Bullet bulletPrefab;
-        [SerializeField] private float bulletSpeed;
-        [SerializeField] private float bulletLifeTime;
+        [SerializeField] protected Bullet bulletPrefab;
+        [SerializeField] protected float bulletSpeed = 3f;
+        [SerializeField] protected float bulletLifeTime = 5f;
     }
 }

@@ -52,7 +52,6 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
-  laserMultiplier: 1
   halfAngle: 90
   chargingTime: 0.5
   shootTime: 0.25
@@ -110,7 +109,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5114498
+        value: 0.27862358
         inSlope: 0
         outSlope: 0
         tangentMode: 0

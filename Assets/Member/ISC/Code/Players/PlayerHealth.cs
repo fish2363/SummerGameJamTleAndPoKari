@@ -34,8 +34,8 @@ namespace Member.ISC.Code.Players
 
             if (currentHealth <= 0)
                 _player.OnDeadEvent?.Invoke();
-            else
-                _player.OnHitEvent?.Invoke();
+            
+            _player.OnHitEvent?.Invoke();
         }
 
     }

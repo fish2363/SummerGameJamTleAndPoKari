@@ -23,73 +23,22 @@ public class ESCManager : MonoBehaviour
     [SerializeField] private Slider _sfxSlider;
 
 
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private Toggle fullscreenToggle;
-
-    private List<Resolution> resolutions=new();
-    private bool _isInitialized;
-
-    void Start()
-    {
-        SetupResolutionDropdown();
-        SetupFullscreenToggle(fullscreenToggle.isOn);
-
-        resolutionDropdown.onValueChanged.AddListener(OnResolutionSelected);
-        fullscreenToggle.onValueChanged.AddListener(SetupFullscreenToggle);
-    }
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
             PressEscape();
     }
 
-    void SetupResolutionDropdown()
-    {
-        for (int i = 0; i < Screen.resolutions.Length; i++)
-        {
-            Resolution r = Screen.resolutions[i];
-            float aspect = (float)r.width / r.height;
-            float refreshRate = r.refreshRateRatio.numerator / (float)r.refreshRateRatio.denominator;
-
-            if (Mathf.Abs(aspect - (16f / 9f)) < 0.1f && r.width >= 1280)
-            {
-                resolutions.Add(r);
-            }
-        }
-        resolutionDropdown.ClearOptions();
-        resolutions.Reverse();
-
-        var options = resolutions.Select(r => $"{r.width} x {r.height}").ToList();
-        resolutionDropdown.AddOptions(options);
-
-        _isInitialized = true;
-    }
-
-    void SetupFullscreenToggle(bool isOn)
-    {
-        Screen.fullScreen = isOn;
-    }
-
-    void OnResolutionSelected(int index)
-    {
-        if (!_isInitialized) return;
-
-        bool isFullscreen = fullscreenToggle.isOn;
-        Resolution res = resolutions[index];
-
-        Screen.SetResolution(res.width, res.height, isFullscreen);
-    }
-
-    
-
     public void ESC()
     {
-        ChoosePanel();
+        if(!isEscOn)
+            ChoosePanel();
         isEscOn = !isEscOn;
         float force = isEscOn ? 1 : 0;
         escCanvas.DOFade(force, 0.2f);
         escCanvas.blocksRaycasts = isEscOn;
         escCanvas.interactable = isEscOn;
+        Time.timeScale = isEscOn ? 0f : 1f;
     }
 
     private void PressEscape()
@@ -107,6 +56,7 @@ public class ESCManager : MonoBehaviour
         chooseCanvas.DOFade(force, 0.2f);
         chooseCanvas.blocksRaycasts = isOn;
         chooseCanvas.interactable = isOn;
+        Time.timeScale = isOn ? 0f : 1f;
     }
 
 

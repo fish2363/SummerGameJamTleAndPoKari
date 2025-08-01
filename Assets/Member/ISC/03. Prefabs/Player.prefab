@@ -1077,7 +1077,7 @@ MonoBehaviour:
     m_Bits: 384
   castRadius: 1.5
   parryRadius: 0.6
-  damage: 200
+  damage: 1
   breakParticle: {fileID: 3491182586884691508, guid: f21071055e45902418fb248cc11b6317, type: 3}
   parryParticle: {fileID: 277077641397390798, guid: 27ca7e67dd47e8c4bb99a39675d7e818, type: 3}
   shakeDuration: 0.3

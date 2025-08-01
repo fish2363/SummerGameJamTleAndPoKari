@@ -17,6 +17,9 @@ namespace Member.ISC.Code.Players
         [SerializeField] private float castRadius;
         [SerializeField] private float parryRadius;
         [SerializeField] private float damage;
+
+        [SerializeField] private ParticleSystem breakParticle;
+        [SerializeField] private ParticleSystem parryParticle;
         
         private bool isParry = false;
         private EntityAnimatorTrigger _triggers;
@@ -54,10 +57,15 @@ namespace Member.ISC.Code.Players
                         else if (isParry)
                         {
                             b.SetReflect(true);
+                            parryParticle.Play();
+                            Instantiate(parryParticle, b.transform);
                             b.Fire(_player.transform.right);
                         }
                         else
+                        {
+                            Instantiate(breakParticle, transform.position, Quaternion.identity).Play();
                             b?.DestroyBullet();
+                        }
                     }
                 }
             }

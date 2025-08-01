@@ -22,10 +22,12 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private bool isMoveableEnemy;
 
         [SerializeField] private ParticleSystem deadEffect;
-
+        [SerializeField] private SpriteRenderer[] sprites;
+        
         private EntityStateMachine _stateMachine;
 
         private float _lifeTime;
+        private bool _isOverClock = false;
         
         protected override void Awake()
         {
@@ -50,15 +52,20 @@ namespace Member.CUH.Code.Enemies
         protected override void Start()
         {
             _stateMachine.ChangeState(isMoveableEnemy ? "MOVE" : "IDLE");
-            GetComponentInChildren<SpriteRenderer>().DOColor(Color.red, 30f).SetEase(Ease.InQuart);
+            foreach (var sprite in sprites)
+            {
+                sprite.DOColor(Color.red, 30f).SetEase(Ease.InQuart);
+            }
         }
 
         private void Update()
         {
             _stateMachine.UpdateStateMachine();
-            if (_lifeTime >= 30f)
+            _lifeTime += Time.deltaTime;
+            if (_lifeTime >= 30f && !_isOverClock)
             {
                 OnOverClock?.Invoke(true);
+                _isOverClock = true;
             }
         }
         
@@ -69,7 +76,11 @@ namespace Member.CUH.Code.Enemies
         {
             if(IsDead) return;
             IsDead = true;
-            StartCoroutine(DeadRoutine());
+            Instantiate(deadEffect, transform.position, Quaternion.identity);
+            OnDeadEvent?.Invoke();
+            if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
+            GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOKill();
+            Destroy(gameObject);
         }
 
         private IEnumerator DeadRoutine()
@@ -77,11 +88,6 @@ namespace Member.CUH.Code.Enemies
             GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOColor(Color.white,0.05f)
                 .OnComplete(()=>transform.DOScale(new Vector2(0.1f,0.1f),0.2f));
             yield return new WaitForSeconds(0.4f);
-            Instantiate(deadEffect, transform.position, Quaternion.identity);
-            OnDeadEvent?.Invoke();
-            if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
-            GetComponentInChildren<SpriteRenderer>().DOKill();
-            Destroy(gameObject);
         }
 
         public void KillSelf()
@@ -89,7 +95,7 @@ namespace Member.CUH.Code.Enemies
             IsDead = true;
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);
-            GetComponentInChildren<SpriteRenderer>().DOKill();
+            GetCompo<EntityAnimator>().GetComponent<SpriteRenderer>().DOKill();
             Destroy(gameObject);
         }
     }

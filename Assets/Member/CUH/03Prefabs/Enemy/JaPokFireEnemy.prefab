@@ -106,6 +106,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 310676b195578e749a0ebd1d8d02f119, type: 2}
   isMoveableEnemy: 1
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 1453856380007745902}
 --- !u!58 &5769745157965113130
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -365,7 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 1.5
-  _bulletSpeed: 7
+  _bulletSpeed: 4
   bombDelay: 1
   bombRadius: 2
   whatIsTarget:

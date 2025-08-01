@@ -47,7 +47,7 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 5
   _bulletCount: 8
-  _bulletSpeed: 2
+  _bulletSpeed: 1
 --- !u!1 &2328743019878872649
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +393,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a4f124384df10d42b27d91f56e0749e, type: 2}
   isMoveableEnemy: 0
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 971675932837913710}
+  - {fileID: 6480525339041525343}
 --- !u!58 &2285733317469994623
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 4
-  _bulletSpeed: 1
+  _bulletSpeed: 1.2
   _rotationStep: 45
   _initialAngle: 0
 --- !u!1 &4360092314933244393
@@ -306,6 +306,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a4f124384df10d42b27d91f56e0749e, type: 2}
   isMoveableEnemy: 0
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 7811064482779492903}
 --- !u!58 &8725139277751964640
 CircleCollider2D:
   m_ObjectHideFlags: 0

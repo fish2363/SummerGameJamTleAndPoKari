@@ -147,6 +147,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f92a7bc54a7ea04993ae434df63e8ee, type: 2}
   isMoveableEnemy: 1
   deadEffect: {fileID: 1536075204270727783, guid: 500912a37fea48944be974a662e29601, type: 3}
+  sprites:
+  - {fileID: 7884658862973581125}
+  - {fileID: 7400889282057598515}
 --- !u!58 &418090111691897288
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -431,7 +434,7 @@ Animator:
   m_GameObject: {fileID: 4570739050296494383}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c42ca632d44a8d24593ae1fda2be0ae0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 06992be60e9aba647b0062a60ec4434e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -524,7 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e71df3266fffa04b911bebeab73c6b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   maxMoveSpeed: 20
   isLeapMove: 0
 --- !u!1 &7956604838345390103

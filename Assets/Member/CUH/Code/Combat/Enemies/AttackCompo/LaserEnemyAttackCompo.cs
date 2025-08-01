@@ -1,7 +1,6 @@
 ﻿using System;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Member.CUH.Code.Combat.Enemies.AttackCompo
 {
@@ -59,6 +58,13 @@ namespace Member.CUH.Code.Combat.Enemies.AttackCompo
                         _target.ApplyDamage(1);
                     }
                 });
+        }
+
+        private void OnDestroy()
+        {
+            laserWarning1.transform.DOKill();
+            laserWarning2.transform.DOKill();
+            _laserLine.DOKill();
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ComboManager : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class ComboManager : MonoBehaviour
 
     public ComboCount comboPrefab;
     public static int COMBO_CNT;
+
+    public UnityEvent ComboChanged;
 
     [Header("comboBonusLine의 배수를 넘을때마다 스코어가 n배로 들어옵니다")]
     [SerializeField]
@@ -45,6 +48,8 @@ public class ComboManager : MonoBehaviour
         Debug.Log($"{comboCount.transform.position}");
         comboCount.SetText($"{COMBO_CNT}",$"x{multiple}");
         comboCount.Animate(COMBO_CNT);
+
+        ComboChanged?.Invoke();
     }
 
     public void ResetCombo()

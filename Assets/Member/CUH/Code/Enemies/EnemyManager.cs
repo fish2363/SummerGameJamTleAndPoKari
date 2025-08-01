@@ -5,7 +5,6 @@ using Member.CUH.Code.Combat;
 using Member.ISC.Code.Players;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
 namespace Member.CUH.Code.Enemies
@@ -21,7 +20,6 @@ namespace Member.CUH.Code.Enemies
         
         [SerializeField] private GameObject warningObject;
         [SerializeField] private Enemy[] spawnEnemies;
-        [SerializeField] private Boss[] spawnBosses;
         [SerializeField] private Transform leftBottomTrm;
         [SerializeField] private Transform rightTopTrm;
 
@@ -49,32 +47,8 @@ namespace Member.CUH.Code.Enemies
         private void HandleBossStartEvent()
         {
             _currentEnemyCount++;
-            StartCoroutine(SpawnBoss());
         }
 
-        private IEnumerator SpawnBoss()
-        {
-            GameObject obj = Instantiate(warningObject, Vector2.zero, Quaternion.identity);
-            float elapsed = 0f;
-            bool visible = true;
-            while (elapsed < totalDuration)
-            {
-                float t = elapsed / totalDuration;
-                float currentInterval = Mathf.Lerp(startInterval, endInterval, t);
-
-                obj.SetActive(visible);
-                visible = !visible;
-
-                yield return new WaitForSeconds(currentInterval);
-                elapsed += currentInterval;
-            }
-            Destroy(obj);
-                        
-            Boss spawnBoss = Instantiate(spawnBosses[Random.Range(0, spawnBosses.Length)], Vector2.zero, Quaternion.identity);
-            spawnBoss.SetTarget(_player.GetComponent<IDamageable>());
-            spawnBoss.OnDeadEvent.AddListener(HandleEnemyDead);
-        }
-        
         private void Start()
         {
             SpawnEnemies();

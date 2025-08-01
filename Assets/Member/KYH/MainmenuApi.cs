@@ -108,9 +108,11 @@ public class MainmenuApi : MonoBehaviour
     {
         if (volume.profile.TryGet(out chromatic))
         {
+            Debug.Log("Ω√¿€");
             StartCoroutine(FadeChromaticAberration());
         }
         pressStartButton.gameObject.SetActive(false);
+        startButton.gameObject.SetActive(false);
         title.transform.DOMove(titlePos.position, moveButtonDuration).SetEase(moveEase);
         StartCoroutine(ShowButtonsSequentially());
     }

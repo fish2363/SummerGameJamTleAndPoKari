@@ -373,3 +373,4 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
+  bombParticle: {fileID: 1536075204270727783, guid: c8c89f8e7e8e0934c81c42fdd6c482c0, type: 3}

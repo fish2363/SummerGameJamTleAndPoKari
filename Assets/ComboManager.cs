@@ -42,7 +42,9 @@ public class ComboManager : MonoBehaviour
             ++multiple;
         ScoreManager.Instance.Score(1 * multiple);
         ComboCount comboCount = Instantiate(comboPrefab,parent.position,Quaternion.identity);
-        comboCount.SetText($"{COMBO_CNT}",$"{multiple}");
+        Debug.Log($"{comboCount.transform.position}");
+        comboCount.SetText($"{COMBO_CNT}",$"x{multiple}");
+        comboCount.Animate(COMBO_CNT);
     }
 
     public void ResetCombo()

@@ -86,7 +86,6 @@ namespace Member.CUH.Code.Enemies
         private void HandleEnemyDead()
         {
             _currentEnemyCount--;
-            ScoreManager.Instance.Score(1);
             if (ScoreManager.Instance.CurrentScore >= nextEnemyCountUpScore)
             {
                 nextEnemyCountUpScore += (int)(nextEnemyCountUpScore * 1.5f);

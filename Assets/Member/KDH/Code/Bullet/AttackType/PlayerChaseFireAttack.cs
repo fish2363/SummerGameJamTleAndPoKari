@@ -12,7 +12,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private float bombDelay;
         [SerializeField] private float bombRadius = 2f;
         [SerializeField] private LayerMask whatIsTarget;
-        
+        [SerializeField] private ParticleSystem bombParticle;
+
         private Tween _tween;
         
         private void Update()
@@ -35,6 +36,7 @@ namespace Member.KDH.Code.Bullet.AttackType
                 {
                     _target.ApplyDamage(1);
                 }
+                Instantiate(bombParticle, _enemy.transform.position, Quaternion.identity);
             }).OnComplete(() => _enemy.KillSelf());
         }
 

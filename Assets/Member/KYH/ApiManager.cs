@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class ApiManager : MonoBehaviour
 {
-
+    public static ApiManager Instance;
     [DllImport("user32.dll")] private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     [DllImport("user32.dll")] private static extern IntPtr GetActiveWindow();
     [DllImport("user32.dll")] private static extern bool GetCursorPos(out POINT lpPoint);
@@ -146,8 +146,14 @@ public class ApiManager : MonoBehaviour
     private bool isStart;
     private int randIdx;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
+        
         camera = Camera.main;
         hWnd = GetActiveWindow();
 
@@ -193,7 +199,7 @@ public class ApiManager : MonoBehaviour
         if (backSlider.value > gageSlider.value)
         {
             DOTween.Sequence()
-                .AppendInterval(0.2f)
+                .AppendInterval(0.5f)
                 .Append(backSlider.DOValue(_currentTime, 0.5f).SetEase(Ease.OutCubic));
         }
         else if (backSlider.value < gageSlider.value)
@@ -205,22 +211,11 @@ public class ApiManager : MonoBehaviour
     public void MinusGageValue(int value)
     {
         _currentTime -= value;
-        ShakeCamera();
     }
     [Header("api 게이지 흔들리는 시간")]
-    public float gageShakeDuration = 0.3f;
+    public float gageShakeDuration = 0.1f;
     [Header("api 게이지 흔들림 강도")]
-    public float gageShakeStrength = 0.3f;
-
-    private Vector3 originalPos;
-    public void ShakeCamera()
-    {
-        Camera.main.transform.localPosition = originalPos; // 혹시 이전 흔들림에서 안 돌아왔으면 리셋
-
-        Camera.main.transform
-            .DOShakePosition(gageShakeDuration, gageShakeStrength, vibrato: 10, randomness: 90, snapping: false, fadeOut: true)
-            .OnComplete(() => Camera.main.transform.localPosition = originalPos); // 흔들고 난 뒤 원위치 보정
-    }
+    public float gageShakeStrength = 0.1f;
 
     private IEnumerator OverClockAlimRoutine()
     {

@@ -825,7 +825,7 @@ RectTransform:
   m_GameObject: {fileID: 3220298724963660168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.809, y: 2.809, z: 2.809}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3418200557582002868}
@@ -1675,6 +1675,10 @@ MonoBehaviour:
   _masterSlider: {fileID: 551098660484265282}
   _bgmSlider: {fileID: 1285073668219033578}
   _sfxSlider: {fileID: 7954365684756122497}
+  escMenuOpenSound:
+    ID: 1073741845
+    _sourceAsset: {fileID: 11400000, guid: 56e3759e7ea9dfb4096dcdb0215017d9, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4987093281122349317}
 --- !u!1 &5120223468914985095
 GameObject:
   m_ObjectHideFlags: 0

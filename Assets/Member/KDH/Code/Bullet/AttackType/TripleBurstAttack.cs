@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Ami.BroAudio;
 using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private float _bulletSpeed = 3.5f;
         [SerializeField] private bool _useFixedDirection = false;
         [SerializeField] private bool _enableDebugLogs = true;
+        [SerializeField] private SoundID[] enemyAttackSounds;
         
         private enum AttackState
         {
@@ -421,6 +423,8 @@ namespace Member.KDH.Code.Bullet.AttackType
             try
             {
                 bullet.transform.position = transform.position;
+                int i = Random.Range(0, enemyAttackSounds.Length);
+                enemyAttackSounds[i].Play();
                 bullet.Fire(direction, _bulletSpeed);
                 return true;
             }

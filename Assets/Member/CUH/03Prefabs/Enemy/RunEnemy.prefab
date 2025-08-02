@@ -49,6 +49,13 @@ MonoBehaviour:
   _bulletSpeed: 6
   _predictionTime: 1
   _drawPredictionGizmo: 1
+  enemyAttackSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 179755478703821359}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 179755478703821359}
 --- !u!1 &632995989314292947
 GameObject:
   m_ObjectHideFlags: 0

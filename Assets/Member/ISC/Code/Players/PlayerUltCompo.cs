@@ -1,11 +1,13 @@
 ﻿using System;
+using Ami.BroAudio;
 using Member.CUH.Code.Entities;
 using Member.KDH.Code.Bullet;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Member.ISC.Code.Players
 {
-    public class PlayerUltiCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
+    public class PlayerUltCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
         [SerializeField] private LayerMask whatIsBullet;
         
@@ -13,6 +15,10 @@ namespace Member.ISC.Code.Players
         [SerializeField] private float ultRange;
         
         [SerializeField] private ParticleSystem parryParticle;
+
+        [SerializeField] private SoundID ultSound;
+        [SerializeField] private ParticleSystem ultChargeParticle;
+        [SerializeField] private ParticleSystem ultUseParticle;
         
         private Player _player;
 
@@ -42,7 +48,13 @@ namespace Member.ISC.Code.Players
         private void HandleUltPressed()
         {
             if (CanUlt)
+            {
+                ParticleSystem p = Instantiate(ultUseParticle, transform.position, Quaternion.identity);
+                float size = ultRange + 1;
+                p.gameObject.transform.localScale = new Vector3(size, size, size);
+                p.Play();
                 AllReflect();
+            }
 
         }
 
@@ -52,6 +64,7 @@ namespace Member.ISC.Code.Players
 
             if (c.Length > 0)
             {
+                ultSound.Play();
                 foreach (Collider2D item in c)
                 {
                     Bullet b = item.gameObject.GetComponent<Bullet>();
@@ -74,9 +87,13 @@ namespace Member.ISC.Code.Players
                 _idx = 1;
                 _currentUltCombo = ultCombo;
             }
+            if (CanUlt) return;
+            
             
             if (ComboManager.COMBO_CNT >= _currentUltCombo)
             {
+                ParticleSystem p = Instantiate(ultChargeParticle, transform.position, Quaternion.identity);
+                p.Play();
                 _ultNum++;
                 if (_ultNum > 1)
                     _ultNum = 1;

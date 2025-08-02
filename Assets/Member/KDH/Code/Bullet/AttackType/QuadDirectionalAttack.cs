@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Combat.Enemies;
+﻿using Ami.BroAudio;
+using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private float _bulletSpeed = 1f; // 탄환 속도
         [SerializeField] private float _rotationStep = 45f; // 회전 각도 (도) - 4방향이므로 45도
         [SerializeField] private float _initialAngle = 0f; // 시작 각도 (도)
-
+        [SerializeField] private SoundID[] enemyAttackSounds;
+        
         private float _lastAttackTime;
         private float _currentAngle; // 현재 발사 각도
         
@@ -42,6 +44,8 @@ namespace Member.KDH.Code.Bullet.AttackType
                 return;
             }
             
+            int idx = Random.Range(0, enemyAttackSounds.Length); 
+            enemyAttackSounds[idx].Play();
             for (int i = 0; i < 4; i++)
             {
                 float shootAngle = _currentAngle + (i * 90f);

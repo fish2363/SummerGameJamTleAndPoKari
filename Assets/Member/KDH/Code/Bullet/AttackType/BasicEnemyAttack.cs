@@ -1,4 +1,5 @@
 ﻿using System;
+using Ami.BroAudio;
 using DG.Tweening;
 using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
@@ -12,7 +13,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private float bombRadius = 2f;
         [SerializeField] private LayerMask whatIsTarget;
         [SerializeField] private ParticleSystem bombParticle;
-
+        [SerializeField] private SoundID explosionSound;
+        
         private Tween _tween;
         
         public override void Initialize(Entity entity)
@@ -43,6 +45,7 @@ namespace Member.KDH.Code.Bullet.AttackType
                     {
                         _target.ApplyDamage(1);
                     }
+                    explosionSound.Play();
                     Instantiate(bombParticle,_enemy.transform.position,Quaternion.identity);
                     }).OnComplete(() => _enemy.KillSelf());
                 }

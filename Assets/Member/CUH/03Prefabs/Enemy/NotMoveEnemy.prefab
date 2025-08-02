@@ -47,7 +47,7 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 3
   _bulletCount: 8
-  _bulletSpeed: 1
+  _bulletSpeed: 1.3
   enemyAttackSounds:
   - ID: 1073741857
     _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}

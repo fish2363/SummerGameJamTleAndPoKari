@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 100
   attackCooldown: 1
-  _bulletSpeed: 1.5
+  _bulletSpeed: 2
   enemyAttackSounds:
   - ID: 1073741857
     _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}

@@ -27,6 +27,7 @@ public class StageChangeManager : MonoBehaviour
     [SerializeField] private Image gameOverUI;
 
     [SerializeField] private SoundID inGameMusic;
+    [SerializeField] private SoundID deadSound;
 
     [Header("애니메이션 시간")]
     public float duration = 0.5f;
@@ -61,6 +62,7 @@ public class StageChangeManager : MonoBehaviour
         ApiManager.Instance.ShakeScreen();
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1f;
+        deadSound.Play();
         for (int i = 0; i < gameOverPanel.Length; i++)
             gameOverPanel[i].rectTransform.DOAnchorPos(Vector2.zero, duration).SetEase(Ease.InOutQuad).WaitForCompletion();
         gameUI.DOFade(0f, 0.5f);

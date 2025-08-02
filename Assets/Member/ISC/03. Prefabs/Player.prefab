@@ -30971,5 +30971,5 @@ MonoBehaviour:
     ID: 1073741860
     _sourceAsset: {fileID: 11400000, guid: 3c7522408ffe50e45b7c3db91993789d, type: 2}
     <DebugObject>k__BackingField: {fileID: 8362294121049099004}
-  ultChargeParticle: {fileID: 1753634120830211247, guid: 3475d3d1a1a35de448fe9571f8210a8e, type: 3}
-  ultUseParticle: {fileID: 9141218219640777296, guid: a90b5c18fde584a43b01e1c10c14ac68, type: 3}
+  ultChargeParticle: {fileID: 6972132711046770393, guid: 3475d3d1a1a35de448fe9571f8210a8e, type: 3}
+  ultUseParticle: {fileID: 637183579612120758, guid: a90b5c18fde584a43b01e1c10c14ac68, type: 3}

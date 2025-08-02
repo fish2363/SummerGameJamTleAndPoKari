@@ -49,7 +49,10 @@ namespace Member.ISC.Code.Players
         {
             if (CanUlt)
             {
-                Instantiate(ultUseParticle, transform.position, Quaternion.identity);
+                ParticleSystem p = Instantiate(ultUseParticle, transform.position, Quaternion.identity);
+                float size = ultRange + 1;
+                p.gameObject.transform.localScale = new Vector3(size, size, size);
+                p.Play();
                 AllReflect();
             }
 
@@ -61,6 +64,7 @@ namespace Member.ISC.Code.Players
 
             if (c.Length > 0)
             {
+                ultSound.Play();
                 foreach (Collider2D item in c)
                 {
                     Bullet b = item.gameObject.GetComponent<Bullet>();
@@ -83,10 +87,13 @@ namespace Member.ISC.Code.Players
                 _idx = 1;
                 _currentUltCombo = ultCombo;
             }
+            if (CanUlt) return;
+            
             
             if (ComboManager.COMBO_CNT >= _currentUltCombo)
             {
-                Instantiate(ultChargeParticle, transform.position, Quaternion.identity);
+                ParticleSystem p = Instantiate(ultChargeParticle, transform.position, Quaternion.identity);
+                p.Play();
                 _ultNum++;
                 if (_ultNum > 1)
                     _ultNum = 1;

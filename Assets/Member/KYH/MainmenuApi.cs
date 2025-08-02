@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Leaderboard.Scripts.Menu;
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
@@ -46,6 +47,9 @@ public class MainmenuApi : MonoBehaviour
     private Vector2 targetPos;
     public GameObject virusBackGround;
     public CanvasGroup tutorialCanvas;
+    public CanvasGroup gameCanvas;
+    public CanvasGroup LBCanvas;
+    public CanvasGroup otherCanvas;
 
     public Button[] buttons;
     public Transform[] buttonPos;
@@ -60,7 +64,7 @@ public class MainmenuApi : MonoBehaviour
             windowSize = new Vector2(rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
-        string cutScene = PlayerPrefs.GetString("SKIP","NO");
+        string cutScene = PlayerPrefs.GetString("SKIP", "NO");
         if (cutScene == "NO")
         {
             PlayerPrefs.SetString("SKIP", "YES");
@@ -72,6 +76,8 @@ public class MainmenuApi : MonoBehaviour
         }
         else
         {
+            MenuManager manager = FindAnyObjectByType<MenuManager>();
+            manager.ClicktoStartClientService();
             virusBackGround.SetActive(true);
             fakeTitle.SetActive(true);
             ClickStart();
@@ -172,10 +178,77 @@ public class MainmenuApi : MonoBehaviour
     }
     public void Tutorial()
     {
-        tutorialCanvas.DOFade(1f,0.5f);
+        tutorialCanvas.DOFade(1f, 0.5f);
         tutorialCanvas.blocksRaycasts = true;
         tutorialCanvas.interactable = true;
+        AllGameUISetActive(false);
+
+        LBSet();
     }
+
+    private void LBSet()
+    {
+        LBCanvas.DOFade(0f, 0.5f);
+        LBCanvas.blocksRaycasts = false;
+        LBCanvas.interactable = false;
+    }
+
+    public void AllGameUISetActive(bool isValue)
+    {
+        int power = isValue ? 1 : 0;
+        gameCanvas.DOFade(power, 0.5f);
+        gameCanvas.blocksRaycasts = isValue;
+        gameCanvas.interactable = isValue;
+        otherCanvas.DOFade(power, 0.5f);
+        otherCanvas.blocksRaycasts = isValue;
+        otherCanvas.interactable = isValue;
+        
+    }
+    private bool isOn=true;
+    public CanvasGroup esc;
+    public void AllGameUISetActiveESC()
+    {
+        isOn = !isOn;
+        int power = isOn ? 1 : 0;
+        gameCanvas.DOFade(power, 0.5f);
+        gameCanvas.blocksRaycasts = isOn;
+        gameCanvas.interactable = isOn;
+        otherCanvas.DOFade(power, 0.5f);
+        otherCanvas.blocksRaycasts = isOn;
+        otherCanvas.interactable = isOn;
+        lbButton.gameObject.SetActive(isOn);
+
+        int powerSS = isOn ? 0 : 1;
+        esc.DOFade(powerSS, 0.5f);
+        esc.blocksRaycasts = !isOn;
+        esc.interactable = !isOn;
+    }
+    public bool isLB;
+    public void AllGameUISetActive()
+    {
+        isLB = !isLB;
+        gameCanvas.DOFade(0f, 0.5f);
+        gameCanvas.blocksRaycasts = isLB;
+        gameCanvas.interactable = isLB;
+        otherCanvas.DOFade(0f, 0.5f);
+        otherCanvas.blocksRaycasts =isLB;
+        otherCanvas.interactable = isLB;
+        lbButton.SetActive(!isLB);
+    }
+    public GameObject lbButton;
+
+    public void TutorialCancel()
+    {
+        tutorialCanvas.DOFade(0f, 0.5f);
+        tutorialCanvas.blocksRaycasts =false;
+        tutorialCanvas.interactable = false;
+
+        AllGameUISetActive(true);
+        LBCanvas.DOFade(1f, 0.5f);
+        LBCanvas.blocksRaycasts = true;
+        LBCanvas.interactable = true;
+    }
+
     public void OnClickQuit()
     {
 #if UNITY_EDITOR

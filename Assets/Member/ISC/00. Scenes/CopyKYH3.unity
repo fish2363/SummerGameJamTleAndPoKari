@@ -1659,6 +1659,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &526722716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4415540092671814856, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+  m_PrefabInstance: {fileID: 5969853577800342103}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &528477861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2502,7 +2507,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: KYH
+          m_StringArgument: CopyKYH3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &947592605
@@ -11412,6 +11417,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2631292215645253660, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: hurtSound.ID
+      value: 1073741855
+      objectReference: {fileID: 0}
     - target: {fileID: 2802834118922149054, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12121,10 +12130,14 @@ MonoBehaviour:
   timeText: {fileID: 1286593999}
   gameOverUI: {fileID: 913309239}
   inGameMusic:
-    ID: 0
-    _sourceAsset: {fileID: 0}
+    ID: 268435458
+    _sourceAsset: {fileID: 11400000, guid: 1d89875783bc88e4199732d302f2b4b3, type: 2}
     <DebugObject>k__BackingField: {fileID: 2119474204}
-  fakeHeart: {fileID: 543471894}
+  deadSound:
+    ID: 1073741850
+    _sourceAsset: {fileID: 11400000, guid: 3c7522408ffe50e45b7c3db91993789d, type: 2}
+    <DebugObject>k__BackingField: {fileID: 2119474204}
+  fakeHeart: {fileID: 0}
   duration: 0.5
 --- !u!199 &19966898793502996
 ParticleSystemRenderer:
@@ -36833,6 +36846,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 1509929337}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
       propertyPath: backSlider
       value: 
       objectReference: {fileID: 0}
@@ -36860,6 +36877,14 @@ PrefabInstance:
       propertyPath: speedChangeDuration
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: cameraRotationSound.<DebugObject>k__BackingField
+      value: 
+      objectReference: {fileID: 526722716}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: timeAccelerationSound.<DebugObject>k__BackingField
+      value: 
+      objectReference: {fileID: 526722716}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

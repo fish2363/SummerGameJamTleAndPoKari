@@ -15,7 +15,7 @@ namespace Leaderboard.Scripts.Menu
     {
         [Header("리더보드 설정")]
         [SerializeField] private int playersPerPage = 25;
-        [SerializeField] private string leaderboardId = "SGJT";
+        [SerializeField] private string leaderboardId = "LeaderboardFish";
         
         [Header("UI 요소")]
         [SerializeField] private LeaderboardsPlayerItem playerItemPrefab = null;

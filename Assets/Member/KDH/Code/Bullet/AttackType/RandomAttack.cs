@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Ami.BroAudio;
 using DG.Tweening;
 using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
@@ -16,7 +17,8 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private int _randomSeed = 12345; // 랜덤 시드 (재현 가능한 패턴용)
         [SerializeField] private bool _enableDebugLogs = true; // 디버그 로그 활성화 여부
         [SerializeField] private ParticleSystem teleportParticle;
-
+        [SerializeField] private SoundID[] enemyAttackSounds;
+        
         public float shakeDuration = 0.2f;
         public float shrinkDuration = 0.15f;
         public float scaleFactor = 0.6f;
@@ -173,6 +175,7 @@ namespace Member.KDH.Code.Bullet.AttackType
 
         private IEnumerator ShoutCoroutine(int successfulShots)
         {
+            
             for (int i = 0; i < _bulletsPerAttack; i++)
             {
                 try
@@ -193,7 +196,8 @@ namespace Member.KDH.Code.Bullet.AttackType
                     }
 
                     bullet.transform.position = transform.position;
-
+                    int idx = Random.Range(0, enemyAttackSounds.Length); 
+                    enemyAttackSounds[idx].Play();
                     bullet.Fire(randomDirection, _bulletSpeed);
                         
                     successfulShots++;

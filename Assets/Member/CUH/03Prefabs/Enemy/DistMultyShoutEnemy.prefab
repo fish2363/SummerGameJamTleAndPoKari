@@ -459,3 +459,10 @@ MonoBehaviour:
   attackCooldown: 1.75
   _bulletSpeed: 1.5
   _spreadAngle: 15
+  enemyAttackSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8715216442869777706}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8715216442869777706}

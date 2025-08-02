@@ -52,11 +52,6 @@ public class StageChangeManager : MonoBehaviour
         inGameMusic.Play();
     }
 
-    private void OnDestroy()
-    {
-        BroAudio.Stop(inGameMusic);
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I)) OpenPanels();

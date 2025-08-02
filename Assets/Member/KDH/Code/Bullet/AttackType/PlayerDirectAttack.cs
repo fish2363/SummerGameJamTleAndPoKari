@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Entities;
+﻿using Ami.BroAudio;
+using Member.CUH.Code.Entities;
 using Member.KDH.Code.Bullet;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Member.CUH.Code.Combat.Enemies
     {
         [Header("플레이어 방향 공격 설정")]
         [SerializeField] private float _bulletSpeed = 1f;   // 탄환 속도
+        [SerializeField] private SoundID[] enemyAttackSounds;
         
         private Transform _playerTransform;
         private float _lastAttackTime;
@@ -56,6 +58,8 @@ namespace Member.CUH.Code.Combat.Enemies
             
             Bullet bullet = BulletPool.Instance.GetBullet();
             bullet.transform.position = transform.position;
+            int i = Random.Range(0, enemyAttackSounds.Length);
+            enemyAttackSounds[i].Play();
             bullet.Fire(direction, _bulletSpeed);
             
             _lastAttackTime = Time.time;

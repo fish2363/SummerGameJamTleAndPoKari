@@ -307,6 +307,13 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 1
   _bulletSpeed: 1.5
+  enemyAttackSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 6442433777319330690}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 6442433777319330690}
 --- !u!1 &7042904345211055780
 GameObject:
   m_ObjectHideFlags: 0

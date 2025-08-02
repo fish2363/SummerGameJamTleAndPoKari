@@ -4,10 +4,12 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using Ami.BroAudio;
 using UnityEngine;
 using TMPro;
 using Member.CUH.Code.Enemies;
 using UnityEngine.UI;
+using Member.KDH.Code.Bullet;
 
 public class ApiManager : MonoBehaviour
 {
@@ -111,10 +113,6 @@ public class ApiManager : MonoBehaviour
     [Header("_____[속도 변경 이벤트]_____")]
     [Header("[속도 변경 지속시간]")]
     public float speedChangeDuration = 2f;
-    [Header("[감소 이벤트 정도 ( 1 / n )]")]
-    public int speedDown = 2;
-    [Header("[증가 이벤트 정도 ( 1 * n )]")]
-    public int speedUp = 2;
     [Header("경고 메세지")]
     public string alimEventText_upSpeed;
     [Header("경고 메세지")]
@@ -142,6 +140,10 @@ public class ApiManager : MonoBehaviour
     [Header("경고 메세지")]
     public string alimEventText_Minimalize;
 
+    [SerializeField] private SoundID warningSound;
+    [SerializeField] private SoundID slowSound;
+    [SerializeField] private SoundID screenRunningSound;
+    
     private bool isStart;
     private int randIdx;
     public bool IsBoss { get; set; }
@@ -228,13 +230,14 @@ public class ApiManager : MonoBehaviour
         if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
             overClockText.SetActive(true);
 
-        randIdx = UnityEngine.Random.Range(0, 8);
+        randIdx = UnityEngine.Random.Range(6, 8);
         UnityEngine.Debug.Log(randIdx);
         ChangeTextEvent(randIdx);
 
         alim.transform.localScale = new Vector3(1.620305f, 0f, 1f); // 아래서 시작
         alim.transform.DOScaleY(1.620305f, appearDuration).SetEase(easeType);
 
+        warningSound.Play();
         flashCoroutine = StartCoroutine(FlashRoutine());
     }
 
@@ -274,7 +277,7 @@ public class ApiManager : MonoBehaviour
     IEnumerator FlashRoutine()
     {
         yield return new WaitForSecondsRealtime(stopDuration);
-
+        
         float elapsed = 0f;
         bool visible = true;
         while (elapsed < totalDuration)
@@ -294,8 +297,7 @@ public class ApiManager : MonoBehaviour
     }
 
     public void ChooseEvent(int idx)
-    {
-
+    { 
         switch (idx)
         {
             case 0:
@@ -334,11 +336,11 @@ public class ApiManager : MonoBehaviour
                 break;
             case 6:
                 //속도 낮추기
-                StartCoroutine(SetSpeed(speedDown));
+                StartCoroutine(SetSpeed(-1));
                 break;
             case 7:
                 //속도 올리기
-                StartCoroutine(SetSpeed(speedUp));
+                StartCoroutine(SetSpeed(1));
                 break;
         }
         overClockText.SetActive(false);
@@ -346,10 +348,10 @@ public class ApiManager : MonoBehaviour
 
     private void RotateCamera()
     {
-        StartCoroutine(ShakeCoroutine());
+        StartCoroutine(RotateAndShakeRoutine());
     }
 
-    IEnumerator ShakeCoroutine()
+    IEnumerator RotateAndShakeRoutine()
     {
         GetWindowRect(hWnd, out RECT rect);
         int width = rect.Right - rect.Left;
@@ -378,6 +380,34 @@ public class ApiManager : MonoBehaviour
         });
     }
 
+    public void ShakeScreen()
+    {
+        StartCoroutine(ScreenShakeRoutine());
+    }
+
+    IEnumerator ScreenShakeRoutine()
+    {
+        GetWindowRect(hWnd, out RECT rect);
+        int width = rect.Right - rect.Left;
+        int height = rect.Bottom - rect.Top;
+
+        float timer = 0f;
+        Vector2 originalPos = new Vector2(rect.Left, rect.Top);
+
+        while (timer < shakeDuration)
+        {
+            float offsetX = UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+            float offsetY = UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+
+            MoveWindow(hWnd, (int)(originalPos.x + offsetX), (int)(originalPos.y + offsetY), width, height, true);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // 원래 위치로 복구
+        MoveWindow(hWnd, (int)originalPos.x, (int)originalPos.y, width, height, true);
+    }
+
     private void ShowError()
     {
         //int rand = UnityEngine.Random.Range(0,errorMassaege.Length);
@@ -389,12 +419,16 @@ public class ApiManager : MonoBehaviour
     public IEnumerator SetSpeed(int value)
     {
         if (value > 0)
-            Time.timeScale = value;
+            Bullet.isFaster = true;
         else
-            Time.timeScale = 1 / Mathf.Abs(value);
+        {
+            slowSound.Play();
+            Bullet.isSlowy = true;
+        }
 
         yield return new WaitForSecondsRealtime(speedChangeDuration);
-        Time.timeScale = 1f;
+        Bullet.isFaster= false;
+        Bullet.isSlowy = false;
         isInvokingEvent = false;
     }
 
@@ -418,6 +452,7 @@ public class ApiManager : MonoBehaviour
 
             if (dist < dodgeRadius)
             {
+                screenRunningSound.Play();
                 // 도망갈 방향은 마우스에서 멀어지는 방향
                 Vector2 dir = (currentPos + windowSize / 2f - mousePos).normalized;
                 Vector2 newTarget = currentPos + dir * dodgeRadius;

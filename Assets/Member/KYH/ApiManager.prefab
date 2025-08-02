@@ -333,8 +333,6 @@ MonoBehaviour:
   alimEventText_runawayScreen: "\uD654\uBA74 \uBC14\uC774\uB7EC\uC2A4 \uAC10\uC5FC
     \uBC1C\uC0DD"
   speedChangeDuration: 0
-  speedDown: 2
-  speedUp: 2
   alimEventText_upSpeed: "\uC2DC\uAC04 \uAC00\uC18D \uC624\uB958 \uBC1C\uC0DD"
   alimEventText_downSpeed: "\uC2DC\uAC04 \uC9C0\uC5F0 \uC624\uB958 \uBC1C\uC0DD"
   rotationEase: 9
@@ -345,6 +343,22 @@ MonoBehaviour:
   fileName: ItsMine
   alimEventText_photo: "\uD30C\uC77C \uC624\uB958 \uBC1C"
   alimEventText_Minimalize: "\uAC8C\uC784 \uD06C\uB798\uC2DC \uBC1C\uC0DD"
+  warningSound:
+    ID: 1073741848
+    _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4415540092671814856}
+  slowSound:
+    ID: 1073741844
+    _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4415540092671814856}
+  screenRunningSound:
+    ID: 1073741847
+    _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4415540092671814856}
+  foregroundImage: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  _warningText: {fileID: 0}
+  delaySpeed: 0.5
 --- !u!1 &5116387707894639992
 GameObject:
   m_ObjectHideFlags: 0

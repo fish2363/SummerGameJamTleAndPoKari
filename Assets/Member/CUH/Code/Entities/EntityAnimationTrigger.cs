@@ -8,6 +8,7 @@ namespace Member.CUH.Code.Entities
         public Action OnAnimationEndTrigger;
         public event Action<bool> OnDamageToggleTrigger;
         public Action OnAttackTrigger;
+        public Action OnPlaySoundTrigger;
         
         private Entity _entity;
 
@@ -23,5 +24,7 @@ namespace Member.CUH.Code.Entities
         private void StartDamageCast() => OnDamageToggleTrigger?.Invoke(true);
         private void StopDamageCast() => OnDamageToggleTrigger?.Invoke(false);
         private void AttactCall() => OnAttackTrigger?.Invoke();
+        
+        private void PlaySound() => OnPlaySoundTrigger?.Invoke();
     }
 }

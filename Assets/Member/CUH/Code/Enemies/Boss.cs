@@ -20,6 +20,7 @@ namespace Member.CUH.Code.Enemies
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
             OnDeadEvent.AddListener(HandleDeadEvent);
+            OnHitEvent.AddListener(HandleHitEvent);
         }
         
         public void SetTarget(IDamageable target)
@@ -28,10 +29,16 @@ namespace Member.CUH.Code.Enemies
             AfterInitialize();
         }
         
+        private void HandleHitEvent()
+        {
+            ComboManager.Instance.PlusCombo(transform);
+        }
+        
         private void HandleDeadEvent()
         {
             if(IsDead) return;
             IsDead = true;
+            StageChangeManager.Instance.ClosePanels();
             Destroy(gameObject);
         }
         

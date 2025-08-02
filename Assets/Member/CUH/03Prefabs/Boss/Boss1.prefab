@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationString: ATTACK2
-  fireCount: 3
+  fireCount: 5
   fireDelay: 0.2
   bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
   bulletSpeed: 3

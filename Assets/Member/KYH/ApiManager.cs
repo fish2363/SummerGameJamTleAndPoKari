@@ -432,15 +432,7 @@ public class ApiManager : MonoBehaviour
     {
         if (volume.profile.TryGet(out colorAdjust))
         {
-            // 초기값 설정 (-76)
-            colorAdjust.postExposure.value = -76f;
-
-            // DOTween으로 서서히 0까지 증가 (2초 동안)
-            DOTween.To(() => colorAdjust.postExposure.value,
-                       x => colorAdjust.postExposure.value = x,
-                       0f, // 목표값
-                       2f  // 지속시간
-                      ).SetEase(Ease.OutCubic);
+            DOTween.To(() => colorAdjust.postExposure.value, x => colorAdjust.postExposure.value = x,-76f,2f).SetEase(Ease.OutCubic);
         }
 
         if (value > 0)
@@ -455,6 +447,7 @@ public class ApiManager : MonoBehaviour
         Bullet.isFaster= false;
         Bullet.isSlowy = false;
         isInvokingEvent = false;
+        DOTween.To(() => colorAdjust.postExposure.value, x => colorAdjust.postExposure.value = x, 0f, 0.2f).SetEase(Ease.OutCubic);
     }
 
     #region 창 움직이기

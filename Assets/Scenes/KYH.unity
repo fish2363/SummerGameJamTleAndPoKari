@@ -39701,6 +39701,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 664499905}
     - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: invokeCooltime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
       propertyPath: backgroundImage
       value: 
       objectReference: {fileID: 1934611999}

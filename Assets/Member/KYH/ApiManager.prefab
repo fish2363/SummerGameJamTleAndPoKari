@@ -332,7 +332,7 @@ MonoBehaviour:
   moveSpeed: 30
   alimEventText_runawayScreen: "\uD654\uBA74 \uBC14\uC774\uB7EC\uC2A4 \uAC10\uC5FC
     \uBC1C\uC0DD"
-  speedChangeDuration: 0
+  speedChangeDuration: 8
   volume: {fileID: 0}
   alimEventText_upSpeed: "\uC2DC\uAC04 \uAC00\uC18D \uC624\uB958 \uBC1C\uC0DD"
   alimEventText_downSpeed: "\uC2DC\uAC04 \uC9C0\uC5F0 \uC624\uB958 \uBC1C\uC0DD"
@@ -342,7 +342,7 @@ MonoBehaviour:
   shakeDuration: 0.5
   alimEventText_rotateCamera: "\uCE74\uBA54\uB77C \uC624\uB958 \uBC1C\uC0DD"
   fileName: ItsMine
-  alimEventText_photo: "\uD30C\uC77C \uC624\uB958 \uBC1C"
+  alimEventText_photo: "\uD30C\uC77C \uC624\uB958 \uBC1C\uC0DD"
   alimEventText_Minimalize: "\uAC8C\uC784 \uD06C\uB798\uC2DC \uBC1C\uC0DD"
   warningSound:
     ID: 1073741848

@@ -456,10 +456,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 1.5
+  attackCooldown: 2
   _burstCount: 3
-  _burstDelay: 0.35
-  _bulletSpeed: 1.75
+  _burstDelay: 0.5
+  _bulletSpeed: 2
   _useFixedDirection: 0
   _enableDebugLogs: 1
   enemyAttackSounds:

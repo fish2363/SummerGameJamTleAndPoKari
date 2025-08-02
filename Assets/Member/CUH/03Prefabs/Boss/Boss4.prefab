@@ -1136,6 +1136,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fec1d585d2f2f9045a0c83de1e4ebd4e, type: 2}
   - {fileID: 11400000, guid: 27a9937311da4494e96c3b16bb760c47, type: 2}
   - {fileID: 11400000, guid: 86fac480a52dbf34baf2fc9a2382bc65, type: 2}
+  deathEffect: {fileID: 0}
 --- !u!58 &7624281171329786726
 CircleCollider2D:
   m_ObjectHideFlags: 0

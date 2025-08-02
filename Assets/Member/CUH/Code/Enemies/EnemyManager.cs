@@ -17,6 +17,7 @@ namespace Member.CUH.Code.Enemies
         public UnityEvent OnBossStartEvent; 
         
         [field: SerializeField] public int OverClockEnemyCount { get; private set; }
+        [Header("보스 등장 웨이브(배수로 계소ㄱ 나오ㅁ)")]
         [SerializeField] private int bossCutWave;
         
         [SerializeField] private GameObject warningObject;

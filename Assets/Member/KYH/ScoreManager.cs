@@ -58,13 +58,5 @@ public class ScoreManager : MonoBehaviour
 
     }
 
-    public void SetHighScore()
-    {
-        int levelNum = CurrentScore;
-        scoreText.text = $"{levelNum}";
-        highScoreText.text = $"{PlayerPrefs.GetInt("score", levelNum)}";
-
-        if (levelNum > PlayerPrefs.GetInt("score", 0))
-            PlayerPrefs.SetInt("score", levelNum);
-    }
+    
 }

@@ -29,6 +29,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
                 laser.transform.localScale *= laserScale;
                 Vector3 targetPos = _targetPositions[Random.Range(0, _targetPositions.Length)];
                 laser.Shoot(targetPos, transform, laserScale);
+                
                 yield return new WaitForSeconds(waitTime);
                 FireBullet(targetPos);
                 Vector2 leftDir = RotateVector(targetPos, spreadAngle);

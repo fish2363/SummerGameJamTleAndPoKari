@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class StageChangeManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class StageChangeManager : MonoBehaviour
     [SerializeField] private Collider2D[] bigColli;
     [SerializeField] private Image[] gameOverPanel;
     [SerializeField] private CanvasGroup gameUI;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI timeText;
 
     private Vector2 leftOriginalPos;   // ½ÃÀÛ À§Ä¡ (´ÝÈù »óÅÂ)
     private Vector2 rightOriginalPos;
@@ -44,8 +48,20 @@ public class StageChangeManager : MonoBehaviour
 
     public void DeadEvent()
     {
+        timeText.text = $"{TimeManager.Instance.CurrentTime}".Substring(0,6);
+        SetHighScore();
         StartCoroutine(DeadRoutine());
     }
+    public void SetHighScore()
+    {
+        int levelNum = ScoreManager.Instance.CurrentScore;
+        scoreText.text = $"{levelNum}";
+        highScoreText.text = $"{PlayerPrefs.GetInt("score", levelNum)}";
+
+        if (levelNum > PlayerPrefs.GetInt("score", 0))
+            PlayerPrefs.SetInt("score", levelNum);
+    }
+
     private IEnumerator DeadRoutine()
     {
         Time.timeScale = 0f;

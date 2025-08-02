@@ -12273,7 +12273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 154879324}
   highScoreText: {fileID: 1127763681}
-  scoreChange: 0
+  scoreChange: 1
   <CurrentScore>k__BackingField: 0
 --- !u!1 &1561728273
 GameObject:
@@ -13111,7 +13111,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  comboBonusLine: 3
+  comboBonusLine: 10
   comboBreakTime: 5
 --- !u!1 &1915382416
 GameObject:
@@ -13819,6 +13819,10 @@ PrefabInstance:
     - target: {fileID: 3503589696958998699, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: moveSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: ultCombo
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_AnchorMax.x

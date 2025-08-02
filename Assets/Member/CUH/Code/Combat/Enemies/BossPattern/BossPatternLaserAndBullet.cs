@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Ami.BroAudio;
 using Member.KDH.Code.Bullet;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
         
         public override void UsePattern()
         {
+            base.UsePattern();
             StartCoroutine(LaserAndBulletAttack());
         }
 
@@ -29,7 +31,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
                 laser.transform.localScale *= laserScale;
                 Vector3 targetPos = _targetPositions[Random.Range(0, _targetPositions.Length)];
                 laser.Shoot(targetPos, transform, laserScale);
-                
+                sound.Play();
                 yield return new WaitForSeconds(waitTime);
                 FireBullet(targetPos);
                 Vector2 leftDir = RotateVector(targetPos, spreadAngle);

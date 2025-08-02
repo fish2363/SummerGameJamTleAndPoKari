@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Ami.BroAudio;
 using UnityEngine;
 
 namespace Member.CUH.Code.Combat.Enemies.BossPattern
@@ -9,7 +10,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
 
         public override void UsePattern()
         {
-            if (_target == null) return;
+            base.UsePattern();
             StartCoroutine(FireLoop());
         }
 
@@ -18,6 +19,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
             for (int i = 0; i < fireCount; i++)
             {
                 FireTriple();
+                sound.Play();
                 yield return new WaitForSeconds(fireDelay);
             }
         }

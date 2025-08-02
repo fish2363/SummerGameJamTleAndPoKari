@@ -31,7 +31,7 @@ public class ESCManager : MonoBehaviour
         }
     }
 
-    private void HandleEscapeKey()
+    public void HandleEscapeKey()
     {
         if (isChoosePanelOn)
         {

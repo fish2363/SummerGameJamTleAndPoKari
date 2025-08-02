@@ -30,11 +30,12 @@ public class MainmenuApi : MonoBehaviour
     public struct RECT { public int Left, Top, Right, Bottom; }
 
     [SerializeField] private GameObject title;
+    [SerializeField] private GameObject fakeTitle;
     [SerializeField] private Transform titlePos;
     [SerializeField] private TMP_Text pressStartButton;
     [SerializeField] private Button startButton;
-    [SerializeField] private Button rankButton;
     [SerializeField] private Image startPanel;
+    [SerializeField] private GameObject[] glitchTexts;
 
     public Volume volume;
     private ChromaticAberration chromatic;
@@ -43,6 +44,8 @@ public class MainmenuApi : MonoBehaviour
     private Vector2 currentPos;
     private Vector2 windowSize;
     private Vector2 targetPos;
+    public GameObject virusBackGround;
+    public CanvasGroup tutorialCanvas;
 
     public Button[] buttons;
     public Transform[] buttonPos;
@@ -51,14 +54,28 @@ public class MainmenuApi : MonoBehaviour
     private void Awake()
     {
         hWnd = GetActiveWindow();
-
         if (GetWindowRect(hWnd, out RECT rect))
         {
             currentPos = new Vector2(rect.Left, rect.Top);
             windowSize = new Vector2(rect.Right - rect.Left, rect.Bottom - rect.Top);
         }
 
-        
+        string cutScene = PlayerPrefs.GetString("SKIP","NO");
+        if (cutScene == "NO")
+        {
+            PlayerPrefs.SetString("SKIP", "YES");
+            PlayerPrefs.Save();
+            for(int i=0;i<glitchTexts.Length;i++)
+            {
+                glitchTexts[i].gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            virusBackGround.SetActive(true);
+            fakeTitle.SetActive(true);
+            ClickStart();
+        }
     }
     public void Api()
     {
@@ -127,7 +144,6 @@ public class MainmenuApi : MonoBehaviour
             btn.enabled = true;
             yield return btn.transform.DOMove(targetPos.position, moveButtonDuration).SetEase(moveEase).WaitForCompletion();
         }
-        rankButton.gameObject.SetActive(true);
     }
     IEnumerator FadeChromaticAberration()
     {
@@ -154,7 +170,12 @@ public class MainmenuApi : MonoBehaviour
         );
         StartCoroutine(FadeChromaticAberration());
     }
-
+    public void Tutorial()
+    {
+        tutorialCanvas.DOFade(1f,0.5f);
+        tutorialCanvas.blocksRaycasts = true;
+        tutorialCanvas.interactable = true;
+    }
     public void OnClickQuit()
     {
 #if UNITY_EDITOR

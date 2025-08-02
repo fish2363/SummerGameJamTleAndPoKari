@@ -3543,9 +3543,9 @@ MonoBehaviour:
   lowerRankText: {fileID: 536162551}
   lowerNameText: {fileID: 2116115969}
   lowerScoreText: {fileID: 219802267}
-  currentScoreText: {fileID: 1792732403}
-  currentTimeText: {fileID: 1286593999}
-  highScoreText: {fileID: 1269383039}
+  currentScoreText: {fileID: 563547197}
+  currentTimeText: {fileID: 625802215}
+  highScoreText: {fileID: 1324549044}
   newRecordIndicator: {fileID: 976255595}
   mainMenuButton: {fileID: 1058472673}
   retryButton: {fileID: 947592604}

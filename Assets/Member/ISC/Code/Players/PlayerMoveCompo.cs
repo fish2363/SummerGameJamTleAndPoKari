@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using Ami.BroAudio;
 using DG.Tweening;
 using Member.CUH.Code.Entities;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace Member.ISC.Code.Players
         [field: SerializeField] public float DashCool { get; private set; }
         [SerializeField] private float dashPower;
 
+        [SerializeField] private SoundID dashSound;
+            
         public UnityEvent OnDashStart;
         public UnityEvent OnDashEnd;
         
@@ -124,6 +127,8 @@ namespace Member.ISC.Code.Players
                 _moveDir = _player.transform.right;
             
             SetAutoMovement(_moveDir);
+            
+            dashSound.Play();
             
             _tweener = DOVirtual.Float(moveSpeed, (moveSpeed*dashPower), dashDuration, (x) => moveSpeed = x).SetEase(Ease.OutSine)
                 .OnComplete(() =>

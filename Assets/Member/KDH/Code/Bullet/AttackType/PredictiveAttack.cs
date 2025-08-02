@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Combat.Enemies;
+﻿using Ami.BroAudio;
+using Member.CUH.Code.Combat.Enemies;
 using Member.CUH.Code.Entities;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Member.KDH.Code.Bullet.AttackType
         [SerializeField] private float _bulletSpeed = 3f; // 고속탄 속도 (기본보다 빠름)
         [SerializeField] private float _predictionTime = 1f; // 예측 시간 (초) - 얼마나 미래를 예측할지
         [SerializeField] private bool _drawPredictionGizmo = true; // 예측 지점 시각화 여부
+        [SerializeField] private SoundID[] enemyAttackSounds;
         
         private Transform _playerTransform;
         private Rigidbody2D _playerRigidbody;
@@ -86,6 +88,8 @@ namespace Member.KDH.Code.Bullet.AttackType
             
             bullet.transform.position = transform.position;
             
+            int idx = Random.Range(0, enemyAttackSounds.Length); 
+            enemyAttackSounds[idx].Play();
             bullet.Fire(shootDirection, _bulletSpeed);
             
             _lastAttackTime = Time.time;

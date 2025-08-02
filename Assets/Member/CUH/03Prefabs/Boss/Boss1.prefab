@@ -601,6 +601,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationString: ATTACK1
+  fireSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
   fireCount: 5
   fireDelay: 0.5
   bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
@@ -620,6 +627,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationString: ATTACK2
+  fireSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
   fireCount: 5
   fireDelay: 0.2
   bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
@@ -1139,6 +1153,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27a9937311da4494e96c3b16bb760c47, type: 2}
   - {fileID: 11400000, guid: 86fac480a52dbf34baf2fc9a2382bc65, type: 2}
   deathEffect: {fileID: 6652865553123604594, guid: a544e589dd8d86f4db7bd27e3c69f179, type: 3}
+  sprites: []
+  blinkColor: {r: 1, g: 1, b: 1, a: 1}
+  nomalColor: {r: 0.30980393, g: 0.9490196, b: 0.76862746, a: 1}
+  blinkTime: 0.15
 --- !u!58 &7624281171329786726
 CircleCollider2D:
   m_ObjectHideFlags: 0

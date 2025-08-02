@@ -49,6 +49,13 @@ MonoBehaviour:
   _bulletSpeed: 2
   _rotationStep: 30
   _initialAngle: 0
+  enemyAttackSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1500257750439106986}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 1500257750439106986}
 --- !u!1 &4185066465465977850
 GameObject:
   m_ObjectHideFlags: 0

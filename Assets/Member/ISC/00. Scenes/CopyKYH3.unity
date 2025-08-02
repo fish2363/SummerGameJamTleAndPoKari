@@ -10279,6 +10279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 154879324}
   highScoreText: {fileID: 1127763681}
+  scoreChange: 0
   <CurrentScore>k__BackingField: 0
 --- !u!1 &1561728273
 GameObject:
@@ -11429,6 +11430,18 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: ultCombo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: ultUseParticle
+      value: 
+      objectReference: {fileID: 637183579612120758, guid: a90b5c18fde584a43b01e1c10c14ac68, type: 3}
+    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
+      propertyPath: ultChargeParticle
+      value: 
+      objectReference: {fileID: 6972132711046770393, guid: 3475d3d1a1a35de448fe9571f8210a8e, type: 3}
     - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

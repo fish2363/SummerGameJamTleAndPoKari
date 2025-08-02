@@ -374,3 +374,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   bombParticle: {fileID: 1536075204270727783, guid: c8c89f8e7e8e0934c81c42fdd6c482c0, type: 3}
+  enemyAttackSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8493702255486933911}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8493702255486933911}
+  explosionSound:
+    ID: 1073741856
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8493702255486933911}

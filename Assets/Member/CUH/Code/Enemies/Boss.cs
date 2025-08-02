@@ -16,12 +16,18 @@ namespace Member.CUH.Code.Enemies
         [SerializeField] private ParticleSystem deathEffect;
         private EntityStateMachine _stateMachine;
         
+        [SerializeField] private SpriteRenderer[] sprites;
+        [SerializeField] private Color blinkColor;
+        [SerializeField] private Color nomalColor;
+        [SerializeField] private float blinkTime;
+        
         protected override void Awake()
         {
             base.Awake();
             _stateMachine = new EntityStateMachine(this, states);
             OnDeadEvent.AddListener(HandleDeadEvent);
             OnHitEvent.AddListener(HandleHitEvent);
+            sprites = GetComponentsInChildren<SpriteRenderer>();
         }
         
         public void SetTarget(IDamageable target)
@@ -32,9 +38,24 @@ namespace Member.CUH.Code.Enemies
         
         private void HandleHitEvent()
         {
+            if(IsDead) return;
             ComboManager.Instance.PlusCombo(transform);
+            StartCoroutine(BlinkFeedback());
         }
-        
+
+        private IEnumerator BlinkFeedback()
+        {
+            foreach (var sprite in sprites)
+            {
+                sprite.color = blinkColor;
+            }
+            yield return new WaitForSeconds(blinkTime);
+            foreach (var sprite in sprites)
+            {
+                sprite.color = nomalColor;
+            }
+        }
+
         private void HandleDeadEvent()
         {
             if(IsDead) return;

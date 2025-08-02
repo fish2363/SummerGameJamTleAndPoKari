@@ -463,6 +463,13 @@ MonoBehaviour:
   _randomSeed: 12345
   _enableDebugLogs: 1
   teleportParticle: {fileID: 2344171489837634120, guid: b14952d76dd00e14caaf0db33257ccf7, type: 3}
+  enemyAttackSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8087377834900694195}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 8087377834900694195}
   shakeDuration: 0.2
   shrinkDuration: 0.15
   scaleFactor: 0.6

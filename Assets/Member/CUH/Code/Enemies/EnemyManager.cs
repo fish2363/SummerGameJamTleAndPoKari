@@ -3,6 +3,7 @@ using System.Collections;
 using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Combat;
 using Member.ISC.Code.Players;
+using Member.KYH;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR;

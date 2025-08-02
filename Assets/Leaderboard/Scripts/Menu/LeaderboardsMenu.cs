@@ -9,15 +9,11 @@ using UnityEngine.UI;
 
 namespace Leaderboard.Scripts.Menu
 {
-    /// <summary>
-    /// 리더보드 UI를 관리하는 메뉴
-    /// 점수와 시간을 함께 표시
-    /// </summary>
     public class LeaderboardsMenu : Panel
     {
         [Header("리더보드 설정")]
         [SerializeField] private int playersPerPage = 25;
-        [SerializeField] private string leaderboardId = "2025SummerGameJam"; // 리더보드 ID
+        [SerializeField] private string leaderboardId = "2025SummerGameJam";
         
         [Header("UI 요소")]
         [SerializeField] private LeaderboardsPlayerItem playerItemPrefab = null;
@@ -26,25 +22,20 @@ namespace Leaderboard.Scripts.Menu
         [SerializeField] private Button nextButton = null;
         [SerializeField] private Button prevButton = null;
         [SerializeField] private Button closeButton = null;
-
-        [SerializeField] private Button refreshButton = null; // 새로고침 버튼 추가
+        [SerializeField] private Button refreshButton = null;
 
         private int currentPage = 1;
         private int totalPages = 0;
 
         public override void Initialize()
         {
-            if (IsInitialized)
-            {
-                return;
-            }
+            if (IsInitialized) return;
             
             ClearPlayersList();
             closeButton.onClick.AddListener(ClosePanel);
             nextButton.onClick.AddListener(NextPage);
             prevButton.onClick.AddListener(PrevPage);
             
-            // 새로고침 버튼
             if (refreshButton != null)
             {
                 refreshButton.onClick.AddListener(() => LoadPlayers(currentPage));
@@ -64,41 +55,7 @@ namespace Leaderboard.Scripts.Menu
             totalPages = 0;
             LoadPlayers(1);
         }
-    
-        /// <summary>
-        /// 게임 오버 시 점수 업로드 (외부에서 호출)
-        /// 메타데이터 없이 점수만 업로드
-        /// </summary>
-        public async void UploadScore(int highScore, float playTime)
-        {
-            try
-            {
-                Debug.Log($"리더보드에 점수 업로드 중... 점수: {highScore}");
-                
-                // 메타데이터 없이 점수만 업로드
-                var playerEntry = await LeaderboardsService.Instance.AddPlayerScoreAsync(
-                    leaderboardId, 
-                    highScore
-                );
-                
-                Debug.Log($"점수 업로드 성공! 순위: {playerEntry.Rank + 1}");
-                
-                // 업로드 후 리더보드 새로고침
-                if (IsOpen)
-                {
-                    LoadPlayers(currentPage);
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.LogError($"점수 업로드 실패: {exception.Message}");
-                ShowError("점수 업로드에 실패했습니다.");
-            }
-        }
 
-        /// <summary>
-        /// 리더보드 데이터 로드
-        /// </summary>
         private async void LoadPlayers(int page)
         {
             nextButton.interactable = false;
@@ -110,23 +67,18 @@ namespace Leaderboard.Scripts.Menu
                 {
                     Offset = (page - 1) * playersPerPage,
                     Limit = playersPerPage
-                    // IncludeMetadata 제거 - 메타데이터 사용하지 않음
                 };
                 
                 var scores = await LeaderboardsService.Instance.GetScoresAsync(leaderboardId, options);
                 
                 ClearPlayersList();
                 
-                // 각 플레이어 항목 생성
                 for (int i = 0; i < scores.Results.Count; i++)
                 {
                     LeaderboardsPlayerItem item = Instantiate(playerItemPrefab, playersContainer);
-                    
-                    // 메타데이터 없이 기본 초기화 사용
                     item.Initialize(scores.Results[i]);
                 }
                 
-                // 페이지 정보 업데이트
                 totalPages = Mathf.CeilToInt((float)scores.Total / (float)scores.Limit);
                 currentPage = page;
                 
@@ -138,20 +90,16 @@ namespace Leaderboard.Scripts.Menu
                 ShowError("리더보드를 불러올 수 없습니다.");
             }
             
-            // 페이지 텍스트 및 버튼 상태 업데이트
             pageText.text = currentPage.ToString() + "/" + totalPages.ToString();
             nextButton.interactable = currentPage < totalPages && totalPages > 1;
             prevButton.interactable = currentPage > 1 && totalPages > 1;
         }
 
-        /// <summary>
-        /// 다음 페이지로 이동
-        /// </summary>
         private void NextPage()
         {
             if (currentPage + 1 > totalPages)
             {
-                LoadPlayers(1); // 마지막 페이지에서 다음 누르면 첫 페이지로
+                LoadPlayers(1);
             }
             else
             {
@@ -159,14 +107,11 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        /// <summary>
-        /// 이전 페이지로 이동
-        /// </summary>
         private void PrevPage()
         {
             if (currentPage - 1 <= 0)
             {
-                LoadPlayers(totalPages); // 첫 페이지에서 이전 누르면 마지막 페이지로
+                LoadPlayers(totalPages);
             }
             else
             {
@@ -174,17 +119,11 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        /// <summary>
-        /// 패널 닫기
-        /// </summary>
         private void ClosePanel()
         {
             Close();
         }
 
-        /// <summary>
-        /// 플레이어 목록 초기화
-        /// </summary>
         private void ClearPlayersList()
         {
             LeaderboardsPlayerItem[] items = playersContainer.GetComponentsInChildren<LeaderboardsPlayerItem>();
@@ -197,9 +136,6 @@ namespace Leaderboard.Scripts.Menu
             }
         }
         
-        /// <summary>
-        /// 에러 메시지 표시
-        /// </summary>
         private void ShowError(string message)
         {
             ErrorMenu errorMenu = (ErrorMenu)PanelManager.GetSingleton("error");

@@ -174,7 +174,7 @@ public class MainmenuApi : MonoBehaviour
         startPanel.DOFade(1f, 1f).OnComplete(() =>
         { SceneManager.LoadScene("KYH"); }
         );
-        StartCoroutine(FadeChromaticAberration());
+       // StartCoroutine(FadeChromaticAberration());
     }
     public void Tutorial()
     {

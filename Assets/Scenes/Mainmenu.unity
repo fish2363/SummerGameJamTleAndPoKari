@@ -3116,7 +3116,7 @@ MonoBehaviour:
   id: leaderboards
   container: {fileID: 531990179}
   playersPerPage: 25
-  leaderboardId: 2025SummerGameJam
+  leaderboardId: LeaderboardFish
   playerItemPrefab: {fileID: 1064627416952517656, guid: 73aff720891edbd4fb565fc6965ef0ae, type: 3}
   playersContainer: {fileID: 275479589}
   pageText: {fileID: 1256633849}

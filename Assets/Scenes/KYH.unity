@@ -14844,12 +14844,12 @@ MonoBehaviour:
   timeText: {fileID: 0}
   gameOverUI: {fileID: 913309239}
   inGameMusic:
-    ID: 0
-    _sourceAsset: {fileID: 0}
+    ID: 268435458
+    _sourceAsset: {fileID: 11400000, guid: 1d89875783bc88e4199732d302f2b4b3, type: 2}
     <DebugObject>k__BackingField: {fileID: 2119474204}
   deadSound:
-    ID: 0
-    _sourceAsset: {fileID: 0}
+    ID: 1073741850
+    _sourceAsset: {fileID: 11400000, guid: 3c7522408ffe50e45b7c3db91993789d, type: 2}
     <DebugObject>k__BackingField: {fileID: 2119474204}
   fakeHeart: {fileID: 0}
   duration: 0.5

@@ -1,11 +1,13 @@
 ﻿using System;
+using Ami.BroAudio;
 using Member.CUH.Code.Entities;
 using Member.KDH.Code.Bullet;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Member.ISC.Code.Players
 {
-    public class PlayerUltiCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
+    public class PlayerUltCompo : MonoBehaviour, IEntityComponent, IAfterInitialize
     {
         [SerializeField] private LayerMask whatIsBullet;
         
@@ -13,6 +15,10 @@ namespace Member.ISC.Code.Players
         [SerializeField] private float ultRange;
         
         [SerializeField] private ParticleSystem parryParticle;
+
+        [SerializeField] private SoundID ultSound;
+        [SerializeField] private ParticleSystem ultChargeParticle;
+        [SerializeField] private ParticleSystem ultUseParticle;
         
         private Player _player;
 
@@ -42,7 +48,10 @@ namespace Member.ISC.Code.Players
         private void HandleUltPressed()
         {
             if (CanUlt)
+            {
+                Instantiate(ultUseParticle, transform.position, Quaternion.identity);
                 AllReflect();
+            }
 
         }
 
@@ -77,6 +86,7 @@ namespace Member.ISC.Code.Players
             
             if (ComboManager.COMBO_CNT >= _currentUltCombo)
             {
+                Instantiate(ultChargeParticle, transform.position, Quaternion.identity);
                 _ultNum++;
                 if (_ultNum > 1)
                     _ultNum = 1;

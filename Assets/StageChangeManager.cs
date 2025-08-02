@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
 using Ami.BroAudio;
+using Member.KYH;
 using UnityEngine.SceneManagement;
 using TMPro;
 

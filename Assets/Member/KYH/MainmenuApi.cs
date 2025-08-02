@@ -45,7 +45,7 @@ public class MainmenuApi : MonoBehaviour
     private Vector2 windowSize;
     private Vector2 targetPos;
     public GameObject virusBackGround;
-
+    public CanvasGroup tutorialCanvas;
 
     public Button[] buttons;
     public Transform[] buttonPos;
@@ -170,7 +170,12 @@ public class MainmenuApi : MonoBehaviour
         );
         StartCoroutine(FadeChromaticAberration());
     }
-
+    public void Tutorial()
+    {
+        tutorialCanvas.DOFade(1f,0.5f);
+        tutorialCanvas.blocksRaycasts = true;
+        tutorialCanvas.interactable = true;
+    }
     public void OnClickQuit()
     {
 #if UNITY_EDITOR

@@ -12124,7 +12124,7 @@ MonoBehaviour:
     ID: 0
     _sourceAsset: {fileID: 0}
     <DebugObject>k__BackingField: {fileID: 2119474204}
-  fakeHeart: {fileID: 0}
+  fakeHeart: {fileID: 543471894}
   duration: 0.5
 --- !u!199 &19966898793502996
 ParticleSystemRenderer:
@@ -36832,10 +36832,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
-      propertyPath: volume
-      value: 
-      objectReference: {fileID: 1509929337}
     - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
       propertyPath: backSlider
       value: 

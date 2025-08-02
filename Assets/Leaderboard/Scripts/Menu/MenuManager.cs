@@ -47,7 +47,7 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        private void Awake()
+        public void ClicktoStartClientService()
         {
             Application.runInBackground = true;
             StartClientService();

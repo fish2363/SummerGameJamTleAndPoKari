@@ -66,6 +66,7 @@ namespace Member.ISC.Code.Players
         private IEnumerator PlayNextAnimation()
         {
             yield return null;
+            yield return null;
             
             const string idle = "IDLE";
             ChangeState(idle);

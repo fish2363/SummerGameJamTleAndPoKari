@@ -146,7 +146,9 @@ public class ApiManager : MonoBehaviour
 
     [SerializeField] private SoundID warningSound;
     [SerializeField] private SoundID slowSound;
+    [SerializeField] private SoundID timeAccelerationSound;
     [SerializeField] private SoundID screenRunningSound;
+    [SerializeField] private SoundID cameraRotationSound;
     
     private bool isStart;
     private int randIdx;
@@ -360,6 +362,7 @@ public class ApiManager : MonoBehaviour
 
     private void RotateCamera()
     {
+        cameraRotationSound.Play();
         StartCoroutine(RotateAndShakeRoutine());
     }
 
@@ -436,7 +439,10 @@ public class ApiManager : MonoBehaviour
         }
 
         if (value > 0)
+        {
+            timeAccelerationSound.Play();
             Bullet.isFaster = true;
+        }
         else
         {
             slowSound.Play();

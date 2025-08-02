@@ -1,70 +1,92 @@
 using DG.Tweening;
-using System.Collections;
+using Leaderboard.Scripts.Menu;
+using Leaderboard.Scripts.Tools;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour
+namespace Member.KYH
 {
-    public static ScoreManager Instance;
-
-    [Header("스코어 텍스트")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI highScoreText;
-
-    [Header("스코어 바뀔때 몇턴 기다릴 건지")]
-    public float scoreChange;
-
-    [field: SerializeField]
-    public int CurrentScore { get; set; }
-
-    private bool isShaking;
-
-    private void Awake()
+    public class ScoreManager : MonoBehaviour
     {
-        Instance = this;
-    }
-    
-    public void Score(int score)
-    {
-        CurrentScore += score;
-        SetText();
-    }
+        public static ScoreManager Instance;
 
-    void SetText()
-    {
-        StartCoroutine(ScoreUp());
-        //if (!isShaking)
-        //{
-        //    isShaking = true;
-        //    scoreText.GetComponent<RectTransform>().DOShakeRotation(0.2f, 50f, 5, 50f).OnComplete(() => isShaking = false);
-        //}
-    }
+        [Header("스코어 텍스트")]
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI highScoreText;
 
-    private IEnumerator ScoreUp()
-    {
+        [field: SerializeField]
+        public int CurrentScore { get; set; }
 
-        scoreText.text = $"";
-        yield return new WaitForSeconds(0.1f);
-        for(int i=0;i<scoreChange;i++)
+        private bool isShaking;
+        private float gameStartTime;
+
+        private void Awake()
         {
-            scoreText.text = $"_";
-            yield return new WaitForSeconds(0.2f);
-            scoreText.text = $"";
-            yield return new WaitForSeconds(0.2f);
-            yield return null;
+            Instance = this;
+            gameStartTime = Time.time;
         }
-        scoreText.text = $"{CurrentScore}";
+    
+        public void Score(int score)
+        {
+            CurrentScore += score;
+            SetText();
+        }
 
-    }
+        void SetText()
+        {
+            scoreText.text = $"{CurrentScore}";
+            if (!isShaking)
+            {
+                isShaking = true;
+                scoreText.GetComponent<RectTransform>().DOShakeRotation(0.2f, 50f, 5, 50f).OnComplete(() => isShaking = false);
+            }
+        }
 
-    public void SetHighScore()
-    {
-        int levelNum = CurrentScore;
-        scoreText.text = $"{levelNum}";
-        highScoreText.text = $"{PlayerPrefs.GetInt("score", levelNum)}";
+        public void SetHighScore()
+        {
+            int finalScore = CurrentScore;
+            float playTime = Time.time - gameStartTime;
+        
+            scoreText.text = $"{finalScore}";
+        
+            int previousHighScore = PlayerPrefs.GetInt("score", 0);
+            highScoreText.text = $"{previousHighScore}";
 
-        if (levelNum > PlayerPrefs.GetInt("score", 0))
-            PlayerPrefs.SetInt("score", levelNum);
+            if (finalScore > previousHighScore)
+            {
+                PlayerPrefs.SetInt("score", finalScore);
+                PlayerPrefs.Save();
+                Debug.Log($"새로운 최고점수 달성: {finalScore}점");
+            }
+        
+            ShowGameOverRanking(finalScore, playTime);
+        }
+    
+        private void ShowGameOverRanking(int score, float playTime)
+        {
+            GameOverRankingMenu rankingMenu = (GameOverRankingMenu)PanelManager.GetSingleton("gameOverRanking");
+            if (rankingMenu != null)
+            {
+                rankingMenu.ShowRankingAfterScore(score, playTime);
+                Debug.Log($"게임 오버 랭킹 표시: {score}점, 플레이 타임: {playTime:F1}초");
+            }
+            else
+            {
+                Debug.LogError("GameOverRankingMenu를 찾을 수 없습니다. Panel ID를 'gameOverRanking'으로 설정했는지 확인하세요.");
+            }
+        }
+    
+        public float GetCurrentPlayTime()
+        {
+            return Time.time - gameStartTime;
+        }
+    
+        public void ResetGame()
+        {
+            CurrentScore = 0;
+            gameStartTime = Time.time;
+            SetText();
+            Debug.Log("게임 리셋됨");
+        }
     }
 }

@@ -1433,6 +1433,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88361630f639f7441a50221a6a98d06a, type: 3}
+--- !u!1001 &401718264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: bgm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: sfx
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: main
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: bgmSlider
+      value: 
+      objectReference: {fileID: 642527240}
+    - target: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 802723893}
+    - target: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: masterSlider
+      value: 
+      objectReference: {fileID: 1455038305}
+    - target: {fileID: 7206673222883615976, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_Name
+      value: PlayBGMSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625889775263576909, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
 --- !u!1 &418750533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2965,8 +3046,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ESCManager, Assembly-CSharp
+      - m_Target: {fileID: 1841292596}
+        m_TargetAssemblyTypeName: Member.ISC.Code.Managers.PlaySoundManager, Assembly-CSharp
         m_MethodName: BGM
         m_Mode: 0
         m_Arguments:
@@ -3822,8 +3903,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ESCManager, Assembly-CSharp
+      - m_Target: {fileID: 1841292596}
+        m_TargetAssemblyTypeName: Member.ISC.Code.Managers.PlaySoundManager, Assembly-CSharp
         m_MethodName: SFX
         m_Mode: 0
         m_Arguments:
@@ -7811,8 +7892,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ESCManager, Assembly-CSharp
+      - m_Target: {fileID: 1841292596}
+        m_TargetAssemblyTypeName: Member.ISC.Code.Managers.PlaySoundManager, Assembly-CSharp
         m_MethodName: Master
         m_Mode: 0
         m_Arguments:
@@ -9495,6 +9576,17 @@ MonoBehaviour:
   container: {fileID: 1375516978}
   playerNameInput: {fileID: 1759481223}
   confirmButton: {fileID: 1878983563}
+--- !u!114 &1841292596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3735813253008478123, guid: 891fec51a6fa7db4dac967735c641c35, type: 3}
+  m_PrefabInstance: {fileID: 401718264}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bd8a015eb24a4f8f1c7e80f5f13077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1873057217 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 563605001036950775, guid: 88361630f639f7441a50221a6a98d06a, type: 3}
@@ -11016,3 +11108,4 @@ SceneRoots:
   - {fileID: 401622840}
   - {fileID: 279823191}
   - {fileID: 1243180997}
+  - {fileID: 401718264}

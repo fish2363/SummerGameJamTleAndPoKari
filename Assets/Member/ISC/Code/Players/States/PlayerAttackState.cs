@@ -1,4 +1,5 @@
-﻿using Member.CUH.Code.Entities;
+﻿using Ami.BroAudio;
+using Member.CUH.Code.Entities;
 using UnityEngine;
 
 namespace Member.ISC.Code.Players.States
@@ -15,6 +16,8 @@ namespace Member.ISC.Code.Players.States
         public override void Enter()
         {
             base.Enter();
+
+            _animatorTrigger.OnPlaySoundTrigger += PlaySound;
             _attackCompo.Attack();
         }
         
@@ -24,6 +27,18 @@ namespace Member.ISC.Code.Players.States
 
             if (_isTriggerCall)
                 _player.ChangeState("IDLE");
+        }
+
+        public override void Exit()
+        {
+            _animatorTrigger.OnPlaySoundTrigger -= PlaySound;
+            base.Exit();
+        }
+
+        private void PlaySound()
+        {
+            int idx = Random.Range(0, _attackCompo.attackSwingSounds.Length);
+            _attackCompo.attackSwingSounds[idx].Play();
         }
     }
 }

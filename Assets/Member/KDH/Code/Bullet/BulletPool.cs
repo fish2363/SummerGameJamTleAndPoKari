@@ -18,12 +18,7 @@ namespace Member.KDH.Code.Bullet
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
                 InitializePool();
-            }
-            else
-            {
-                Destroy(gameObject);
             }
         }
         

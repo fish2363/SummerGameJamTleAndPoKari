@@ -21,6 +21,8 @@ public class ESCManager : MonoBehaviour
     [SerializeField] private Slider _bgmSlider;
     [SerializeField] private Slider _sfxSlider;
 
+    [SerializeField] private SoundID escMenuOpenSound;
+    
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -60,6 +62,7 @@ public class ESCManager : MonoBehaviour
 
     private void OpenChoosePanel()
     {
+        escMenuOpenSound.Play();
         isChoosePanelOn = true;
 
         // 패널 알파 및 인터랙션 설정

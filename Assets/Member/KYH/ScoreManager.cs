@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Leaderboard.Scripts.Menu;
 using Leaderboard.Scripts.Tools;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace Member.KYH
         [Header("스코어 텍스트")]
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI highScoreText;
+        [Header("스코어 바뀔때 몇턴 기다릴 건지")]
+        public float scoreChange;
 
         [field: SerializeField]
         public int CurrentScore { get; set; }
@@ -34,12 +37,28 @@ namespace Member.KYH
 
         void SetText()
         {
-            scoreText.text = $"{CurrentScore}";
-            if (!isShaking)
+            StartCoroutine(ScoreUp());
+            //if (!isShaking)
+            //{
+            //    isShaking = true;
+            //    scoreText.GetComponent<RectTransform>().DOShakeRotation(0.2f, 50f, 5, 50f).OnComplete(() => isShaking = false);
+            //}
+        }
+        private IEnumerator ScoreUp()
+        {
+
+            scoreText.text = $"";
+            yield return new WaitForSeconds(0.1f);
+            for (int i = 0; i < scoreChange; i++)
             {
-                isShaking = true;
-                scoreText.GetComponent<RectTransform>().DOShakeRotation(0.2f, 50f, 5, 50f).OnComplete(() => isShaking = false);
+                scoreText.text = $"_";
+                yield return new WaitForSeconds(0.2f);
+                scoreText.text = $"";
+                yield return new WaitForSeconds(0.2f);
+                yield return null;
             }
+            scoreText.text = $"{CurrentScore}";
+
         }
 
         public void SetHighScore()

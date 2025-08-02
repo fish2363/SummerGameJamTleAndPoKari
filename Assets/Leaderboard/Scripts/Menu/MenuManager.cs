@@ -111,7 +111,7 @@ namespace Leaderboard.Scripts.Menu
             try
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
-                Debug.Log($"익명 로그인 성공: {playerName}");
+                Debug.Log($"자동 로그인 성공: {playerName}");
             }
             catch (AuthenticationException exception)
             {

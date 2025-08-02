@@ -3,6 +3,7 @@ using System.Collections;
 using Chuh007Lib.Dependencies;
 using Member.CUH.Code.Combat;
 using Member.ISC.Code.Players;
+using Member.KYH;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR;
@@ -17,6 +18,7 @@ namespace Member.CUH.Code.Enemies
         public UnityEvent OnBossStartEvent; 
         
         [field: SerializeField] public int OverClockEnemyCount { get; private set; }
+        [Header("보스 등장 웨이브(배수로 계소ㄱ 나오ㅁ)")]
         [SerializeField] private int bossCutWave;
         
         [SerializeField] private GameObject warningObject;

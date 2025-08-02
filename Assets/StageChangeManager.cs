@@ -4,7 +4,10 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
 using Ami.BroAudio;
+using Member.KYH;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Member.KYH;
 
 public class StageChangeManager : MonoBehaviour
 {
@@ -20,6 +23,9 @@ public class StageChangeManager : MonoBehaviour
     [SerializeField] private Collider2D[] bigColli;
     [SerializeField] private Image[] gameOverPanel;
     [SerializeField] private CanvasGroup gameUI;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI timeText;
 
     private Vector2 leftOriginalPos;   // 시작 위치 (닫힌 상태)
     private Vector2 rightOriginalPos;
@@ -27,7 +33,7 @@ public class StageChangeManager : MonoBehaviour
     [SerializeField] private Image gameOverUI;
 
     [SerializeField] private SoundID inGameMusic;
-
+    [SerializeField] private CanvasGroup fakeHeart;
     [Header("애니메이션 시간")]
     public float duration = 0.5f;
 
@@ -53,8 +59,20 @@ public class StageChangeManager : MonoBehaviour
 
     public void DeadEvent()
     {
+        timeText.text = $"{TimeManager.Instance.CurrentTime}".Substring(0,6);
+        SetHighScore();
         StartCoroutine(DeadRoutine());
     }
+    public void SetHighScore()
+    {
+        int levelNum = ScoreManager.Instance.CurrentScore;
+        scoreText.text = $"{levelNum}";
+        highScoreText.text = $"{PlayerPrefs.GetInt("score", levelNum)}";
+
+        if (levelNum > PlayerPrefs.GetInt("score", 0))
+            PlayerPrefs.SetInt("score", levelNum);
+    }
+
     private IEnumerator DeadRoutine()
     {
         Time.timeScale = 0f;
@@ -74,6 +92,7 @@ public class StageChangeManager : MonoBehaviour
 
     public void OpenPanels()
     {
+        fakeHeart.DOFade(1f,0.2f);
         ApiManager.Instance.IsBoss = true;
         for(int i=0;i<2;i++)
         {
@@ -86,6 +105,7 @@ public class StageChangeManager : MonoBehaviour
 
     public void ClosePanels()
     {
+        fakeHeart.DOFade(0f, 0.2f);
         ApiManager.Instance.IsBoss = false;
         for (int i = 0; i < 2; i++)
         {

@@ -10,6 +10,7 @@ using TMPro;
 using Member.CUH.Code.Enemies;
 using UnityEngine.UI;
 using Member.KDH.Code.Bullet;
+using UnityEngine.Rendering.Universal;
 
 public class ApiManager : MonoBehaviour
 {
@@ -84,6 +85,7 @@ public class ApiManager : MonoBehaviour
     private float appearDuration = 0.4f;
     private Ease easeType = Ease.OutBack; // 뽀용~ 느낌
     private Coroutine flashCoroutine;
+    private float multiplyGreatEnemyCnt;
 
     private float _currentTime = 0f;
     private bool isInvokingEvent = false;
@@ -113,6 +115,8 @@ public class ApiManager : MonoBehaviour
     [Header("_____[속도 변경 이벤트]_____")]
     [Header("[속도 변경 지속시간]")]
     public float speedChangeDuration = 2f;
+    public UnityEngine.Rendering.Volume volume;
+    private ColorAdjustments colorAdjust;
     [Header("경고 메세지")]
     public string alimEventText_upSpeed;
     [Header("경고 메세지")]
@@ -172,11 +176,14 @@ public class ApiManager : MonoBehaviour
     {
         if (!isStart) return;
 
-        if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
+        if (EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
         {
+            multiplyGreatEnemyCnt = EnemyManager.Instance.OverClockEnemyCount / 3;
             StartCoroutine(OverClockAlimRoutine());
         }
-        if(!IsBoss)
+        else
+            multiplyGreatEnemyCnt = 1f;
+        if (!IsBoss)
         {
             if (isInvokingEvent == false)
             {
@@ -188,7 +195,7 @@ public class ApiManager : MonoBehaviour
                 }
                 else
                 {
-                    _currentTime += Time.deltaTime;
+                    _currentTime += Time.deltaTime * multiplyGreatEnemyCnt;
                 }
             }
 
@@ -225,10 +232,15 @@ public class ApiManager : MonoBehaviour
             StartCoroutine(OverClockAlimRoutine());
     }
 
+
+
     public void Appear()
     {
         if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
+        {
+
             overClockText.SetActive(true);
+        }
 
         randIdx = UnityEngine.Random.Range(6, 8);
         UnityEngine.Debug.Log(randIdx);
@@ -418,6 +430,19 @@ public class ApiManager : MonoBehaviour
 
     public IEnumerator SetSpeed(int value)
     {
+        if (volume.profile.TryGet(out colorAdjust))
+        {
+            // 초기값 설정 (-76)
+            colorAdjust.postExposure.value = -76f;
+
+            // DOTween으로 서서히 0까지 증가 (2초 동안)
+            DOTween.To(() => colorAdjust.postExposure.value,
+                       x => colorAdjust.postExposure.value = x,
+                       0f, // 목표값
+                       2f  // 지속시간
+                      ).SetEase(Ease.OutCubic);
+        }
+
         if (value > 0)
             Bullet.isFaster = true;
         else

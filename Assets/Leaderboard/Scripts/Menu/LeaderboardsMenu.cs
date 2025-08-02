@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Leaderboard.Scripts.Tools;
 using TMPro;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
@@ -9,15 +11,11 @@ using UnityEngine.UI;
 
 namespace Leaderboard.Scripts.Menu
 {
-    /// <summary>
-    /// 리더보드 UI를 관리하는 메뉴
-    /// 점수와 시간을 함께 표시
-    /// </summary>
     public class LeaderboardsMenu : Panel
     {
         [Header("리더보드 설정")]
         [SerializeField] private int playersPerPage = 25;
-        [SerializeField] private string leaderboardId = "2025SummerGameJam"; // 리더보드 ID
+        [SerializeField] private string leaderboardId = "SGJT";
         
         [Header("UI 요소")]
         [SerializeField] private LeaderboardsPlayerItem playerItemPrefab = null;
@@ -26,25 +24,20 @@ namespace Leaderboard.Scripts.Menu
         [SerializeField] private Button nextButton = null;
         [SerializeField] private Button prevButton = null;
         [SerializeField] private Button closeButton = null;
-
-        [SerializeField] private Button refreshButton = null; // 새로고침 버튼 추가
+        [SerializeField] private Button refreshButton = null;
 
         private int currentPage = 1;
         private int totalPages = 0;
 
         public override void Initialize()
         {
-            if (IsInitialized)
-            {
-                return;
-            }
+            if (IsInitialized) return;
             
             ClearPlayersList();
             closeButton.onClick.AddListener(ClosePanel);
             nextButton.onClick.AddListener(NextPage);
             prevButton.onClick.AddListener(PrevPage);
             
-            // 새로고침 버튼
             if (refreshButton != null)
             {
                 refreshButton.onClick.AddListener(() => LoadPlayers(currentPage));
@@ -62,43 +55,46 @@ namespace Leaderboard.Scripts.Menu
             ClearPlayersList();
             currentPage = 1;
             totalPages = 0;
-            LoadPlayers(1);
-        }
-    
-        /// <summary>
-        /// 게임 오버 시 점수 업로드 (외부에서 호출)
-        /// 메타데이터 없이 점수만 업로드
-        /// </summary>
-        public async void UploadScore(int highScore, float playTime)
-        {
-            try
-            {
-                Debug.Log($"리더보드에 점수 업로드 중... 점수: {highScore}");
-                
-                // 메타데이터 없이 점수만 업로드
-                var playerEntry = await LeaderboardsService.Instance.AddPlayerScoreAsync(
-                    leaderboardId, 
-                    highScore
-                );
-                
-                Debug.Log($"점수 업로드 성공! 순위: {playerEntry.Rank + 1}");
-                
-                // 업로드 후 리더보드 새로고침
-                if (IsOpen)
-                {
-                    LoadPlayers(currentPage);
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.LogError($"점수 업로드 실패: {exception.Message}");
-                ShowError("점수 업로드에 실패했습니다.");
-            }
+            
+            // 서비스 상태 확인 후 로드
+            CheckServicesAndLoadPlayers();
         }
 
         /// <summary>
-        /// 리더보드 데이터 로드
+        /// Unity Services 상태 확인 후 플레이어 로드
         /// </summary>
+        private async void CheckServicesAndLoadPlayers()
+        {
+            try
+            {
+                // Unity Services 초기화 상태 확인
+                if (UnityServices.State != ServicesInitializationState.Initialized)
+                {
+                    Debug.LogError("Unity Services가 초기화되지 않았습니다.");
+                    ShowError("서비스가 초기화되지 않았습니다. 메인 메뉴에서 다시 시도해주세요.");
+                    return;
+                }
+
+                // 인증 상태 확인
+                if (!AuthenticationService.Instance.IsSignedIn)
+                {
+                    Debug.LogError("사용자가 로그인되지 않았습니다.");
+                    ShowError("로그인이 필요합니다. 메인 메뉴에서 다시 시도해주세요.");
+                    return;
+                }
+
+                Debug.Log($"서비스 상태 확인 완료. 리더보드 ID: {leaderboardId}");
+                Debug.Log($"인증된 플레이어: {AuthenticationService.Instance.PlayerName}");
+                
+                LoadPlayers(1);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError($"서비스 상태 확인 실패: {exception.Message}");
+                ShowError("서비스 연결에 문제가 있습니다. 잠시 후 다시 시도해주세요.");
+            }
+        }
+
         private async void LoadPlayers(int page)
         {
             nextButton.interactable = false;
@@ -106,52 +102,73 @@ namespace Leaderboard.Scripts.Menu
             
             try
             {
+                Debug.Log($"리더보드 로드 시작 - 페이지: {page}, ID: {leaderboardId}");
+                
                 GetScoresOptions options = new GetScoresOptions
                 {
                     Offset = (page - 1) * playersPerPage,
                     Limit = playersPerPage
-                    // IncludeMetadata 제거 - 메타데이터 사용하지 않음
                 };
                 
                 var scores = await LeaderboardsService.Instance.GetScoresAsync(leaderboardId, options);
                 
                 ClearPlayersList();
                 
-                // 각 플레이어 항목 생성
+                Debug.Log($"리더보드 데이터 수신: {scores.Results.Count}명의 플레이어");
+                
                 for (int i = 0; i < scores.Results.Count; i++)
                 {
                     LeaderboardsPlayerItem item = Instantiate(playerItemPrefab, playersContainer);
-                    
-                    // 메타데이터 없이 기본 초기화 사용
                     item.Initialize(scores.Results[i]);
                 }
                 
-                // 페이지 정보 업데이트
                 totalPages = Mathf.CeilToInt((float)scores.Total / (float)scores.Limit);
                 currentPage = page;
                 
                 Debug.Log($"리더보드 로드 완료. 총 {scores.Results.Count}명, 페이지 {currentPage}/{totalPages}");
             }
+            catch (Unity.Services.Leaderboards.Exceptions.LeaderboardsException leaderboardException)
+            {
+                Debug.LogError($"리더보드 전용 에러: {leaderboardException.Message}");
+                Debug.LogError($"에러 코드: {leaderboardException.ErrorCode}");
+                
+                if (leaderboardException.ErrorCode == (int)Unity.Services.Leaderboards.Exceptions.LeaderboardsExceptionReason.LeaderboardNotFound)
+                {
+                    ShowError($"리더보드를 찾을 수 없습니다. (ID: {leaderboardId})");
+                }
+                else if (leaderboardException.ErrorCode == (int)Unity.Services.Leaderboards.Exceptions.LeaderboardsExceptionReason.Unauthorized)
+                {
+                    ShowError("리더보드 접근 권한이 없습니다. 다시 로그인해주세요.");
+                }
+                else
+                {
+                    ShowError($"리더보드 오류: {leaderboardException.Message}");
+                }
+            }
+            catch (Unity.Services.Core.RequestFailedException requestException)
+            {
+                Debug.LogError($"네트워크 요청 실패: {requestException.Message}");
+                Debug.LogError($"HTTP 상태 코드: {requestException.ErrorCode}");
+                ShowError("네트워크 연결을 확인해주세요.");
+            }
             catch (Exception exception)
             {
                 Debug.LogError($"리더보드 로드 실패: {exception.Message}");
+                Debug.LogError($"에러 타입: {exception.GetType().Name}");
+                Debug.LogError($"스택 트레이스: {exception.StackTrace}");
                 ShowError("리더보드를 불러올 수 없습니다.");
             }
             
-            // 페이지 텍스트 및 버튼 상태 업데이트
             pageText.text = currentPage.ToString() + "/" + totalPages.ToString();
             nextButton.interactable = currentPage < totalPages && totalPages > 1;
             prevButton.interactable = currentPage > 1 && totalPages > 1;
         }
 
-        /// <summary>
-        /// 다음 페이지로 이동
-        /// </summary>
         private void NextPage()
         {
             if (currentPage + 1 > totalPages)
             {
-                LoadPlayers(1); // 마지막 페이지에서 다음 누르면 첫 페이지로
+                LoadPlayers(1);
             }
             else
             {
@@ -159,14 +176,11 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        /// <summary>
-        /// 이전 페이지로 이동
-        /// </summary>
         private void PrevPage()
         {
             if (currentPage - 1 <= 0)
             {
-                LoadPlayers(totalPages); // 첫 페이지에서 이전 누르면 마지막 페이지로
+                LoadPlayers(totalPages);
             }
             else
             {
@@ -174,17 +188,11 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        /// <summary>
-        /// 패널 닫기
-        /// </summary>
         private void ClosePanel()
         {
             Close();
         }
 
-        /// <summary>
-        /// 플레이어 목록 초기화
-        /// </summary>
         private void ClearPlayersList()
         {
             LeaderboardsPlayerItem[] items = playersContainer.GetComponentsInChildren<LeaderboardsPlayerItem>();
@@ -197,9 +205,6 @@ namespace Leaderboard.Scripts.Menu
             }
         }
         
-        /// <summary>
-        /// 에러 메시지 표시
-        /// </summary>
         private void ShowError(string message)
         {
             ErrorMenu errorMenu = (ErrorMenu)PanelManager.GetSingleton("error");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Blade.FSM;
 using Member.CUH.Code.Combat;
 using Member.CUH.Code.Entities;
@@ -12,7 +13,7 @@ namespace Member.CUH.Code.Enemies
         public IDamageable Target;
         
         [SerializeField] private StateDataSO[] states;
-        
+        [SerializeField] private ParticleSystem deathEffect;
         private EntityStateMachine _stateMachine;
         
         protected override void Awake()
@@ -38,10 +39,20 @@ namespace Member.CUH.Code.Enemies
         {
             if(IsDead) return;
             IsDead = true;
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+            StartCoroutine(DeadRoutine());
+        }
+
+        private IEnumerator DeadRoutine()
+        {
+            Time.timeScale = 0f;
+            ApiManager.Instance.ShakeScreen();
+            yield return new WaitForSecondsRealtime(1f);
+            Time.timeScale = 1f;
             StageChangeManager.Instance.ClosePanels();
             Destroy(gameObject);
         }
-        
+
         protected override void Start()
         {
             base.Start();

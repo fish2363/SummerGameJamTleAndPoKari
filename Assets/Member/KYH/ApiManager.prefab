@@ -333,6 +333,7 @@ MonoBehaviour:
   alimEventText_runawayScreen: "\uD654\uBA74 \uBC14\uC774\uB7EC\uC2A4 \uAC10\uC5FC
     \uBC1C\uC0DD"
   speedChangeDuration: 0
+  volume: {fileID: 0}
   alimEventText_upSpeed: "\uC2DC\uAC04 \uAC00\uC18D \uC624\uB958 \uBC1C\uC0DD"
   alimEventText_downSpeed: "\uC2DC\uAC04 \uC9C0\uC5F0 \uC624\uB958 \uBC1C\uC0DD"
   rotationEase: 9
@@ -351,8 +352,16 @@ MonoBehaviour:
     ID: 1073741844
     _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
     <DebugObject>k__BackingField: {fileID: 4415540092671814856}
+  timeAccelerationSound:
+    ID: 1073741854
+    _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4415540092671814856}
   screenRunningSound:
     ID: 1073741847
+    _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
+    <DebugObject>k__BackingField: {fileID: 4415540092671814856}
+  cameraRotationSound:
+    ID: 1073741851
     _sourceAsset: {fileID: 11400000, guid: 92ceca94994ff33488d9e0767ea897da, type: 2}
     <DebugObject>k__BackingField: {fileID: 4415540092671814856}
   foregroundImage: {fileID: 0}

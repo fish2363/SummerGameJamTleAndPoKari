@@ -47,7 +47,7 @@ MonoBehaviour:
   attackRange: 100
   attackCooldown: 1
   bombDelay: 1
-  bombRadius: 2
+  bombRadius: 1.3
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64

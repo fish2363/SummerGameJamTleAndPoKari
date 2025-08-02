@@ -243,7 +243,7 @@ public class ApiManager : MonoBehaviour
                 break;
         }
 
-        MoveWindow(windowHandle, x, y, width, height, true);
+        //MoveWindow(windowHandle, x, y, width, height, true);
     }
 
     public Image foregroundImage;    

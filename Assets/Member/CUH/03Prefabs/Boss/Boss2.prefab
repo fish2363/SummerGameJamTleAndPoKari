@@ -652,6 +652,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27a9937311da4494e96c3b16bb760c47, type: 2}
   - {fileID: 11400000, guid: 86fac480a52dbf34baf2fc9a2382bc65, type: 2}
   deathEffect: {fileID: 6652865553123604594, guid: a544e589dd8d86f4db7bd27e3c69f179, type: 3}
+  sprites: []
+  blinkColor: {r: 1, g: 1, b: 1, a: 1}
+  nomalColor: {r: 0.30980393, g: 0.9490196, b: 0.76862746, a: 1}
+  blinkTime: 0.15
 --- !u!58 &7624281171329786726
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Leaderboard.Scripts.Tools;
 using TMPro;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
@@ -33,11 +36,17 @@ namespace Leaderboard.Scripts.Menu
         [SerializeField] private TextMeshProUGUI currentScoreText;
         [SerializeField] private TextMeshProUGUI currentTimeText;
         [SerializeField] private TextMeshProUGUI highScoreText;
-        [SerializeField] private GameObject newRecordIndicator; // "NEW RECORD!" 표시용
+        [SerializeField] private GameObject newRecordIndicator;
         
         [Header("버튼")]
         [SerializeField] private Button mainMenuButton;
         [SerializeField] private Button retryButton;
+        [SerializeField] private Button offlineRetryButton; // 오프라인 모드용 재시도 버튼
+        
+        [Header("오프라인 모드 UI (선택사항)")]
+        [SerializeField] private GameObject onlineRankingPanel; // 온라인 랭킹 패널
+        [SerializeField] private GameObject offlineMessagePanel; // 오프라인 메시지 패널
+        [SerializeField] private TextMeshProUGUI offlineMessageText; // 오프라인 메시지 텍스트
 
         // PlayerPrefs 키 상수
         private const string HIGH_SCORE_KEY = "HighScore";
@@ -48,6 +57,10 @@ namespace Leaderboard.Scripts.Menu
         private int currentGameScore = 0;
         private float currentGameTime = 0f;
         private bool isNewRecord = false;
+        
+        // 상태 관리
+        private bool isProcessingRanking = false;
+        private bool isOfflineMode = false;
 
         public override void Initialize()
         {
@@ -58,8 +71,10 @@ namespace Leaderboard.Scripts.Menu
             
             if (retryButton != null)
                 retryButton.onClick.AddListener(RetryGame);
+                
+            if (offlineRetryButton != null)
+                offlineRetryButton.onClick.AddListener(RetryGame);
             
-            // 새 기록 표시기 초기 비활성화
             if (newRecordIndicator != null)
                 newRecordIndicator.SetActive(false);
             
@@ -69,49 +84,473 @@ namespace Leaderboard.Scripts.Menu
         /// <summary>
         /// 게임 종료 후 점수와 시간으로 랭킹 표시
         /// </summary>
-        public async void ShowRankingAfterScore(int score, float playTime)
+        public void ShowRankingAfterScore(int score, float playTime)
         {
-            try
+            if (isProcessingRanking)
             {
-                Debug.Log($"점수 업로드 및 랭킹 표시 시작: {score}점, {playTime:F2}초");
-                
-                // 현재 게임 정보 저장
-                currentGameScore = score;
-                currentGameTime = playTime;
-                
-                // 하이스코어 확인 및 업데이트
-                CheckAndUpdateHighScore(score, playTime);
-                
-                // 현재 게임 정보 UI 업데이트
-                UpdateCurrentGameUI();
-                
-                // 리더보드에 점수 업로드
-                var playerEntry = await LeaderboardsService.Instance.AddPlayerScoreAsync(
-                    leaderboardId, 
-                    score
-                );
-                
-                Debug.Log($"점수 업로드 성공! 내 순위: {playerEntry.Rank + 1}");
-                
-                // 주변 순위 로드
-                await LoadSurroundingRanks(playerEntry.Rank);
-                
-                // 게임 횟수 증가
-                IncrementGameCount();
-                
-                Open();
+                Debug.LogWarning("이미 랭킹 처리 중입니다.");
+                return;
             }
-            catch (Exception exception)
+            
+            Debug.Log($"점수 업로드 및 랭킹 표시 시작: {score}점, {playTime:F2}초");
+            
+            // 현재 게임 정보 저장
+            currentGameScore = score;
+            currentGameTime = playTime;
+            
+            // 하이스코어 확인 및 업데이트
+            CheckAndUpdateHighScore(score, playTime);
+            
+            // 현재 게임 정보 UI 업데이트
+            UpdateCurrentGameUI();
+            
+            // 코루틴으로 비동기 처리
+            StartCoroutine(ProcessRankingCoroutine());
+        }
+
+        /// <summary>
+        /// 오프라인 모드로 게임오버 표시 (리더보드 없이)
+        /// </summary>
+        public void ShowOfflineGameOver(int score, float playTime, string message = "인터넷 연결을 확인해주세요.")
+        {
+            Debug.Log($"오프라인 모드 게임오버: {score}점, {playTime:F2}초");
+            
+            // 현재 게임 정보 저장
+            currentGameScore = score;
+            currentGameTime = playTime;
+            isOfflineMode = true;
+            
+            // 하이스코어 확인 및 업데이트
+            CheckAndUpdateHighScore(score, playTime);
+            
+            // 현재 게임 정보 UI 업데이트
+            UpdateCurrentGameUI();
+            
+            // 오프라인 모드 UI 설정
+            SetOfflineModeUI(message);
+            
+            // 게임 횟수 증가
+            IncrementGameCount();
+            
+            // UI 표시
+            Open();
+        }
+
+        /// <summary>
+        /// 랭킹 처리 메인 코루틴
+        /// </summary>
+        private IEnumerator ProcessRankingCoroutine()
+        {
+            isProcessingRanking = true;
+            isOfflineMode = false;
+            
+            // 1. 서비스 상태 확인 및 초기화
+            bool servicesValid = false;
+            yield return ValidateServicesCoroutine((result) => servicesValid = result);
+            
+            if (!servicesValid)
             {
-                Debug.LogError($"랭킹 표시 실패: {exception.Message}");
-                ShowError("랭킹 정보를 불러올 수 없습니다.");
+                Debug.LogError("서비스 검증 실패 - 오프라인 모드로 전환");
+                SetOfflineModeUI("서비스 연결에 문제가 있습니다. 점수는 로컬에 저장되었습니다.");
+                FinishProcessing();
+                yield break;
+            }
+            
+            // 2. 점수 업로드
+            LeaderboardEntry playerEntry = null;
+            yield return UploadScoreCoroutine((result) => playerEntry = result);
+            
+            if (playerEntry == null)
+            {
+                Debug.LogError("점수 업로드 실패 - 오프라인 모드로 전환");
+                SetOfflineModeUI("온라인 랭킹 업데이트에 실패했습니다. 점수는 로컬에 저장되었습니다.");
+                FinishProcessing();
+                yield break;
+            }
+            
+            Debug.Log($"점수 업로드 성공! 내 순위: {playerEntry.Rank + 1}");
+            
+            // 3. 주변 순위 로드
+            yield return LoadSurroundingRanksCoroutine(playerEntry.Rank);
+            
+            // 4. 온라인 모드 UI 설정
+            SetOnlineModeUI();
+            
+            // 5. 게임 횟수 증가
+            IncrementGameCount();
+            
+            // 6. 처리 완료
+            FinishProcessing();
+        }
+
+        /// <summary>
+        /// 처리 완료 및 UI 표시
+        /// </summary>
+        private void FinishProcessing()
+        {
+            isProcessingRanking = false;
+            Open();
+        }
+
+        /// <summary>
+        /// 온라인 모드 UI 설정
+        /// </summary>
+        private void SetOnlineModeUI()
+        {
+            isOfflineMode = false;
+            
+            if (onlineRankingPanel != null)
+                onlineRankingPanel.SetActive(true);
                 
-                // 에러가 발생해도 현재 게임 정보는 표시
-                currentGameScore = score;
-                currentGameTime = playTime;
-                CheckAndUpdateHighScore(score, playTime);
-                UpdateCurrentGameUI();
-                Open();
+            if (offlineMessagePanel != null)
+                offlineMessagePanel.SetActive(false);
+        }
+
+        /// <summary>
+        /// 오프라인 모드 UI 설정
+        /// </summary>
+        private void SetOfflineModeUI(string message)
+        {
+            isOfflineMode = true;
+            
+            if (onlineRankingPanel != null)
+                onlineRankingPanel.SetActive(false);
+                
+            if (offlineMessagePanel != null)
+                offlineMessagePanel.SetActive(true);
+                
+            if (offlineMessageText != null)
+                offlineMessageText.text = message;
+                
+            // 오프라인 모드에서는 랭킹 텍스트 클리어
+            ClearRankingTexts();
+        }
+
+        /// <summary>
+        /// 서비스 상태 검증 및 초기화 코루틴
+        /// </summary>
+        private IEnumerator ValidateServicesCoroutine(System.Action<bool> callback)
+        {
+            // Unity Services 초기화 확인 및 시도
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {
+                Debug.LogWarning("Unity Services가 초기화되지 않음. 초기화 시도 중...");
+                
+                // Unity Services 초기화 시도
+                yield return InitializeUnityServicesCoroutine();
+                
+                // 초기화 재확인
+                if (UnityServices.State != ServicesInitializationState.Initialized)
+                {
+                    Debug.LogError("Unity Services 초기화 실패");
+                    callback(false);
+                    yield break;
+                }
+            }
+
+            // 인증 상태 확인 및 시도
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                Debug.LogWarning("사용자가 로그인되지 않음. 익명 로그인 시도 중...");
+                
+                // 익명 로그인 시도
+                yield return SignInAnonymouslyCoroutine();
+                
+                // 로그인 재확인
+                if (!AuthenticationService.Instance.IsSignedIn)
+                {
+                    Debug.LogError("사용자 로그인 실패");
+                    callback(false);
+                    yield break;
+                }
+            }
+
+            // 플레이어 이름 확인 및 설정
+            string playerName = AuthenticationService.Instance.PlayerName;
+            if (string.IsNullOrEmpty(playerName))
+            {
+                Debug.LogWarning("플레이어 이름이 설정되지 않았습니다. 기본값 사용");
+                string savedName = PlayerPrefs.GetString("SavedPlayerName", "Player");
+                
+                // 플레이어 이름 업데이트 시도
+                yield return UpdatePlayerNameCoroutine(savedName);
+            }
+
+            Debug.Log($"서비스 검증 완료. 플레이어: {AuthenticationService.Instance.PlayerName}");
+            callback(true);
+        }
+
+        /// <summary>
+        /// Unity Services 초기화 코루틴
+        /// </summary>
+        private IEnumerator InitializeUnityServicesCoroutine()
+        {
+            bool initComplete = false;
+            bool initSuccess = false;
+
+            UnityServices.InitializeAsync().ContinueWith(task =>
+            {
+                initSuccess = !task.IsFaulted;
+                initComplete = true;
+                
+                if (task.IsFaulted)
+                {
+                    Debug.LogError($"Unity Services 초기화 실패: {task.Exception?.GetBaseException()?.Message}");
+                }
+                else
+                {
+                    Debug.Log("Unity Services 초기화 성공");
+                }
+            });
+
+            // 초기화 완료 대기 (최대 10초)
+            float timeout = 10f;
+            while (!initComplete && timeout > 0)
+            {
+                timeout -= Time.deltaTime;
+                yield return null;
+            }
+
+            if (!initComplete)
+            {
+                Debug.LogError("Unity Services 초기화 타임아웃");
+            }
+        }
+
+        /// <summary>
+        /// 익명 로그인 코루틴
+        /// </summary>
+        private IEnumerator SignInAnonymouslyCoroutine()
+        {
+            bool signInComplete = false;
+            bool signInSuccess = false;
+
+            AuthenticationService.Instance.SignInAnonymouslyAsync().ContinueWith(task =>
+            {
+                signInSuccess = !task.IsFaulted;
+                signInComplete = true;
+                
+                if (task.IsFaulted)
+                {
+                    Debug.LogError($"익명 로그인 실패: {task.Exception?.GetBaseException()?.Message}");
+                }
+                else
+                {
+                    Debug.Log("익명 로그인 성공");
+                    
+                    // 저장된 플레이어 이름 설정
+                    string savedName = PlayerPrefs.GetString("SavedPlayerName", "Player");
+                    AuthenticationService.Instance.UpdatePlayerNameAsync(savedName);
+                }
+            });
+
+            // 로그인 완료 대기 (최대 10초)
+            float timeout = 10f;
+            while (!signInComplete && timeout > 0)
+            {
+                timeout -= Time.deltaTime;
+                yield return null;
+            }
+
+            if (!signInComplete)
+            {
+                Debug.LogError("익명 로그인 타임아웃");
+            }
+        }
+
+        /// <summary>
+        /// 플레이어 이름 업데이트 코루틴
+        /// </summary>
+        private IEnumerator UpdatePlayerNameCoroutine(string newName)
+        {
+            bool updateComplete = false;
+            bool updateSuccess = false;
+            
+            AuthenticationService.Instance.UpdatePlayerNameAsync(newName).ContinueWith(task =>
+            {
+                updateSuccess = !task.IsFaulted;
+                updateComplete = true;
+                if (task.IsFaulted)
+                {
+                    Debug.LogWarning($"플레이어 이름 업데이트 실패: {task.Exception?.GetBaseException()?.Message}");
+                }
+            });
+            
+            // 업데이트 완료 대기 (최대 5초)
+            float timeout = 5f;
+            while (!updateComplete && timeout > 0)
+            {
+                timeout -= Time.deltaTime;
+                yield return null;
+            }
+            
+            if (!updateComplete)
+            {
+                Debug.LogWarning("플레이어 이름 업데이트 타임아웃");
+            }
+        }
+
+        /// <summary>
+        /// 점수 업로드 코루틴
+        /// </summary>
+        private IEnumerator UploadScoreCoroutine(System.Action<LeaderboardEntry> callback)
+        {
+            const int maxRetries = 3;
+            
+            for (int attempt = 1; attempt <= maxRetries; attempt++)
+            {
+                Debug.Log($"점수 업로드 시도 {attempt}/{maxRetries}");
+                
+                bool uploadComplete = false;
+                LeaderboardEntry result = null;
+                Exception uploadError = null;
+                
+                // 비동기 업로드 시작
+                LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId, currentGameScore)
+                    .ContinueWith(task =>
+                    {
+                        if (task.IsFaulted)
+                        {
+                            uploadError = task.Exception?.GetBaseException();
+                        }
+                        else
+                        {
+                            result = task.Result;
+                        }
+                        uploadComplete = true;
+                    });
+                
+                // 업로드 완료 대기 (최대 10초)
+                float timeout = 10f;
+                while (!uploadComplete && timeout > 0)
+                {
+                    timeout -= Time.deltaTime;
+                    yield return null;
+                }
+                
+                if (!uploadComplete)
+                {
+                    Debug.LogError($"업로드 타임아웃 (시도 {attempt})");
+                    if (attempt < maxRetries)
+                    {
+                        yield return new WaitForSeconds(attempt); // 점진적 대기
+                        continue;
+                    }
+                }
+                else if (uploadError != null)
+                {
+                    Debug.LogError($"업로드 에러 (시도 {attempt}): {uploadError.Message}");
+                    
+                    // 특정 에러는 재시도하지 않음
+                    if (ShouldStopRetrying(uploadError))
+                    {
+                        Debug.LogError("재시도할 수 없는 에러입니다.");
+                        break;
+                    }
+                    
+                    if (attempt < maxRetries)
+                    {
+                        yield return new WaitForSeconds(attempt);
+                        continue;
+                    }
+                }
+                else
+                {
+                    // 성공
+                    Debug.Log($"점수 업로드 성공 (시도 {attempt})");
+                    callback(result);
+                    yield break;
+                }
+            }
+            
+            // 모든 시도 실패
+            Debug.LogError("점수 업로드 최종 실패");
+            callback(null);
+        }
+
+        /// <summary>
+        /// 재시도를 중단해야 하는 에러인지 확인
+        /// </summary>
+        private bool ShouldStopRetrying(Exception error)
+        {
+            if (error is Unity.Services.Leaderboards.Exceptions.LeaderboardsException leaderboardEx)
+            {
+                var errorCode = leaderboardEx.ErrorCode;
+                return errorCode == (int)Unity.Services.Leaderboards.Exceptions.LeaderboardsExceptionReason.LeaderboardNotFound ||
+                       errorCode == (int)Unity.Services.Leaderboards.Exceptions.LeaderboardsExceptionReason.Unauthorized;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 주변 순위 로드 코루틴
+        /// </summary>
+        private IEnumerator LoadSurroundingRanksCoroutine(int myRank)
+        {
+            List<LeaderboardEntry> allEntries = new List<LeaderboardEntry>();
+            
+            // 상위 순위 로드 (내 순위 - 1)
+            if (myRank > 0)
+            {
+                yield return LoadSingleRankCoroutine(myRank - 1, allEntries);
+            }
+            
+            // 내 순위 로드
+            yield return LoadSingleRankCoroutine(myRank, allEntries);
+            
+            // 하위 순위 로드 (내 순위 + 1)
+            yield return LoadSingleRankCoroutine(myRank + 1, allEntries);
+            
+            // UI 업데이트
+            DisplayRankings(allEntries, myRank);
+        }
+
+        /// <summary>
+        /// 단일 순위 로드 코루틴
+        /// </summary>
+        private IEnumerator LoadSingleRankCoroutine(int offset, List<LeaderboardEntry> resultList)
+        {
+            if (offset < 0) yield break; // 음수 offset은 무시
+            
+            bool loadComplete = false;
+            List<LeaderboardEntry> entries = null;
+            Exception loadError = null;
+            
+            var options = new GetScoresOptions
+            {
+                Offset = offset,
+                Limit = 1
+            };
+            
+            LeaderboardsService.Instance.GetScoresAsync(leaderboardId, options)
+                .ContinueWith(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        loadError = task.Exception?.GetBaseException();
+                    }
+                    else if (task.Result.Results.Count > 0)
+                    {
+                        entries = new List<LeaderboardEntry>(task.Result.Results);
+                    }
+                    loadComplete = true;
+                });
+            
+            // 로드 완료 대기 (최대 5초)
+            float timeout = 5f;
+            while (!loadComplete && timeout > 0)
+            {
+                timeout -= Time.deltaTime;
+                yield return null;
+            }
+            
+            if (loadError != null)
+            {
+                Debug.LogWarning($"순위 {offset} 로드 실패: {loadError.Message}");
+            }
+            else if (entries != null)
+            {
+                resultList.AddRange(entries);
             }
         }
 
@@ -122,11 +561,10 @@ namespace Leaderboard.Scripts.Menu
         {
             int previousHighScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);
             
-            // 새로운 하이스코어인지 확인
             if (score > previousHighScore)
             {
                 PlayerPrefs.SetInt(HIGH_SCORE_KEY, score);
-                PlayerPrefs.SetFloat(BEST_TIME_KEY, playTime); // 하이스코어와 함께 그때의 시간도 저장
+                PlayerPrefs.SetFloat(BEST_TIME_KEY, playTime);
                 PlayerPrefs.Save();
                 
                 isNewRecord = true;
@@ -137,7 +575,6 @@ namespace Leaderboard.Scripts.Menu
                 isNewRecord = false;
             }
 
-            // 새 기록 표시기 활성화/비활성화
             if (newRecordIndicator != null)
             {
                 newRecordIndicator.SetActive(isNewRecord);
@@ -149,38 +586,25 @@ namespace Leaderboard.Scripts.Menu
         /// </summary>
         private void UpdateCurrentGameUI()
         {
-            // 현재 점수 표시
             if (currentScoreText != null)
             {
-                currentScoreText.text = currentGameScore.ToString();
+                currentScoreText.text = $"SCORE : {currentGameScore}";
             }
 
-            // 현재 시간 표시 (분:초 형식)
             if (currentTimeText != null)
             {
-                currentTimeText.text = FormatTime(currentGameTime);
+                currentTimeText.text = $"TIME : {FormatTime(currentGameTime)}";
             }
 
-            // 하이스코어 표시
             if (highScoreText != null)
             {
                 int highScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);
-                if (highScore > 0)
-                {
-                    highScoreText.text = highScore.ToString();
-                }
-                else
-                {
-                    highScoreText.text = "---";
-                }
+                highScoreText.text = highScore > 0 ? $"HIGH SCORE : {highScore}" : "HIGH SCORE : -";
             }
 
-            Debug.Log($"현재 게임 UI 업데이트 완료 - 점수: {currentGameScore}, 시간: {FormatTime(currentGameTime)}, 하이스코어: {PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0)}");
+            Debug.Log($"현재 게임 UI 업데이트 완료 - 점수: {currentGameScore}, 시간: {FormatTime(currentGameTime)}");
         }
 
-        /// <summary>
-        /// 시간을 "분:초" 형식으로 변환
-        /// </summary>
         private string FormatTime(float timeInSeconds)
         {
             if (timeInSeconds <= 0) return "00:00";
@@ -190,9 +614,6 @@ namespace Leaderboard.Scripts.Menu
             return $"{minutes:00}:{seconds:00}";
         }
 
-        /// <summary>
-        /// 게임 플레이 횟수 증가
-        /// </summary>
         private void IncrementGameCount()
         {
             int currentCount = PlayerPrefs.GetInt(TOTAL_GAMES_KEY, 0);
@@ -202,63 +623,9 @@ namespace Leaderboard.Scripts.Menu
             Debug.Log($"총 게임 플레이 횟수: {currentCount + 1}회");
         }
 
-        private async System.Threading.Tasks.Task LoadSurroundingRanks(int myRank)
-        {
-            try
-            {
-                List<LeaderboardEntry> allEntries = new List<LeaderboardEntry>();
-                
-                if (myRank > 0)
-                {
-                    var upperOptions = new GetScoresOptions
-                    {
-                        Offset = myRank - 1,
-                        Limit = 1
-                    };
-                    var upperScores = await LeaderboardsService.Instance.GetScoresAsync(leaderboardId, upperOptions);
-                    if (upperScores.Results.Count > 0)
-                    {
-                        allEntries.Add(upperScores.Results[0]);
-                    }
-                }
-                
-                var myOptions = new GetScoresOptions
-                {
-                    Offset = myRank,
-                    Limit = 1
-                };
-                var myScores = await LeaderboardsService.Instance.GetScoresAsync(leaderboardId, myOptions);
-                if (myScores.Results.Count > 0)
-                {
-                    allEntries.Add(myScores.Results[0]);
-                }
-                
-                var lowerOptions = new GetScoresOptions
-                {
-                    Offset = myRank + 1,
-                    Limit = 1
-                };
-                var lowerScores = await LeaderboardsService.Instance.GetScoresAsync(leaderboardId, lowerOptions);
-                if (lowerScores.Results.Count > 0)
-                {
-                    allEntries.Add(lowerScores.Results[0]);
-                }
-                
-                DisplayRankings(allEntries, myRank);
-            }
-            catch (Exception exception)
-            {
-                Debug.LogError($"주변 랭킹 로드 실패: {exception.Message}");
-                throw;
-            }
-        }
-
         private void DisplayRankings(List<LeaderboardEntry> entries, int myRank)
         {
-            // 모든 텍스트 초기화
             ClearRankingTexts();
-            
-            string currentPlayerName = PlayerPrefs.GetString("SavedPlayerName", "");
             
             foreach (var entry in entries)
             {
@@ -286,22 +653,19 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        /// <summary>
-        /// 순위 텍스트들 초기화
-        /// </summary>
         private void ClearRankingTexts()
         {
-            if (upperRankText != null) upperRankText.text = "---";
-            if (upperNameText != null) upperNameText.text = "---";
-            if (upperScoreText != null) upperScoreText.text = "---";
+            if (upperRankText != null) upperRankText.text = "-";
+            if (upperNameText != null) upperNameText.text = "-";
+            if (upperScoreText != null) upperScoreText.text = "-";
             
-            if (myRankText != null) myRankText.text = "---";
-            if (myNameText != null) myNameText.text = "---";
-            if (myScoreText != null) myScoreText.text = "---";
+            if (myRankText != null) myRankText.text = "-";
+            if (myNameText != null) myNameText.text = "-";
+            if (myScoreText != null) myScoreText.text = "-";
             
-            if (lowerRankText != null) lowerRankText.text = "---";
-            if (lowerNameText != null) lowerNameText.text = "---";
-            if (lowerScoreText != null) lowerScoreText.text = "---";
+            if (lowerRankText != null) lowerRankText.text = "-";
+            if (lowerNameText != null) lowerNameText.text = "-";
+            if (lowerScoreText != null) lowerScoreText.text = "-";
         }
 
         private void GoToMainMenu()
@@ -314,8 +678,9 @@ namespace Leaderboard.Scripts.Menu
         private void RetryGame()
         {
             Close();
-            // 게임 재시작 로직 (GameManager나 SceneManager 호출)
             Debug.Log("게임 재시작");
+            // 필요하다면 여기에 게임 재시작 로직 추가
+            // 예: SceneManager.LoadScene("GameScene");
         }
 
         private void ShowError(string message)
@@ -327,9 +692,6 @@ namespace Leaderboard.Scripts.Menu
             }
         }
 
-        /// <summary>
-        /// 통계 정보 가져오기 (다른 스크립트에서 사용 가능)
-        /// </summary>
         public GameStats GetGameStats()
         {
             return new GameStats
@@ -343,9 +705,6 @@ namespace Leaderboard.Scripts.Menu
             };
         }
 
-        /// <summary>
-        /// 하이스코어 리셋 (디버그/테스트용)
-        /// </summary>
         [ContextMenu("하이스코어 리셋")]
         public void ResetHighScore()
         {
@@ -361,22 +720,24 @@ namespace Leaderboard.Scripts.Menu
         }
 
         #if UNITY_EDITOR
-        /// <summary>
-        /// 에디터에서 테스트용
-        /// </summary>
-        [ContextMenu("테스트 - 랜덤 점수로 표시")]
+        [ContextMenu("테스트 - 온라인 랜덤 점수")]
         public void TestShowRandomScore()
         {
             int randomScore = UnityEngine.Random.Range(100, 1000);
             float randomTime = UnityEngine.Random.Range(30f, 300f);
             ShowRankingAfterScore(randomScore, randomTime);
         }
+        
+        [ContextMenu("테스트 - 오프라인 모드")]
+        public void TestOfflineMode()
+        {
+            int randomScore = UnityEngine.Random.Range(100, 1000);
+            float randomTime = UnityEngine.Random.Range(30f, 300f);
+            ShowOfflineGameOver(randomScore, randomTime, "테스트 오프라인 모드입니다.");
+        }
         #endif
     }
 
-    /// <summary>
-    /// 게임 통계 정보 구조체
-    /// </summary>
     [System.Serializable]
     public struct GameStats
     {

@@ -3,5 +3,6 @@
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
     <file url="file://$PROJECT_DIR$/Assets/ComboManager.cs" charset="EUC-KR" />
     <file url="file://$PROJECT_DIR$/Assets/Member/KYH/TimeManager.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/StageChangeManager.cs" charset="EUC-KR" />
   </component>
 </project>

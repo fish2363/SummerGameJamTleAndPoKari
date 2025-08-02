@@ -19,7 +19,7 @@ MonoBehaviour:
     _group: {fileID: 0}
     Clips:
     - AudioClip: {fileID: 8300000, guid: c965b5568f8c440408a59ff651a164b7, type: 3}
-      Volume: 1
+      Volume: 0.74756986
       Delay: 0
       StartPosition: 0
       EndPosition: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
       FadeOut: 0
       Weight: 0
     <MasterVolume>k__BackingField: 1
-    <Loop>k__BackingField: 0
+    <Loop>k__BackingField: 1
     <SeamlessLoop>k__BackingField: 0
     <TransitionTime>k__BackingField: 0
     <SpatialSetting>k__BackingField: {fileID: 0}

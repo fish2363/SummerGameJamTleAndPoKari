@@ -215,6 +215,7 @@ public class ApiManager : MonoBehaviour
             }
         }
     }
+    private RECT screenRect;
     public enum Direction { Top, Bottom, Left, Right }
     void MoveToEdge(Direction dir)
     {
@@ -452,13 +453,13 @@ public class ApiManager : MonoBehaviour
         MoveWindow(hWnd, (int)originalPos.x, (int)originalPos.y, width, height, true);
     }
 
-    private void ShowError()
-    {
-        //int rand = UnityEngine.Random.Range(0,errorMassaege.Length);
+    //private void ShowError()
+    //{
+    //    int rand = UnityEngine.Random.Range(0, errorMassaege.Length);
 
-        //MessageBox(hWnd, errorMassaege[rand].headerName, errorMassaege[rand].description, (uint)(0x00000001L | 0x00000030L));
-        //isInvokingEvent = false;
-    }
+    //    MessageBox(hWnd, errorMassaege[rand].headerName, errorMassaege[rand].description, (uint)(0x00000001L | 0x00000030L));
+    //    isInvokingEvent = false;
+    //}
 
     public IEnumerator SetSpeed(int value)
     {

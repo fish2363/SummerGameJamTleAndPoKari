@@ -8,7 +8,6 @@ public class StoryLogic : MonoBehaviour
     public TextMeshProUGUI targetText;
     public string[] messages;
     public float typingSpeed = 0.05f;
-    public PlayableDirector timeline;
 
     private int index = 0;
     private bool isTyping = false;
@@ -36,12 +35,26 @@ public class StoryLogic : MonoBehaviour
                 }
                 else
                 {
-                    if (timeline != null)
-                        timeline.Play();
+                    //if (Answer(appDescript, appName) == 1)
+                    //{
+                    //    Process.Start("https://ggm-h.goeay.kr/ggm-h/main.do");
+                    //    isExecute = false;
+                    //}
+                    //else
+                    //{
+                    //    isExecute = false;
+                    //}
                 }
             }
         }
     }
+
+    //private int Answer(string appName, string appDescript)
+    //{
+    //    int answer;
+    //    answer = MessageBox(GetWindowHandle(), appName, appDescript, (uint)(0x00000001L | 0x00000030L));
+    //    return answer;
+    //}
 
     IEnumerator TypeText(string message)
     {

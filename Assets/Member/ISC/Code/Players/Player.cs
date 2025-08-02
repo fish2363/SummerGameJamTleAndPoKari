@@ -2,6 +2,7 @@
 using System.Collections;
 using Blade.FSM;
 using Chuh007Lib.Dependencies;
+using DG.Tweening;
 using Member.CUH.Code.Entities;
 using Member.CUH.Code.Entities.FSM;
 using Member.ISC.Code.Managers;
@@ -98,6 +99,9 @@ namespace Member.ISC.Code.Players
         public void SetActiveFrame(bool isActive)
         {
             attackFrame.SetActive(isActive);
+            attackFrame.transform.DOScale(1.1945f, 0.4f)
+             .From(0.9f)
+             .SetEase(Ease.OutBack);
         }
         
         public void ChangeState(string newStateName, bool force = false) 

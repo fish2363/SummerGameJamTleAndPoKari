@@ -95,7 +95,7 @@ public class GlitchTextEffect : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            if (mainmenuApi != null)
+            if (mainmenuApi != null && PlayerPrefs.GetString("SKIP","NO") == "NO")
                 mainmenuApi.Api();
 
             if (startButton != null)

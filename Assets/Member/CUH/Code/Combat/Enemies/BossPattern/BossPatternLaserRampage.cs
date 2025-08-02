@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Ami.BroAudio;
 using UnityEngine;
 
 namespace Member.CUH.Code.Combat.Enemies.BossPattern
@@ -9,6 +10,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
         
         public override void UsePattern()
         {
+            base.UsePattern();
             StartCoroutine(LaserRampage());
         }
 
@@ -18,6 +20,7 @@ namespace Member.CUH.Code.Combat.Enemies.BossPattern
             {
                 Laser laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
                 laser.Shoot(_target.transform.position + (Vector3)Random.insideUnitCircle * randomValue, transform);
+                sound.Play();
                 yield return new WaitForSeconds(fireDelay);
             }
         }

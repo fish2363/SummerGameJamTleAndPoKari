@@ -640,6 +640,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationString: ATTACK2
+  fireSounds:
+  - ID: 1073741857
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
+  - ID: 1073741858
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
   fireCount: 3
   fireDelay: 0.5
   bulletPrefab: {fileID: 7182573362351142165, guid: e722db673093e0e4fa5cf2f42df8ab9a, type: 3}
@@ -660,6 +667,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationString: ATTACK1
+  fireSounds:
+  - ID: 1073741859
+    _sourceAsset: {fileID: 11400000, guid: d15ffec5c70011a4286d686e0c4a284c, type: 2}
+    <DebugObject>k__BackingField: {fileID: 3614644260402164630}
   fireCount: 50
   fireDelay: 0.05
   laserPrefab: {fileID: 526105166653921955, guid: 7311374966844e3458bbe1086c554221, type: 3}

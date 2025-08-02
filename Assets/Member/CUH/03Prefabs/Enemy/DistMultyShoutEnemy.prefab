@@ -456,8 +456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 100
-  attackCooldown: 1.75
-  _bulletSpeed: 1.5
+  attackCooldown: 2
+  _bulletSpeed: 2
   _spreadAngle: 15
   enemyAttackSounds:
   - ID: 1073741857

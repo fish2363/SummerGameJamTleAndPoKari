@@ -77,7 +77,7 @@ namespace Member.CUH.Code.Enemies
             if(IsDead) return;
             IsDead = true;
             ComboManager.Instance.PlusCombo(transform);
-            ApiManager.Instance.MinusGageValue(5);
+            ApiManager.Instance.MinusGageValue(1);
             Instantiate(deadEffect, transform.position, Quaternion.identity);
             OnDeadEvent?.Invoke();
             if (_lifeTime >= 30f) OnOverClock?.Invoke(false);

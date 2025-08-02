@@ -212,7 +212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: bossCutWave
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: endInterval
@@ -228,16 +228,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: spawnBosses.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: 'spawnBosses.Array.data[0]'
       value: 
-      objectReference: {fileID: 1875714941417143595, guid: 53892c81d7403d1419fc05e2697df462, type: 3}
+      objectReference: {fileID: 1875714941417143595, guid: c39f368c37b19644c8969a393cecbd64, type: 3}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: 'spawnBosses.Array.data[1]'
       value: 
-      objectReference: {fileID: 1875714941417143595, guid: b77fa4d7e31be7146a3e486a7335b9df, type: 3}
+      objectReference: {fileID: 1875714941417143595, guid: 53892c81d7403d1419fc05e2697df462, type: 3}
     - target: {fileID: 518033195843343565, guid: 15ffebfcf2ef83a4795739b5069b7a69, type: 3}
       propertyPath: 'spawnBosses.Array.data[2]'
       value: 
@@ -39578,6 +39578,10 @@ PrefabInstance:
       propertyPath: overClockAlim
       value: 
       objectReference: {fileID: 664499905}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: invokeCooltime
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
       propertyPath: backgroundImage
       value: 

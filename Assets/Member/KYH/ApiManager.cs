@@ -4,6 +4,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using Ami.BroAudio;
 using UnityEngine;
 using TMPro;
 using Member.CUH.Code.Enemies;
@@ -139,6 +140,10 @@ public class ApiManager : MonoBehaviour
     [Header("경고 메세지")]
     public string alimEventText_Minimalize;
 
+    [SerializeField] private SoundID warningSound;
+    [SerializeField] private SoundID slowSound;
+    [SerializeField] private SoundID screenRunningSound;
+    
     private bool isStart;
     private int randIdx;
     public bool IsBoss { get; set; }
@@ -232,6 +237,7 @@ public class ApiManager : MonoBehaviour
         alim.transform.localScale = new Vector3(1.620305f, 0f, 1f); // 아래서 시작
         alim.transform.DOScaleY(1.620305f, appearDuration).SetEase(easeType);
 
+        warningSound.Play();
         flashCoroutine = StartCoroutine(FlashRoutine());
     }
 
@@ -271,7 +277,7 @@ public class ApiManager : MonoBehaviour
     IEnumerator FlashRoutine()
     {
         yield return new WaitForSecondsRealtime(stopDuration);
-
+        
         float elapsed = 0f;
         bool visible = true;
         while (elapsed < totalDuration)
@@ -291,8 +297,7 @@ public class ApiManager : MonoBehaviour
     }
 
     public void ChooseEvent(int idx)
-    {
-
+    { 
         switch (idx)
         {
             case 0:
@@ -416,7 +421,10 @@ public class ApiManager : MonoBehaviour
         if (value > 0)
             Bullet.isFaster = true;
         else
+        {
+            slowSound.Play();
             Bullet.isSlowy = true;
+        }
 
         yield return new WaitForSecondsRealtime(speedChangeDuration);
         Bullet.isFaster= false;
@@ -444,6 +452,7 @@ public class ApiManager : MonoBehaviour
 
             if (dist < dodgeRadius)
             {
+                screenRunningSound.Play();
                 // 도망갈 방향은 마우스에서 멀어지는 방향
                 Vector2 dir = (currentPos + windowSize / 2f - mousePos).normalized;
                 Vector2 newTarget = currentPos + dir * dodgeRadius;

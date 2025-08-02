@@ -917,11 +917,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 587888509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &243796079 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3123122606750994491, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
-  m_PrefabInstance: {fileID: 956120304}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &304691447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -979,81 +974,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 527ec684728daaf42a50c1ee253889fa, type: 3}
---- !u!1 &362082855
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 362082856}
-  - component: {fileID: 362082858}
-  - component: {fileID: 362082857}
-  m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &362082856
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362082855}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8090048, y: 2.8090048, z: 2.8090048}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 243796079}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -287.99997, y: -172.99998}
-  m_SizeDelta: {x: 3468.12, y: 1729.8401}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &362082857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362082855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &362082858
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362082855}
-  m_CullTransparentMesh: 1
 --- !u!1 &441408283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,6 +1148,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &574793492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4415540092671814856, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+  m_PrefabInstance: {fileID: 5969853577800342103}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &587888508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,18 +1828,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7811476269522524932, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.809
-      objectReference: {fileID: 0}
-    - target: {fileID: 7811476269522524932, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.809
-      objectReference: {fileID: 0}
-    - target: {fileID: 7811476269522524932, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.809
-      objectReference: {fileID: 0}
     - target: {fileID: 8307913466306806960, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1941,10 +1854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3123122606750994491, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 362082856}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0ec78e15373b50469e69a666a3f3ce9, type: 3}
 --- !u!1 &980391085
@@ -3546,6 +3456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 154879324}
   highScoreText: {fileID: 1127763681}
+  scoreChange: 0
   <CurrentScore>k__BackingField: 0
 --- !u!1 &1561728273
 GameObject:
@@ -4189,18 +4100,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4413200296291996140, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: ultCombo
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8377545252243117381, guid: 18045614faad3e645acc8c5cf7db0a0c, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4726,6 +4625,13 @@ MonoBehaviour:
   bigColli:
   - {fileID: 1134681862}
   - {fileID: 709866588}
+  gameOverPanel: []
+  gameUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  inGameMusic:
+    ID: 268435458
+    _sourceAsset: {fileID: 11400000, guid: 1d89875783bc88e4199732d302f2b4b3, type: 2}
+    <DebugObject>k__BackingField: {fileID: 2119474204}
   duration: 0.5
 --- !u!114 &2127208533 stripped
 MonoBehaviour:
@@ -4814,6 +4720,14 @@ PrefabInstance:
       propertyPath: foregroundImage
       value: 
       objectReference: {fileID: 29458197}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: slowSound.<DebugObject>k__BackingField
+      value: 
+      objectReference: {fileID: 574793492}
+    - target: {fileID: 6907364062301192347, guid: 6207f28f16d03ae4eafdee20a76b4219, type: 3}
+      propertyPath: screenRunningSound.<DebugObject>k__BackingField
+      value: 
+      objectReference: {fileID: 574793492}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

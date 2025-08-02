@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections;
+using Ami.BroAudio;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -28,6 +30,8 @@ public class StageChangeManager : MonoBehaviour
 
     [SerializeField] private Image gameOverUI;
 
+    [SerializeField] private SoundID inGameMusic;
+
     [Header("애니메이션 시간")]
     public float duration = 0.5f;
 
@@ -38,6 +42,11 @@ public class StageChangeManager : MonoBehaviour
         // 현재 anchoredPosition 저장 (닫힌 상태)
         leftOriginalPos = leftPanel.rectTransform.anchoredPosition;
         rightOriginalPos = rightPanel.rectTransform.anchoredPosition;
+    }
+
+    private void Start()
+    {
+        inGameMusic.Play();
     }
 
     private void Update()

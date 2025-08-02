@@ -1,4 +1,5 @@
 ﻿using System;
+using Ami.BroAudio;
 using DG.Tweening;
 using Member.CUH.Code.Combat;
 using Member.CUH.Code.Enemies;
@@ -20,6 +21,9 @@ namespace Member.ISC.Code.Players
 
         [SerializeField] private ParticleSystem breakParticle;
         [SerializeField] private ParticleSystem parryParticle;
+        [SerializeField] private SoundID hittingSound;
+        
+        [field: SerializeField] public SoundID[] attackSwingSounds { get; private set; }
         
         private bool isParry = false;
         private EntityAnimatorTrigger _triggers;
@@ -37,6 +41,7 @@ namespace Member.ISC.Code.Players
 
             if (c.Length > 0)
             {
+                hittingSound.Play();
                 foreach (Collider2D item in c)
                 {
                     if (InSight(item.transform.position))

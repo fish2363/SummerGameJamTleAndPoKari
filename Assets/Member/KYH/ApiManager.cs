@@ -84,6 +84,7 @@ public class ApiManager : MonoBehaviour
     private float appearDuration = 0.4f;
     private Ease easeType = Ease.OutBack; // 뽀용~ 느낌
     private Coroutine flashCoroutine;
+    private float multiplyGreatEnemyCnt;
 
     private float _currentTime = 0f;
     private bool isInvokingEvent = false;
@@ -172,11 +173,14 @@ public class ApiManager : MonoBehaviour
     {
         if (!isStart) return;
 
-        if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
+        if (EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
         {
+            multiplyGreatEnemyCnt = EnemyManager.Instance.OverClockEnemyCount / 3;
             StartCoroutine(OverClockAlimRoutine());
         }
-        if(!IsBoss)
+        else
+            multiplyGreatEnemyCnt = 1f;
+        if (!IsBoss)
         {
             if (isInvokingEvent == false)
             {
@@ -188,7 +192,7 @@ public class ApiManager : MonoBehaviour
                 }
                 else
                 {
-                    _currentTime += Time.deltaTime;
+                    _currentTime += Time.deltaTime * multiplyGreatEnemyCnt;
                 }
             }
 
@@ -225,10 +229,15 @@ public class ApiManager : MonoBehaviour
             StartCoroutine(OverClockAlimRoutine());
     }
 
+
+
     public void Appear()
     {
         if(EnemyManager.Instance.OverClockEnemyCount >= overClockCnt)
+        {
+
             overClockText.SetActive(true);
+        }
 
         randIdx = UnityEngine.Random.Range(6, 8);
         UnityEngine.Debug.Log(randIdx);

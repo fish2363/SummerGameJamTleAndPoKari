@@ -215,36 +215,36 @@ public class ApiManager : MonoBehaviour
             }
         }
     }
-    private RECT screenRect;
-    public enum Direction { Top, Bottom, Left, Right }
-    void MoveToEdge(Direction dir)
-    {
-        GetWindowRect(hWnd, out RECT rect);
+    //private RECT screenRect;
+    //public enum Direction { Top, Bottom, Left, Right }
+    //void MoveToEdge(Direction dir)
+    //{
+    //    GetWindowRect(hWnd, out RECT rect);
 
-        int width = rect.Right - rect.Left;
-        int height = rect.Bottom - rect.Top;
+    //    int width = rect.Right - rect.Left;
+    //    int height = rect.Bottom - rect.Top;
 
-        int x = rect.Left;
-        int y = rect.Top;
+    //    int x = rect.Left;
+    //    int y = rect.Top;
 
-        switch (dir)
-        {
-            case Direction.Top:
-                y = 0;
-                break;
-            case Direction.Bottom:
-                y = screenRect.Bottom - height;
-                break;
-            case Direction.Left:
-                x = 0;
-                break;
-            case Direction.Right:
-                x = screenRect.Right - width;
-                break;
-        }
+    //    switch (dir)
+    //    {
+    //        case Direction.Top:
+    //            y = 0;
+    //            break;
+    //        case Direction.Bottom:
+    //            y = screenRect.Bottom - height;
+    //            break;
+    //        case Direction.Left:
+    //            x = 0;
+    //            break;
+    //        case Direction.Right:
+    //            x = screenRect.Right - width;
+    //            break;
+    //    }
 
-        //MoveWindow(windowHandle, x, y, width, height, true);
-    }
+    //    //MoveWindow(windowHandle, x, y, width, height, true);
+    //}
 
     public Image foregroundImage;    
     public Image backgroundImage;

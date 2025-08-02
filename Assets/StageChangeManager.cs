@@ -6,6 +6,7 @@ using System.Collections;
 using Ami.BroAudio;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Member.KYH;
 
 public class StageChangeManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class StageChangeManager : MonoBehaviour
     [SerializeField] private Image gameOverUI;
 
     [SerializeField] private SoundID inGameMusic;
-
+    [SerializeField] private CanvasGroup fakeHeart;
     [Header("애니메이션 시간")]
     public float duration = 0.5f;
 
@@ -90,6 +91,7 @@ public class StageChangeManager : MonoBehaviour
 
     public void OpenPanels()
     {
+        fakeHeart.DOFade(1f,0.2f);
         ApiManager.Instance.IsBoss = true;
         for(int i=0;i<2;i++)
         {
@@ -102,6 +104,7 @@ public class StageChangeManager : MonoBehaviour
 
     public void ClosePanels()
     {
+        fakeHeart.DOFade(0f, 0.2f);
         ApiManager.Instance.IsBoss = false;
         for (int i = 0; i < 2; i++)
         {
